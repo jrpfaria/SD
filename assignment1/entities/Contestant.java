@@ -2,12 +2,12 @@ package assignment1.entities;
 
 import java.lang.Math;
 
-public class Player extends Thread implements Comparable<Player> {
+public class Contestant extends Thread implements Comparable<Contestant> {
     private short team;
     private short number;
     private short strength;
 
-    public Player(short team, short number) {
+    public Contestant(short team, short number) {
         super();
         this.team = team;
         this.number = number;
@@ -34,7 +34,7 @@ public class Player extends Thread implements Comparable<Player> {
         strength -= 1;
     }
 
-    public int compareTo(Player b) {
+    public int compareTo(Contestant b) {
         return Short.compare(strength, b.getStrength());
     }
 }
