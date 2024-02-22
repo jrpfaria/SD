@@ -1,6 +1,8 @@
 package assignment1;
 
 import java.lang.Math;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Coach {
     private Player[] team;
@@ -20,22 +22,8 @@ public class Coach {
     }
 
     public Player[] selectPlayersSweaty(){
-        Player[] sorted = new Player[team.length];
-
-        for (int i = 0; i < team.length; i++){
-            sorted[i] = team[i];
-        }
-
-        for (int i = 0; i < sorted.length; i++){
-            for (int j = i + 1; j < sorted.length; j++){
-                if (sorted[i].getStrength() < sorted[j].getStrength()){
-                    Player temp = sorted[i];
-                    sorted[i] = sorted[j];
-                    sorted[j] = temp;
-                }
-            }
-        }
-
+        Player[] sorted = team.clone();
+        Arrays.sort(sorted, Collections.reverseOrder());
         return new Player[]{sorted[0], sorted[1], sorted[2]};
     }
 
