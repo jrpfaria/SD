@@ -4,8 +4,8 @@ import java.lang.Math;
 
 public class Coach {
     private Player[] team;
-    private boolean method;
-    private int selected = 0;
+    private boolean method; //  Randomly chosen: sweaty if true, lazy if false
+    private int selected = 0; // Added to keep track of the last selected player in the lazy method
     
     public Coach(Player[] team){
         this.team = team;
@@ -13,9 +13,9 @@ public class Coach {
     }
 
     public Player[] selectPlayers(){
-        if (method)
+        if (method) // Sweaty
             return selectPlayersSweaty();
-        else
+        else // Lazy
             return selectPlayersLazy();
     }
 
