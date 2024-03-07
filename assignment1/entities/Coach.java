@@ -8,8 +8,8 @@ public class Coach extends Thread {
     private short team;
     private Contestant[] players;
     private boolean method; //  Randomly chosen: sweaty if true, lazy if false
-    private int selected = 0; // Added to keep track of the last selected player in the lazy method
-    
+    private short gameCounter = 0; // Added to keep track of the number of games played in the gamblers dream method
+
     public Coach(ThreadGroup group, short team, Contestant[] players) {
         super(String.format("Coach-%d", team));
         this.team = team;
@@ -25,7 +25,7 @@ public class Coach extends Thread {
         if (method) // Sweaty
             return selectPlayersSweaty();
         else // Lazy
-            return selectPlayersLazy();
+            return selectPlayersGamblersDream();
     }
 
     public Contestant[] selectPlayersSweaty() {
@@ -34,13 +34,14 @@ public class Coach extends Thread {
         return new Contestant[]{sorted[0], sorted[1], sorted[2]};
     }
 
-    public Contestant[] selectPlayersLazy() {
-        selected %= players.length;
-        return new Contestant[]{
-            players[selected++ % players.length],
-            players[selected++ % players.length],
-            players[selected++ % players.length]
-        };
+    public Contestant[] selectPlayersGamblersDream() {
+        Contestant[] sorted = players.clone();
+        Arrays.sort(sorted);
+        if (gameCounter++ < 3) {
+            gameCounter %= 6;
+            return new Contestant[]{sorted[0], sorted[1], sorted[2]};
+        }
+        return new Contestant[]{sorted[sorted.length-1], sorted[sorted.length-2], sorted[sorted.length-3]};
     }
 
     @Override
