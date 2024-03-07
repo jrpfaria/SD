@@ -37,8 +37,7 @@ public class Coach extends Thread {
     public Contestant[] selectPlayersGamblersDream() {
         Contestant[] sorted = players.clone();
         Arrays.sort(sorted);
-        if (gameCounter++ < 3) {
-            gameCounter %= 6;
+        if (gameCounter++ < 9) {
             return new Contestant[]{sorted[0], sorted[1], sorted[2]};
         }
         return new Contestant[]{sorted[sorted.length-1], sorted[sorted.length-2], sorted[sorted.length-3]};
