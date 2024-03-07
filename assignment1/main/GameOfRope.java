@@ -1,8 +1,8 @@
-package assignment1;
+package assignment1.main;
 
 import assignment1.entities.*;
 
-public class Main {
+public class GameOfRope {
     public static void main(String[] args) {
         System.out.println("hello world");
         ThreadGroup testsGroup = new ThreadGroup("Tests");
