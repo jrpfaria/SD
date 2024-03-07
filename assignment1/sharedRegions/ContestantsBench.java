@@ -1,4 +1,4 @@
-package assignment1.shared;
+package assignment1.sharedRegions;
 
 public class ContestantsBench {
     

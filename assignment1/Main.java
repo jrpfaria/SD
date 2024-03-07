@@ -1,16 +1,21 @@
 package assignment1;
 
 import assignment1.entities.*;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        Contestant[] players = new Contestant[5];
-        for (int i = 0; i < players.length; i++) players[i] = new Contestant((short)1, (short)1);
-        Contestant[] temp = players.clone();
-        Arrays.sort(temp, Collections.reverseOrder());
-        for (Contestant player: temp) System.out.println(player.getStrength());
+        System.out.println("hello world");
+        ThreadGroup testsGroup = new ThreadGroup("Tests");
+        final int nTests = 10;
+        Test[] tests = new Test[nTests];
+        for (int i = 0; i < nTests; i++) tests[i] = new Test(testsGroup, i);
+        for (int i = 0; i < nTests; i++) tests[i].start();
+        for (int i = 0; i < nTests; i++) {
+            try {
+                tests[i].join();
+            }
+            catch (InterruptedException e) {}
+        }
+        System.out.println("goodbye world");
     }
 }
