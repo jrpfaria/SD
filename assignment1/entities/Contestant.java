@@ -60,4 +60,11 @@ public class Contestant extends Thread implements Comparable<Contestant> {
         //     sitDown();
         // }
     }
+
+    public void pullTheRope() {
+        try
+        { sleep ((long) (1 + 100 * Math.random ()));
+        }
+        catch (InterruptedException e) {}
+    }
 }

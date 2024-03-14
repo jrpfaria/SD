@@ -37,14 +37,18 @@ public class Playground {
     }
 
     public synchronized void getReady() {
-        if (((Contestant)Thread.currentThread()).getTeam() > 0)
-            team_A_strength += ((Contestant)Thread.currentThread()).getStrength();
+        Contestant contestant = (Contestant)Thread.currentThread();
+
+        if (contestant.getTeam() == 1)
+            team_A_strength += contestant.getStrength();
         else
-            team_B_strength += ((Contestant)Thread.currentThread()).getStrength();
+            team_B_strength += contestant.getStrength();
     }
 
     public synchronized void amDone() {
-        ((Contestant)Thread.currentThread()).setContestantState(ContestantState.SEAT_AT_THE_BENCH);
+        Contestant contestant = (Contestant)Thread.currentThread();
+        contestant.pullTheRope();
+        contestant.setContestantState(ContestantState.SEAT_AT_THE_BENCH);
         amDone++;
         notifyAll();
     }

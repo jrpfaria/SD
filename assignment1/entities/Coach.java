@@ -66,7 +66,4 @@ public class Coach extends Thread {
 
         state = CoachState.WAIT_FOR_REFEREE_COMMAND;
     }
-
-
-
 }
