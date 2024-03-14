@@ -16,7 +16,7 @@ public enum RefereeState {
             case START_OF_A_GAME:
                 return "SOG";
             case TEAMS_READY:
-                return "TRD";
+                return "TRY";
             case WAIT_FOR_TRIAL_CONCLUSION:
                 return "WTC";
             case END_OF_A_GAME:

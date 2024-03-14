@@ -13,9 +13,9 @@ public enum CoachState {
             case WAIT_FOR_REFEREE_COMMAND:
                 return "WFRC";
             case ASSEMBLE_TEAM:
-                return "ASST";
+                return "ASTM";
             case WATCH_TRIAL:
-                return "WATR";
+                return "WATL";
             default:
                 throw new IllegalArgumentException();
         }
