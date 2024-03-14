@@ -3,15 +3,21 @@ package assignment1.entities;
 import java.lang.Math;
 
 public class Contestant extends Thread implements Comparable<Contestant> {
+    private ContestantState state;
     private short team;
     private short number;
     private short strength;
 
     public Contestant(short team, short number) {
         super(String.format("Contestant-%d-%d", team, number));
+        this.state = ContestantState.SEAT_AT_THE_BENCH;
         this.team = team;
         this.number = number;
         this.strength = (short)(Math.random() * 5 + 6);
+    }
+
+    public ContestantState getContestantState() {
+        return state;
     }
 
     public short getTeam() {
@@ -24,6 +30,10 @@ public class Contestant extends Thread implements Comparable<Contestant> {
 
     public short getStrength() {
         return strength;
+    }
+
+    public void setContestantState(ContestantState state) {
+        this.state = state;
     }
 
     public void rest() {
@@ -41,6 +51,13 @@ public class Contestant extends Thread implements Comparable<Contestant> {
 
     @Override
     public void run() {
-        
+        // while (!endOfMatches)
+        // {
+        //     followCoachAdvice();
+        //     getReady();
+        //     pullTheRope();
+        //     amDone();
+        //     sitDown();
+        // }
     }
 }

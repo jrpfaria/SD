@@ -61,3 +61,15 @@ void synchronized amDone()
 //Contestant
 //informs referee that effort is complete
 ```
+BLOCKING_STATE = function_that_led_to_state -> function_that_unblocks_thread
+
+Ref.TEAMS_READY = callTrial -> informReferee
+Ref.WAIT_FOR_TRIAL_CONCLUSION = startTrial -> amDone
+Coach.WAIT_FOR_REFEREE_COMMAND = review_notes -> callTrial
+Coach.ASSEMBLE_TEAM = callContestants -> followCoachAdvice
+Coach.WATCH_TRIAL = informReferee -> assertTrialDecision
+Con.SEAT_AT_THE_BENCH = seatDown -> callContestants
+Con.STAND_IN_POSISION = followCoachAdvice -> startTrial
+Con.DO_YOUR_BEST = amDone -> assertTrialDecision
+
+amDone + assertTrialDecicion + informReferee + callTrial + startTrial + followCoachAdvice + callContestants + seatDown + review_notes

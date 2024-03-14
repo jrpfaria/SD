@@ -1,33 +1,50 @@
 package assignment1.sharedRegions;
 
+import assignment1.entities.Contestant;
+import assignment1.entities.ContestantState;
+
 public class Playground {
-    private int[] strength = new int[]{0, 0};
+    private short team_A_strength = 0;
+    private short team_B_strength = 0;
     private boolean startTrial = false;
-    private int amDone = 0;
+    private short amDone = 0;
 
     public synchronized void startTrial() {
+        //mudar estado do referee
+        //comunicar a mudança ao repositório
         startTrial = true;
         notifyAll();
-        while (amDone!=6) {
+        while (amDone<6) {
             try {wait();}
             catch (InterruptedException e) {}
         }
         amDone = 0;
     }
 
-    public synchronized int assertTrialDecision() {
-        return strength[0]-strength[1];
+    // "define"s to improve readability
+    private static final short team_A = 1;
+    private static final short team_B = -1;
+    private static final short draw = 0;
+    
+    public synchronized short assertTrialDecision() {
+        short result = (short)(team_A_strength - team_B_strength);
+        
+        if (result == 0) return draw;
+        short winner = (result > 0) ? team_A : team_B;
+
+        // Missing KO condition
+        return winner;
     }
 
     public synchronized void getReady() {
-        
-    }
-
-    public synchronized void pullTheRope(short team, short strength) {
-        this.strength[team] += strength;
+        if (((Contestant)Thread.currentThread()).getTeam() > 0)
+            team_A_strength += ((Contestant)Thread.currentThread()).getStrength();
+        else
+            team_B_strength += ((Contestant)Thread.currentThread()).getStrength();
     }
 
     public synchronized void amDone() {
+        ((Contestant)Thread.currentThread()).setContestantState(ContestantState.SEAT_AT_THE_BENCH);
         amDone++;
         notifyAll();
     }
