@@ -8,12 +8,12 @@ public class Contestant extends Thread implements Comparable<Contestant> {
     private short number;
     private short strength;
 
-    public Contestant(short team, short number) {
+    public Contestant(short team, short number, short strength) {
         super(String.format("Contestant-%d-%d", team, number));
         this.state = ContestantState.SEAT_AT_THE_BENCH;
         this.team = team;
         this.number = number;
-        this.strength = (short)(Math.random() * 5 + 6);
+        this.strength = strength;
     }
 
     public ContestantState getContestantState() {
