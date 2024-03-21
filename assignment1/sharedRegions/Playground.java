@@ -4,10 +4,15 @@ import assignment1.entities.Contestant;
 import assignment1.entities.ContestantState;
 
 public class Playground {
+    private GeneralRepos repos;
     private short team_A_strength = 0;
     private short team_B_strength = 0;
     private boolean startTrial = false;
     private short amDone = 0;
+
+    public Playground(GeneralRepos repos) {
+        this.repos = repos;
+    }
 
     public synchronized void startTrial() {
         //mudar estado do referee
