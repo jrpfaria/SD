@@ -1,21 +1,29 @@
 package assignment1.entities;
 
+import assignment1.sharedRegions.*;
+
 import java.lang.Math;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class Coach extends Thread {
-    private short team;
     private CoachState state;
+    private short team;
     private Contestant[] players;
-    private boolean method; //  Randomly chosen: sweaty if true, lazy if false
-    private short gameCounter = 0; // Added to keep track of the number of games played in the gamblers dream method
+    private RefereeSite refereeSite;
+    private Playground playground;
+    private ContestantsBench contestantsBench;
+    private boolean method; //  Randomly chosen: sweaty if true, gambler's dream if false
+    private short gameCounter = 0; // Added to keep track of the number of games played in the gambler's dream method
 
-    public Coach(ThreadGroup group, short team, Contestant[] players) {
+    public Coach(short team, Contestant[] players, RefereeSite refereeSite, Playground playground, ContestantsBench contestantsBench) {
         super(String.format("Coach-%d", team));
         this.state = CoachState.WAIT_FOR_REFEREE_COMMAND;
         this.team = team;
         this.players = players;
+        this.refereeSite = refereeSite;
+        this.playground = playground;
+        this.contestantsBench = contestantsBench;
         this.method = Math.random() < 0.5;
     }
 
@@ -23,48 +31,55 @@ public class Coach extends Thread {
         return state;
     }
 
-    public short getTeam() {
-        return team;
+    public void setCoachState(CoachState state) {
+        this.state = state;
     }
 
-    public Contestant[] selectPlayers() {
+    public short[] selectPlayers() {
         if (method) // Sweaty
             return selectPlayersSweaty();
         else // Gamblers Dream
             return selectPlayersGamblersDream();
     }
 
-    public Contestant[] selectPlayersSweaty() {
+    public short[] selectPlayersSweaty() {
         Contestant[] sorted = players.clone();
         Arrays.sort(sorted, Collections.reverseOrder());
-        return new Contestant[]{sorted[0], sorted[1], sorted[2]};
+        return new short[]{sorted[0].getNumber(), sorted[1].getNumber(), sorted[2].getNumber()};
     }
 
-    public Contestant[] selectPlayersGamblersDream() {
+    public short[] selectPlayersGamblersDream() {
         Contestant[] sorted = players.clone();
         Arrays.sort(sorted);
         if (gameCounter++ < 9) {
-            return new Contestant[]{sorted[0], sorted[1], sorted[2]};
+            return new short[]{sorted[0].getNumber(), sorted[1].getNumber(), sorted[2].getNumber()};
         }
-        return new Contestant[]{sorted[sorted.length-1], sorted[sorted.length-2], sorted[sorted.length-3]};
+        return new short[]{sorted[sorted.length-1].getNumber(), sorted[sorted.length-2].getNumber(), sorted[sorted.length-3].getNumber()};
     }
 
     @Override
     public void run() {
-        // while(!endOfMatches)
-        // {
-        //     reviewNotes();
-        //     callContestants();
-        
-        //     informReferee();
-        // }
+        short current_game;
+        short current_trial;
+        short total_trials = 6;
+        boolean knockout;
+        short[] roster = reviewNotes();
+        for (current_game = 1; current_game <= 3; current_game++) {
+            for (current_trial = 1; current_trial <= 6; current_trial++) {
+                refereeSite.wait_for_referee_command();
+                contestantsBench.callContestants(roster);
+                playground.assemble_team();
+                refereeSite.informReferee();
+                knockout = playground.watch_trial();
+                roster = reviewNotes();
+                if (knockout) break;
+            }
+        }
     }
 
     public void reviewNotes(){
         // Contestant[] selectedPlayers = selectPlayers();
         // // Inform the selected players that they are about to play
         // // we do that by adding it to the Bench shared memory area
-
-        state = CoachState.WAIT_FOR_REFEREE_COMMAND;
     }
 }
