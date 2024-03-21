@@ -61,22 +61,27 @@ public class Contestant extends Thread implements Comparable<Contestant> {
 
     @Override
     public void run() {
-        short current_game;
-        short current_trial;
-        short total_trials = 6;
-        boolean knockout;
-        for (current_game = 1; current_game <= 3; current_game++) {
-            for (current_trial = 1; current_trial <= 6; current_trial++) {
-                contestantsBench.seat_at_the_bench();
-                contestantsBench.followCoachAdvice();
-                playground.stand_in_position();
-                playground.getReady();
-                playground.pullTheRope(team, strength);
-                refereeSite.amDone();
-                knockout = refereeSite.do_your_best();
-                contestantsBench.sitDown();
-                if (knockout) break;
+        boolean called;
+        while (true) {
+            called = contestantsBench.seat_at_the_bench();
+            if (called) {
+                if (!contestantsBench.checkRoster(team, number)) {
+                    rest();
+                    continue;
+                }
             }
+            else if (refereeSite.matchOver()) {
+                return;
+            }
+            
+            contestantsBench.followCoachAdvice();
+            playground.stand_in_position();
+            playground.getReady();
+            playground.pullTheRope(team, strength);
+            refereeSite.amDone();
+            refereeSite.do_your_best();
+            play();
+            contestantsBench.sitDown();
         }
     }
 
