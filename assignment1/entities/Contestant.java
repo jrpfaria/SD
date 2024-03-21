@@ -61,25 +61,21 @@ public class Contestant extends Thread implements Comparable<Contestant> {
 
     @Override
     public void run() {
-        boolean called;
+        short called;
         while (true) {
             called = contestantsBench.seat_at_the_bench();
-            if (called) {
-                if (!contestantsBench.checkRoster(team, number)) {
-                    rest();
-                    continue;
-                }
+            switch (called) {
+                case 0: return; // match is over; close thread
+                case 1: rest(); continue; // player was not called; rest and start again
+                case 2: break; // player was called; execute the rest of the code
+                default: throw new Exception("Invalid return value received by contestant");
             }
-            else if (refereeSite.matchOver()) {
-                return;
-            }
-            
             contestantsBench.followCoachAdvice();
             playground.stand_in_position();
             playground.getReady();
-            playground.pullTheRope(team, strength);
-            refereeSite.amDone();
-            refereeSite.do_your_best();
+            playground.pullTheRope();
+            playground.amDone();
+            playground.do_your_best();
             play();
             contestantsBench.sitDown();
         }
