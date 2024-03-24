@@ -5,7 +5,7 @@ import assignment1.sharedRegions.*;
 import java.lang.Math;
 
 public class Contestant extends Thread implements Comparable<Contestant> {
-    private ContestantState state;
+    private ContestantStates state;
     private short team;
     private short number;
     private short strength;
@@ -15,7 +15,7 @@ public class Contestant extends Thread implements Comparable<Contestant> {
 
     public Contestant(short team, short number, short strength, RefereeSite refereeSite, Playground playground, ContestantsBench contestantBench) {
         super(String.format("Contestant-%d-%d", team, number));
-        this.state = ContestantState.SEAT_AT_THE_BENCH;
+        this.state = ContestantStates.SEAT_AT_THE_BENCH;
         this.team = team;
         this.number = number;
         this.strength = strength;
@@ -24,7 +24,7 @@ public class Contestant extends Thread implements Comparable<Contestant> {
         this.contestantsBench = contestantsBench;
     }
 
-    public ContestantState getContestantState() {
+    public ContestantStates getContestantState() {
         return state;
     }
 
@@ -40,7 +40,7 @@ public class Contestant extends Thread implements Comparable<Contestant> {
         return strength;
     }
 
-    public void setContestantState(ContestantState state) {
+    public void setContestantState(ContestantStates state) {
         this.state = state;
     }
 
@@ -61,24 +61,24 @@ public class Contestant extends Thread implements Comparable<Contestant> {
 
     @Override
     public void run() {
-        short called;
-        while (true) {
-            called = contestantsBench.seat_at_the_bench();
-            switch (called) {
-                case 0: return; // match is over; close thread
-                case 1: rest(); continue; // player was not called; rest and start again
-                case 2: break; // player was called; execute the rest of the code
-                default: throw new Exception("Invalid return value received by contestant");
-            }
-            contestantsBench.followCoachAdvice();
-            playground.stand_in_position();
-            playground.getReady();
-            playground.pullTheRope();
-            playground.amDone();
-            playground.do_your_best();
-            play();
-            contestantsBench.sitDown();
-        }
+        // short called;
+        // while (true) {
+        //     called = contestantsBench.seat_at_the_bench();
+        //     switch (called) {
+        //         case 0: return; // match is over; close thread
+        //         case 1: rest(); continue; // player was not called; rest and start again
+        //         case 2: break; // player was called; execute the rest of the code
+        //         default: throw new Exception("Invalid return value received by contestant");
+        //     }
+        //     contestantsBench.followCoachAdvice();
+        //     playground.stand_in_position();
+        //     playground.getReady();
+        //     playground.pullTheRope();
+        //     playground.amDone();
+        //     playground.do_your_best();
+        //     play();
+        //     contestantsBench.sitDown();
+        // }
     }
 
     @Override

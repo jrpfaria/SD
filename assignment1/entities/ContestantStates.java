@@ -1,6 +1,6 @@
 package assignment1.entities;
 
-public enum ContestantState {
+public enum ContestantStates {
     SEAT_AT_THE_BENCH,
     STAND_IN_POSITION,
     DO_YOUR_BEST;

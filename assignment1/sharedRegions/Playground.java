@@ -1,7 +1,7 @@
 package assignment1.sharedRegions;
 
 import assignment1.entities.Contestant;
-import assignment1.entities.ContestantState;
+import assignment1.entities.ContestantStates;
 
 public class Playground {
     private GeneralRepos repos;
@@ -53,7 +53,7 @@ public class Playground {
     public synchronized void amDone() {
         Contestant contestant = (Contestant)Thread.currentThread();
         contestant.pullTheRope();
-        contestant.setContestantState(ContestantState.SEAT_AT_THE_BENCH);
+        contestant.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
         amDone++;
         notifyAll();
     }

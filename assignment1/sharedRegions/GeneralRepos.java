@@ -1,6 +1,5 @@
 package assignment1.sharedRegions;
 
-import assignment1.main.*;
 import assignment1.entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
@@ -12,9 +11,9 @@ public class GeneralRepos {
     private int nGame;
     private int nTrial;
     private int ropePosition;
-    private RefereeState refereeState;
-    private final CoachState[] coachState;
-    private final ContestantState[][] contestantState;
+    private RefereeStates refereeState;
+    private final CoachStates[] coachState;
+    private final ContestantStates[][] contestantState;
     private final short[][] contestantStrength;
     private final short[][] contestantPosition;
 
@@ -25,15 +24,15 @@ public class GeneralRepos {
         nGame = 0;
         nTrial = 0;
         ropePosition = 0;
-        refereeState = RefereeState.START_OF_THE_MATCH;
-        coachState = new CoachState[2];
+        refereeState = RefereeStates.START_OF_THE_MATCH;
+        coachState = new CoachStates[2];
         for (int i = 0; i < 2; i++) {
-            coachState[i] = CoachState.WAIT_FOR_REFEREE_COMMAND;
+            coachState[i] = CoachStates.WAIT_FOR_REFEREE_COMMAND;
         }
-        contestantState = new ContestantState[2][5];
+        contestantState = new ContestantStates[2][5];
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 5; j++) {
-                contestantState[i][j] = ContestantState.SEAT_AT_THE_BENCH;
+                contestantState[i][j] = ContestantStates.SEAT_AT_THE_BENCH;
             }
         }
         this.contestantStrength = contestantStrength;
@@ -41,24 +40,27 @@ public class GeneralRepos {
         reportInitialStatus();
     }
 
-    public void setRefereeState(RefereeState refereeState) {
+    public void setRefereeState(RefereeStates refereeState) {
         this.refereeState = refereeState;
+        reportStatus();
     }
 
-    public void setCoachState(short team, CoachState coachState) {
-        this.coachState[team-1] = coachState;
+    public void setCoachState(short team, CoachStates coachState) {
+        this.coachState[team] = coachState;
+        reportStatus();
     }
 
-    public void setContestantState(short team, short number, ContestantState contestantState) {
-        this.contestantState[team-1][number-1] = contestantState;
+    public void setContestantState(short team, short number, ContestantStates contestantState) {
+        this.contestantState[team][number] = contestantState;
+        reportStatus();
     }
 
     public void setContestantStrength(short team, short number, short strength) {
-        contestantStrength[team-1][number-1] = strength;
+        contestantStrength[team][number] = strength;
     }
 
     public void setContestantPosition(short team, short number, short position) {
-        contestantPosition[team-1][position] = number;
+        contestantPosition[team][position] = number;
     }
 
     public void setRopePosition(short position) {
@@ -90,6 +92,10 @@ public class GeneralRepos {
         log.writelnString("                               Game of the Rope - Description of the internal state");
         log.writelnString("\nRef Coa 1 Cont 1 Cont 2 Cont 3 Cont 4 Cont 5 Coa 2 Cont 1 Cont 2 Cont 3 Cont 4 Cont 5       Trial");
         log.writelnString("Sta  Stat Sta SG Sta SG Sta SG Sta SG Sta SG  Stat Sta SG Sta SG Sta SG Sta SG Sta SG 3 2 1 . 1 2 3 NB PS");
+        if (!log.close()) {
+            GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
+            System.exit (1);
+        }
         reportStatus();
     }
 
@@ -132,9 +138,9 @@ public class GeneralRepos {
         lineStatus += refereeState;
 
         lineStatus += "  " + coachState[0];
-        for (int i = 0; i < 5; i++) lineStatus += " " + contestantState[0][i] + " " + contestantStrength[0][i];
+        for (int i = 0; i < 5; i++) lineStatus += String.format(" %s %2d", contestantState[0][i], contestantStrength[0][i]);
         lineStatus += "  " + coachState[1];
-        for (int i = 0; i < 5; i++) lineStatus += " " + contestantState[1][i] + " " + contestantStrength[1][i];
+        for (int i = 0; i < 5; i++) lineStatus += String.format(" %s %2d", contestantState[1][i], contestantStrength[1][i]);
 
         if (nTrial==0) {
             lineStatus += " - - - . - - - -- --";

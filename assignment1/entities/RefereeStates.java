@@ -1,6 +1,6 @@
 package assignment1.entities;
 
-public enum RefereeState {
+public enum RefereeStates {
     START_OF_THE_MATCH,
     START_OF_A_GAME,
     TEAMS_READY,

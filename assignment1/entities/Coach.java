@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class Coach extends Thread {
-    private CoachState state;
+    private CoachStates state;
     private short team;
     private Contestant[] players;
     private RefereeSite refereeSite;
@@ -18,7 +18,7 @@ public class Coach extends Thread {
 
     public Coach(short team, Contestant[] players, RefereeSite refereeSite, Playground playground, ContestantsBench contestantsBench) {
         super(String.format("Coach-%d", team));
-        this.state = CoachState.WAIT_FOR_REFEREE_COMMAND;
+        this.state = CoachStates.WAIT_FOR_REFEREE_COMMAND;
         this.team = team;
         this.players = players;
         this.refereeSite = refereeSite;
@@ -27,11 +27,11 @@ public class Coach extends Thread {
         this.method = Math.random() < 0.5;
     }
 
-    public CoachState getCoachState() {
+    public CoachStates getCoachState() {
         return state;
     }
 
-    public void setCoachState(CoachState state) {
+    public void setCoachState(CoachStates state) {
         this.state = state;
     }
 
@@ -59,27 +59,28 @@ public class Coach extends Thread {
 
     @Override
     public void run() {
-        short current_game;
-        short current_trial;
-        short total_trials = 6;
-        boolean knockout;
+        // short current_game;
+        // short current_trial;
+        // short total_trials = 6;
+        // boolean knockout;
         short[] roster = reviewNotes();
-        for (current_game = 1; current_game <= 3; current_game++) {
-            for (current_trial = 1; current_trial <= 6; current_trial++) {
+        // for (current_game = 1; current_game <= 3; current_game++) {
+        //     for (current_trial = 1; current_trial <= 6; current_trial++) {
                 refereeSite.wait_for_referee_command();
-                contestantsBench.callContestants(roster);
-                playground.assemble_team();
-                refereeSite.informReferee();
-                knockout = playground.watch_trial();
-                roster = reviewNotes();
-                if (knockout) break;
-            }
-        }
+                contestantsBench.callContestants(team, roster);
+        //         playground.assemble_team();
+        //         refereeSite.informReferee();
+        //         knockout = playground.watch_trial();
+        //         roster = reviewNotes();
+        //         if (knockout) break;
+        //     }
+        // }
     }
 
-    public void reviewNotes(){
-        // Contestant[] selectedPlayers = selectPlayers();
-        // // Inform the selected players that they are about to play
-        // // we do that by adding it to the Bench shared memory area
+    public short[] reviewNotes(){
+        short[] selectedPlayers = selectPlayers();
+        return selectedPlayers;
+        // Inform the selected players that they are about to play
+        // we do that by adding it to the Bench shared memory area
     }
 }

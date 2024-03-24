@@ -1,6 +1,6 @@
 package assignment1.entities;
 
-public enum CoachState {
+public enum CoachStates {
     WAIT_FOR_REFEREE_COMMAND,
     ASSEMBLE_TEAM,
     WATCH_TRIAL;

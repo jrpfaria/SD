@@ -18,6 +18,7 @@ public class GameOfRope {
         String fileName;
         char opt;
         boolean success;
+
         //read file name from stdin
         GenericIO.writelnString("\n" + "Game of Rope");
         do {
@@ -33,15 +34,18 @@ public class GameOfRope {
             }
             else success = true;
         } while (!success);
+
         //generate contestant strength
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 5; j++) contestantStrength[i][j] = (short)(4*Math.random()+6);
         }
+
         //instanciate shared areas
         repos = new GeneralRepos(fileName, contestantStrength);
         refereeSite = new RefereeSite(repos);
         playground = new Playground(repos);
         contestantsBench = new ContestantsBench(repos);
+
         //instanciate threads
         referee = new Referee(refereeSite, playground);
         for (short i = 0; i < 2; i++) {
@@ -52,6 +56,7 @@ public class GameOfRope {
         for (short i = 0; i < 2; i++) {
             coach[i] = new Coach(i, contestant[i], refereeSite, playground, contestantsBench);
         }
+
         //start threads
         referee.start();
         for (int i = 0; i < 2; i++) {
@@ -62,6 +67,7 @@ public class GameOfRope {
                 contestant[i][j].start();
             }
         }
+
         //join threads
         try {referee.join();}
         catch (InterruptedException e) {}
