@@ -53,9 +53,7 @@ public class Contestant extends Thread implements Comparable<Contestant> {
     }
 
     public void pullTheRope() {
-        try
-        { sleep ((long) (1 + 100 * Math.random ()));
-        }
+        try {sleep((long)(1+100*Math.random()));}
         catch (InterruptedException e) {}
     }
 

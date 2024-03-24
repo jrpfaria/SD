@@ -1,5 +1,6 @@
 package assignment1.main;
 
+import assignment1.main.SimulPar;
 import assignment1.entities.*;
 import assignment1.sharedRegions.*;
 import genclass.GenericIO;
@@ -9,8 +10,8 @@ public class GameOfRope {
     public static void main(String[] args) {
         Referee referee;
         Coach[] coach = new Coach[2];
-        Contestant[][] contestant = new Contestant[2][5];
-        short[][] contestantStrength = new short[2][5];
+        Contestant[][] contestant = new Contestant[2][SimulPar.NC];
+        short[][] contestantStrength = new short[2][SimulPar.NC];
         GeneralRepos repos;
         RefereeSite refereeSite;
         Playground playground;
@@ -37,7 +38,7 @@ public class GameOfRope {
 
         //generate contestant strength
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 5; j++) contestantStrength[i][j] = (short)(4*Math.random()+6);
+            for (int j = 0; j < SimulPar.NC; j++) contestantStrength[i][j] = (short)(5*Math.random()+6);
         }
 
         //instanciate shared areas
@@ -49,7 +50,7 @@ public class GameOfRope {
         //instanciate threads
         referee = new Referee(refereeSite, playground);
         for (short i = 0; i < 2; i++) {
-            for (short j = 0; j < 5; j++) {
+            for (short j = 0; j < SimulPar.NC; j++) {
                 contestant[i][j] = new Contestant(i, j, contestantStrength[i][j], refereeSite, playground, contestantsBench);
             }
         }
@@ -63,7 +64,7 @@ public class GameOfRope {
             coach[i].start();
         }
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < SimulPar.NC; j++) {
                 contestant[i][j].start();
             }
         }
@@ -76,7 +77,7 @@ public class GameOfRope {
             catch (InterruptedException e) {}
         }
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < SimulPar.NC; j++) {
                 try {contestant[i][j].join();}
                 catch (InterruptedException e) {}
             }

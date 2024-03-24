@@ -1,5 +1,6 @@
 package assignment1.entities;
 
+import assignment1.main.SimulPar;
 import assignment1.sharedRegions.*;
 
 import java.lang.Math;
@@ -45,27 +46,37 @@ public class Coach extends Thread {
     public short[] selectPlayersSweaty() {
         Contestant[] sorted = players.clone();
         Arrays.sort(sorted, Collections.reverseOrder());
-        return new short[]{sorted[0].getNumber(), sorted[1].getNumber(), sorted[2].getNumber()};
+        short[] roster = new short[SimulPar.NP];
+        for (int i = 0; i < SimulPar.NP; i++) roster[i] = sorted[i].getNumber();
+        return roster;
     }
-
+    
     public short[] selectPlayersGamblersDream() {
         Contestant[] sorted = players.clone();
         Arrays.sort(sorted);
-        if (gameCounter++ < 9) {
-            return new short[]{sorted[0].getNumber(), sorted[1].getNumber(), sorted[2].getNumber()};
+        short[] roster = new short[SimulPar.NP];
+        if (gameCounter++ < SimulPar.NG*SimulPar.NT) {
+            for (int i = 0; i < SimulPar.NP; i++) roster[i] = sorted[i].getNumber();
         }
-        return new short[]{sorted[sorted.length-1].getNumber(), sorted[sorted.length-2].getNumber(), sorted[sorted.length-3].getNumber()};
+        else for (int i = 0; i < SimulPar.NP; i++) roster[i] = sorted[SimulPar.NP-1].getNumber();
+        return roster;
+    }
+
+    public short[] reviewNotes(){
+        short[] selectedPlayers = selectPlayers();
+        return selectedPlayers;
+        // Inform the selected players that they are about to play
+        // we do that by adding it to the Bench shared memory area
     }
 
     @Override
     public void run() {
-        // short current_game;
-        // short current_trial;
-        // short total_trials = 6;
+        // short currentGame;
+        // short currentTrial;
         // boolean knockout;
         short[] roster = reviewNotes();
-        // for (current_game = 1; current_game <= 3; current_game++) {
-        //     for (current_trial = 1; current_trial <= 6; current_trial++) {
+        // for (currentGame = 1; currentGame <= SimulPar.NG; currentGame++) {
+        //     for (currentTrial = 1; currentTrial <= SimulPar.NT; currentTrial++) {
                 refereeSite.wait_for_referee_command();
                 contestantsBench.callContestants(team, roster);
         //         playground.assemble_team();
@@ -75,12 +86,5 @@ public class Coach extends Thread {
         //         if (knockout) break;
         //     }
         // }
-    }
-
-    public short[] reviewNotes(){
-        short[] selectedPlayers = selectPlayers();
-        return selectedPlayers;
-        // Inform the selected players that they are about to play
-        // we do that by adding it to the Bench shared memory area
     }
 }

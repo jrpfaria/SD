@@ -1,5 +1,6 @@
 package assignment1.sharedRegions;
 
+import assignment1.main.SimulPar;
 import assignment1.entities.*;
 
 public class ContestantsBench {
@@ -8,7 +9,7 @@ public class ContestantsBench {
 
     public ContestantsBench(GeneralRepos repos) {
         this.repos = repos;
-        called = new boolean[2][5];
+        called = new boolean[2][SimulPar.NC];
     }
 
     public synchronized void callContestants(short team, short[] roster) {

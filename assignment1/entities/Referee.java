@@ -1,4 +1,6 @@
 package assignment1.entities;
+
+import assignment1.main.SimulPar;
 import assignment1.sharedRegions.RefereeSite;
 import assignment1.sharedRegions.Playground;
 
@@ -25,13 +27,12 @@ public class Referee extends Thread {
 
     @Override
     public void run() {
-        // short current_game;
-        // short current_trial;
-        // short total_trials = 6;
+        // short currentGame;
+        // short currentTrial;
         // boolean knockout = false;
-        // for (current_game = 1; current_game <= 3; current_game++) {
+        // for (currentGame = 1; currentGame <= SimulPar.NG; currentGame++) {
             refereeSite.announceNewGame();
-        //     for (current_trial = 1; current_trial <= total_trials; current_trial++) {
+        //     for (currentTrial = 1; currentTrial <= SimulPar.NT; currentTrial++) {
                 refereeSite.callTrial();
         //         refereeSite.teams_ready();
         //         playground.startTrial();

@@ -1,5 +1,6 @@
 package assignment1.sharedRegions;
 
+import assignment1.main.SimulPar;
 import assignment1.entities.Contestant;
 import assignment1.entities.ContestantStates;
 
@@ -19,7 +20,7 @@ public class Playground {
         //comunicar a mudança ao repositório
         startTrial = true;
         notifyAll();
-        while (amDone<6) {
+        while (amDone < 2*SimulPar.NP) {
             try {wait();}
             catch (InterruptedException e) {}
         }
