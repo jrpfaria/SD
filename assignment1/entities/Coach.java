@@ -76,7 +76,7 @@ public class Coach extends Thread {
         byte orders;
         short[] roster = reviewNotes();
         while (true) {
-            orders = contestantsBench.wait_for_referee_command();
+            orders = contestantsBench.wait_for_referee_command(team);
             if (orders==0) return;
             contestantsBench.callContestants(team, roster);
             playground.assemble_team(team);

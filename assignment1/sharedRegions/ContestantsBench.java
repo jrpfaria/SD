@@ -29,7 +29,9 @@ public class ContestantsBench {
 
     //Coach
 
-    public synchronized byte wait_for_referee_command() {
+    public synchronized byte wait_for_referee_command(short team) {
+        ((Coach)Thread.currentThread()).setCoachState(CoachStates.WAIT_FOR_REFEREE_COMMAND);
+        repos.setCoachState(team, CoachStates.WAIT_FOR_REFEREE_COMMAND);
         while (!matchOver && callTrial==0) {
             try {wait();}
             catch (InterruptedException e) {}

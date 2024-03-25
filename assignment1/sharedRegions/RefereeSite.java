@@ -13,9 +13,9 @@ public class RefereeSite {
     //Referee
 
     public synchronized void announceNewGame() {
+        repos.startGame();
         ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.START_OF_A_GAME);
         repos.setRefereeState(RefereeStates.START_OF_A_GAME);
-        repos.startGame();
     }
 
     public synchronized void teams_ready() {
@@ -23,10 +23,11 @@ public class RefereeSite {
             try {wait();}
             catch (InterruptedException e) {}
         }
+        ready = 0;
     }
 
     //Coach
-    
+
     public synchronized void informReferee() {
         ready++;
         notifyAll();

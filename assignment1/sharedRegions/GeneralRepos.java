@@ -183,9 +183,6 @@ public class GeneralRepos {
             GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
             System.exit(1);
         }
-
-        //report
-        reportStatus();
     }
 
     private void reportEndOfGame(short ropePosition, boolean knockout) {

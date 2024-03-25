@@ -49,6 +49,8 @@ public class Playground {
         boolean knockout = false;
         if (Math.abs(strengthDifference)>=4) knockout = true;
         repos.endGame(ropePosition, knockout);
+        ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.END_OF_A_GAME);
+        repos.setRefereeState(RefereeStates.END_OF_A_GAME);
         ropePosition = 0;
     }
 
@@ -90,18 +92,20 @@ public class Playground {
         }
     }
 
-    public void getReady(short team, short number) {
+    public synchronized void getReady(short team, short number) {
         repos.addContestant(team, number);
     }
 
     public void do_your_best(short team, short number, short strength) {
+        synchronized (this) {
         ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.DO_YOUR_BEST);
-        repos.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
-        pullTheRope(team, strength);
+            repos.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
+            pullTheRope(team, strength);
+        }
         try {Thread.currentThread().sleep((long)(1+100*Math.random()));}
         catch (InterruptedException e) {}
-        amDone();
         synchronized (this) {
+            amDone();
             while (!endTrial) {
                 try {wait();}
                 catch (InterruptedException e) {}
