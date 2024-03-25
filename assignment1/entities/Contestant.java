@@ -13,8 +13,8 @@ public class Contestant extends Thread implements Comparable<Contestant> {
     private Playground playground;
     private ContestantsBench contestantsBench;
 
-    public Contestant(short team, short number, short strength, RefereeSite refereeSite, Playground playground, ContestantsBench contestantBench) {
-        super(String.format("Contestant-%d-%d", team, number));
+    public Contestant(short team, short number, short strength, RefereeSite refereeSite, Playground playground, ContestantsBench contestantsBench) {
+        super(String.format("Contestant-%d-%d", team+1, number+1));
         this.state = ContestantStates.SEAT_AT_THE_BENCH;
         this.team = team;
         this.number = number;
@@ -44,39 +44,23 @@ public class Contestant extends Thread implements Comparable<Contestant> {
         this.state = state;
     }
 
-    public void rest() {
-        strength += 1;
-    }
-
-    public void play() {
-        strength -= 1;
-    }
-
-    public void pullTheRope() {
-        try {sleep((long)(1+100*Math.random()));}
-        catch (InterruptedException e) {}
-    }
-
     @Override
     public void run() {
-        // short called;
-        // while (true) {
-        //     called = contestantsBench.seat_at_the_bench();
-        //     switch (called) {
-        //         case 0: return; // match is over; close thread
-        //         case 1: rest(); continue; // player was not called; rest and start again
-        //         case 2: break; // player was called; execute the rest of the code
-        //         default: throw new Exception("Invalid return value received by contestant");
-        //     }
-        //     contestantsBench.followCoachAdvice();
-        //     playground.stand_in_position();
-        //     playground.getReady();
-        //     playground.pullTheRope();
-        //     playground.amDone();
-        //     playground.do_your_best();
-        //     play();
-        //     contestantsBench.sitDown();
-        // }
+        byte orders;
+        while (true) {
+            orders = contestantsBench.seat_at_the_bench(team, number);
+            switch (orders) {
+                case 0: return; // match is over; close thread
+                case 1: strength++; continue; // player was not called; rest and start again
+                case 2: break; // player was called; execute the rest of the code
+            }
+            playground.followCoachAdvice(team);
+            playground.stand_in_position(team, number);
+            playground.getReady(team, number);
+            playground.do_your_best(team, number, strength);
+            strength--;
+            contestantsBench.seatDown(team, number);
+        }
     }
 
     @Override

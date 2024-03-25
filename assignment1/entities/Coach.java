@@ -18,7 +18,7 @@ public class Coach extends Thread {
     private short gameCounter = 0; // Added to keep track of the number of games played in the gambler's dream method
 
     public Coach(short team, Contestant[] players, RefereeSite refereeSite, Playground playground, ContestantsBench contestantsBench) {
-        super(String.format("Coach-%d", team));
+        super(String.format("Coach-%d", team+1));
         this.state = CoachStates.WAIT_FOR_REFEREE_COMMAND;
         this.team = team;
         this.players = players;
@@ -71,20 +71,18 @@ public class Coach extends Thread {
 
     @Override
     public void run() {
-        // short currentGame;
-        // short currentTrial;
-        // boolean knockout;
+        short currentGame;
+        short currentTrial;
+        byte orders;
         short[] roster = reviewNotes();
-        // for (currentGame = 1; currentGame <= SimulPar.NG; currentGame++) {
-        //     for (currentTrial = 1; currentTrial <= SimulPar.NT; currentTrial++) {
-                refereeSite.wait_for_referee_command();
-                contestantsBench.callContestants(team, roster);
-        //         playground.assemble_team();
-        //         refereeSite.informReferee();
-        //         knockout = playground.watch_trial();
-        //         roster = reviewNotes();
-        //         if (knockout) break;
-        //     }
-        // }
+        while (true) {
+            orders = contestantsBench.wait_for_referee_command();
+            if (orders==0) return;
+            contestantsBench.callContestants(team, roster);
+            playground.assemble_team(team);
+            refereeSite.informReferee();
+            playground.watch_trial(team);
+            roster = reviewNotes();
+        }
     }
 }

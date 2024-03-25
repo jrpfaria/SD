@@ -76,18 +76,24 @@ public class GeneralRepos {
     }
 
     public void setRefereeState(RefereeStates refereeState) {
-        this.refereeState = refereeState;
-        reportStatus();
+        if (this.refereeState!=refereeState) {
+            this.refereeState = refereeState;
+            reportStatus();
+        }
     }
 
     public void setCoachState(short team, CoachStates coachState) {
-        this.coachState[team] = coachState;
-        reportStatus();
+        if (this.coachState[team]!=coachState) {
+            this.coachState[team] = coachState;
+            reportStatus();
+        }
     }
 
     public void setContestantState(short team, short number, ContestantStates contestantState) {
-        this.contestantState[team][number] = contestantState;
-        reportStatus();
+        if (this.contestantState[team][number]!=contestantState) {
+            this.contestantState[team][number] = contestantState;
+            reportStatus();
+        }
     }
 
     public void setContestantStrength(short team, short number, short strength) {
@@ -96,6 +102,18 @@ public class GeneralRepos {
 
     public void setContestantPosition(short team, short number, short position) {
         contestantPosition[team][position] = number;
+    }
+
+    public void addContestant(short team, short number) {
+        for (int i = 0; i < SimulPar.NP; i++) {
+            if (contestantPosition[team][i]==0) contestantPosition[team][i] = number;
+        }
+    }
+
+    public void removeContestant(short team, short number) {
+        for (int i = 0; i < SimulPar.NP; i++) {
+            if (contestantPosition[team][i]==number) contestantPosition[team][i] = 0;
+        }
     }
 
     public void setRopePosition(short position) {
@@ -116,6 +134,10 @@ public class GeneralRepos {
         reportEndOfGame(team, knockout);
     }
 
+    public void endMatch(short score1, short score2) {
+        reportEndOfMatch(score1, score2);
+    }
+
     private void reportInitialStatus() {
         //open file
         TextFile log = new TextFile();
@@ -131,7 +153,7 @@ public class GeneralRepos {
         //close file
         if (!log.close()) {
             GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
-            System.exit (1);
+            System.exit(1);
         }
 
         //report
@@ -153,14 +175,14 @@ public class GeneralRepos {
         //close file
         if (!log.close()) {
             GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
-            System.exit (1);
+            System.exit(1);
         }
 
         //report
         reportStatus();
     }
 
-    private void reportEndOfGame(short team, boolean knockout) {
+    private void reportEndOfGame(short ropePosition, boolean knockout) {
         //open file
         TextFile log = new TextFile();
         if (!log.openForWriting(".", logFileName)) {
@@ -169,14 +191,42 @@ public class GeneralRepos {
         }
 
         //print end of game
-        if (knockout) log.writelnString(String.format("Game %d was won by team %d by knockout in %d trials.", nGame, team+1, nTrial));
-        else if (ropePosition!=0) log.writelnString(String.format("Game %d was won by team %d by %d points.", nGame, team+1, Math.abs(ropePosition)));
-        else log.writelnString(String.format("Game %d was a draw", nGame));
+        if (ropePosition==0) log.writelnString(String.format("Game %d was a draw", nGame));
+        else {
+            short winner = 1;
+            if (ropePosition>0) winner = 2;
+            if (knockout) log.writelnString(String.format("Game %d was won by team %d by knockout in %d trials.", nGame, winner, nTrial));
+            else if (ropePosition!=0) log.writelnString(String.format("Game %d was won by team %d by %d points.", nGame, winner, Math.abs(ropePosition)));
+        }
 
         //close file
         if (!log.close()) {
             GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
-            System.exit (1);
+            System.exit(1);
+        }
+    }
+
+    private void reportEndOfMatch(short score1, short score2) {
+        //open file
+        TextFile log = new TextFile();
+        if (!log.openForWriting(".", logFileName)) {
+            GenericIO.writelnString("The operation of creating the file " + logFileName + " failed!");
+            System.exit(1);
+        }
+
+        //print end of match
+        if (score1==score2) log.writelnString("Match was a draw.");
+        else {
+            short winner;
+            if (score1>=score2) winner = 1;
+            else winner = 2;
+            log.writelnString(String.format("Match was won by team %d (%d-%d).", winner, score1, score2));
+        }
+
+        //close file
+        if (!log.close()) {
+            GenericIO.writelnString ("The operation of closing the file " + logFileName + " failed!");
+            System.exit(1);
         }
     }
 

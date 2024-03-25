@@ -1,6 +1,5 @@
 package assignment1.main;
 
-import assignment1.main.SimulPar;
 import assignment1.entities.*;
 import assignment1.sharedRegions.*;
 import genclass.GenericIO;
@@ -48,7 +47,7 @@ public class GameOfRope {
         contestantsBench = new ContestantsBench(repos);
 
         //instanciate threads
-        referee = new Referee(refereeSite, playground);
+        referee = new Referee(refereeSite, playground, contestantsBench);
         for (short i = 0; i < 2; i++) {
             for (short j = 0; j < SimulPar.NC; j++) {
                 contestant[i][j] = new Contestant(i, j, contestantStrength[i][j], refereeSite, playground, contestantsBench);
@@ -60,26 +59,32 @@ public class GameOfRope {
 
         //start threads
         referee.start();
+        System.out.println("Referee has started.");
         for (int i = 0; i < 2; i++) {
             coach[i].start();
+            System.out.printf("Coach-%d has started.\n", i+1);
         }
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++) {
                 contestant[i][j].start();
+                System.out.printf("Contestant-%d-%d has started.\n", i+1, j+1);
             }
         }
 
         //join threads
         try {referee.join();}
         catch (InterruptedException e) {}
+        System.out.println("Referee has ended.");
         for (int i = 0; i < 2; i++) {
             try {coach[i].join();}
             catch (InterruptedException e) {}
+            System.out.printf("Coach-%d has ended.\n", i+1);
         }
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++) {
                 try {contestant[i][j].join();}
                 catch (InterruptedException e) {}
+                System.out.printf("Contestant-%d-%d has ended.\n", i+1, j+1);
             }
         }
     }
