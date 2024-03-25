@@ -106,13 +106,19 @@ public class GeneralRepos {
 
     public void addContestant(short team, short number) {
         for (int i = 0; i < SimulPar.NP; i++) {
-            if (contestantPosition[team][i]==0) contestantPosition[team][i] = number;
+            if (contestantPosition[team][i]==0) {
+                contestantPosition[team][i] = (short)(number+1);
+                break;
+            }
         }
     }
 
     public void removeContestant(short team, short number) {
         for (int i = 0; i < SimulPar.NP; i++) {
-            if (contestantPosition[team][i]==number) contestantPosition[team][i] = 0;
+            if (contestantPosition[team][i]==number+1) {
+                contestantPosition[team][i] = 0;
+                break;
+            }
         }
     }
 
@@ -163,13 +169,13 @@ public class GeneralRepos {
     private void reportStartOfGame() {
         //open file
         TextFile log = new TextFile();
-        if (!log.openForWriting(".", logFileName)) {
-            GenericIO.writelnString("The operation of creating the file " + logFileName + " failed!");
+        if (!log.openForAppending(".", logFileName)) {
+            GenericIO.writelnString("The operation of opening for appending the file " + logFileName + " failed!");
             System.exit(1);
         }
         
         //print header
-        log.writelnString("Game " + nGame);
+        log.writeString("Game " + nGame);
         log.writelnString(legend);
 
         //close file
@@ -185,8 +191,8 @@ public class GeneralRepos {
     private void reportEndOfGame(short ropePosition, boolean knockout) {
         //open file
         TextFile log = new TextFile();
-        if (!log.openForWriting(".", logFileName)) {
-            GenericIO.writelnString("The operation of creating the file " + logFileName + " failed!");
+        if (!log.openForAppending(".", logFileName)) {
+            GenericIO.writelnString("The operation of opening for appending the file " + logFileName + " failed!");
             System.exit(1);
         }
 
@@ -209,8 +215,8 @@ public class GeneralRepos {
     private void reportEndOfMatch(short score1, short score2) {
         //open file
         TextFile log = new TextFile();
-        if (!log.openForWriting(".", logFileName)) {
-            GenericIO.writelnString("The operation of creating the file " + logFileName + " failed!");
+        if (!log.openForAppending(".", logFileName)) {
+            GenericIO.writelnString("The operation of opening for appending the file " + logFileName + " failed!");
             System.exit(1);
         }
 

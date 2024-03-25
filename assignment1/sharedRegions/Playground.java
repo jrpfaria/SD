@@ -67,7 +67,7 @@ public class Playground {
     public synchronized void watch_trial(short team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
         repos.setCoachState(team, CoachStates.WATCH_TRIAL);
-        while (amDone<2*SimulPar.NP) {
+        while (!endTrial) {
             try {wait();}
             catch (InterruptedException e) {}
         }

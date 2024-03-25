@@ -44,6 +44,14 @@ public class Contestant extends Thread implements Comparable<Contestant> {
         this.state = state;
     }
 
+    public void increaseStrength() {
+        this.strength++;
+    }
+
+    public void reduceStrength() {
+        this.strength--;
+    }
+
     @Override
     public void run() {
         byte orders;
@@ -51,14 +59,13 @@ public class Contestant extends Thread implements Comparable<Contestant> {
             orders = contestantsBench.seat_at_the_bench(team, number);
             switch (orders) {
                 case 0: return; // match is over; close thread
-                case 1: strength++; continue; // player was not called; rest and start again
+                case 1: continue; // player was not called; rest and start again
                 case 2: break; // player was called; execute the rest of the code
             }
             playground.followCoachAdvice(team);
             playground.stand_in_position(team, number);
             playground.getReady(team, number);
             playground.do_your_best(team, number, strength);
-            strength--;
             contestantsBench.seatDown(team, number);
         }
     }

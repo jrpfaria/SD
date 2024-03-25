@@ -48,17 +48,27 @@ public class ContestantsBench {
     //Contestants
 
     public synchronized byte seat_at_the_bench(short team, short number) {
-        ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
+        Contestant c = (Contestant)Thread.currentThread();
+        c.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
         repos.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
         while (!matchOver && called[team][number]==0) {
             try {wait();}
             catch (InterruptedException e) {}
         }
         if (matchOver) return 0;
-        return called[team][number];
+        byte orders = called[team][number];
+        if (orders==1) {
+            c.increaseStrength();
+            repos.setContestantStrength(team, number, c.getStrength());
+        }
+        called[team][number] = 0;
+        return orders;
     }
 
     public synchronized void seatDown(short team, short number) {
+        Contestant c = (Contestant)Thread.currentThread();
+        c.reduceStrength();
         repos.removeContestant(team, number);
+        repos.setContestantStrength(team, number, c.getStrength());
     }
 }
