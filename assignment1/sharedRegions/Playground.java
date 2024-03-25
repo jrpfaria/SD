@@ -42,6 +42,7 @@ public class Playground {
         startTrial = false;
         endTrial = true;
         notifyAll();
+        ropePosition += strengthDifference;
         return strengthDifference;
     }
 
@@ -49,9 +50,10 @@ public class Playground {
         boolean knockout = false;
         if (Math.abs(strengthDifference)>=4) knockout = true;
         repos.endGame(ropePosition, knockout);
+        ropePosition = 0;
+        repos.setRopePosition((short)0);
         ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.END_OF_A_GAME);
         repos.setRefereeState(RefereeStates.END_OF_A_GAME);
-        ropePosition = 0;
     }
 
     //Coach
@@ -102,8 +104,8 @@ public class Playground {
             repos.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
             pullTheRope(team, strength);
         }
-        try {Thread.currentThread().sleep((long)(1+100*Math.random()));}
-        catch (InterruptedException e) {}
+        //try {Thread.currentThread().sleep((long)(1+100*Math.random()));}
+        //catch (InterruptedException e) {}
         synchronized (this) {
             amDone();
             while (!endTrial) {

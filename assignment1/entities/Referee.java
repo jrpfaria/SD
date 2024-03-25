@@ -41,6 +41,8 @@ public class Referee extends Thread {
                 playground.startTrial();
                 playground.wait_for_trial_conclusion();
                 scoreDifference = playground.assertTrialDecision();
+                if (scoreDifference<0) score1++;
+                if (scoreDifference>0) score2++;
                 if (scoreDifference>=SimulPar.KT) break;
             }
             playground.declareGameWinner();
