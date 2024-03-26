@@ -20,10 +20,6 @@ public class Referee extends Thread {
         this.contestantsBench = contestantsBench;
     }
 
-    public RefereeStates getRefereeState(){
-        return state;
-    }
-
     public void setRefereeState(RefereeStates state){
         this.state = state;
     }
@@ -32,7 +28,8 @@ public class Referee extends Thread {
     public void run() {
         short currentGame;
         short currentTrial;
-        short scoreDifference;
+        short ropePosition;
+        short strengthDifference;
         for (currentGame = 1; currentGame <= SimulPar.NG; currentGame++) {
             refereeSite.announceNewGame();
             for (currentTrial = 1; currentTrial <= SimulPar.NT; currentTrial++) {
@@ -40,12 +37,12 @@ public class Referee extends Thread {
                 refereeSite.teams_ready();
                 playground.startTrial();
                 playground.wait_for_trial_conclusion();
-                scoreDifference = playground.assertTrialDecision();
-                if (scoreDifference<0) score1++;
-                if (scoreDifference>0) score2++;
-                if (scoreDifference>=SimulPar.KT) break;
+                strengthDifference = playground.assertTrialDecision();
+                if (Math.abs(strengthDifference)>=SimulPar.KT) break;
             }
-            playground.declareGameWinner();
+            ropePosition = playground.declareGameWinner();
+            if (ropePosition<0) score1++;
+            if (ropePosition>0) score2++;
         }
         contestantsBench.declareMatchWinner(score1, score2);
     }

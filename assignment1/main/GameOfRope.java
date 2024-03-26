@@ -15,10 +15,10 @@ public class GameOfRope {
         RefereeSite refereeSite;
         Playground playground;
         ContestantsBench contestantsBench;
+
         String fileName;
         char opt;
         boolean success;
-
         //read file name from stdin
         GenericIO.writelnString("\n" + "Game of Rope");
         // do {

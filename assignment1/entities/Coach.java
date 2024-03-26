@@ -25,11 +25,7 @@ public class Coach extends Thread {
         this.refereeSite = refereeSite;
         this.playground = playground;
         this.contestantsBench = contestantsBench;
-        this.method = Math.random() < 0.5;
-    }
-
-    public CoachStates getCoachState() {
-        return state;
+        this.method = true; //Math.random() < 0.5;
     }
 
     public void setCoachState(CoachStates state) {

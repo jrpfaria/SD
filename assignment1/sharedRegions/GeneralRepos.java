@@ -9,7 +9,7 @@ public class GeneralRepos {
 
     private final String logFileName;
 
-    private String legend;
+    private final String legend;
 
     private int nGame;
     private int nTrial;
@@ -22,7 +22,7 @@ public class GeneralRepos {
 
     public GeneralRepos(String logFileName, short[][] contestantStrength) {
         //create file
-        if ((logFileName == null) || logFileName.equals(""))
+        if ((logFileName == null) || logFileName.isEmpty())
             this.logFileName = "logger";
             else this.logFileName = logFileName;
         
@@ -75,36 +75,32 @@ public class GeneralRepos {
         reportInitialStatus();
     }
 
-    public void setRefereeState(RefereeStates refereeState) {
+    public synchronized void setRefereeState(RefereeStates refereeState) {
         if (this.refereeState!=refereeState) {
             this.refereeState = refereeState;
             reportStatus();
         }
     }
 
-    public void setCoachState(short team, CoachStates coachState) {
+    public synchronized void setCoachState(short team, CoachStates coachState) {
         if (this.coachState[team]!=coachState) {
             this.coachState[team] = coachState;
             reportStatus();
         }
     }
 
-    public void setContestantState(short team, short number, ContestantStates contestantState) {
+    public synchronized void setContestantState(short team, short number, ContestantStates contestantState) {
         if (this.contestantState[team][number]!=contestantState) {
             this.contestantState[team][number] = contestantState;
             reportStatus();
         }
     }
 
-    public void setContestantStrength(short team, short number, short strength) {
+    public synchronized void setContestantStrength(short team, short number, short strength) {
         contestantStrength[team][number] = strength;
     }
 
-    public void setContestantPosition(short team, short number, short position) {
-        contestantPosition[team][position] = number;
-    }
-
-    public void addContestant(short team, short number) {
+    public synchronized void addContestant(short team, short number) {
         for (int i = 0; i < SimulPar.NP; i++) {
             if (contestantPosition[team][i]==0) {
                 contestantPosition[team][i] = (short)(number+1);
@@ -113,7 +109,7 @@ public class GeneralRepos {
         }
     }
 
-    public void removeContestant(short team, short number) {
+    public synchronized void removeContestant(short team, short number) {
         for (int i = 0; i < SimulPar.NP; i++) {
             if (contestantPosition[team][i]==number+1) {
                 contestantPosition[team][i] = 0;
@@ -122,25 +118,25 @@ public class GeneralRepos {
         }
     }
 
-    public void setRopePosition(short position) {
+    public synchronized void setRopePosition(short position) {
         this.ropePosition = position;
     }
 
-    public void startTrial() {
+    public synchronized void startTrial() {
         nTrial++;
     }
 
-    public void startGame() {
+    public synchronized void startGame() {
         nGame++;
         nTrial = 0;
         reportStartOfGame();
     }
 
-    public void endGame(short team, boolean knockout) {
+    public synchronized void endGame(short team, boolean knockout) {
         reportEndOfGame(team, knockout);
     }
 
-    public void endMatch(short score1, short score2) {
+    public synchronized void endMatch(short score1, short score2) {
         reportEndOfMatch(score1, score2);
     }
 

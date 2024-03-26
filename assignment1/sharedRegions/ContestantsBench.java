@@ -19,12 +19,16 @@ public class ContestantsBench {
     public synchronized void callTrial() {
         callTrial = 2;
         notifyAll();
+        ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.TEAMS_READY);
+        repos.setRefereeState(RefereeStates.TEAMS_READY);
     }
 
     public synchronized void declareMatchWinner(short score1, short score2) {
-        repos.endMatch(score1, score2);
         matchOver = true;
         notifyAll();
+        repos.endMatch(score1, score2);
+        ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.END_OF_THE_MATCH);
+        repos.setRefereeState(RefereeStates.END_OF_THE_MATCH);
     }
 
     //Coach
