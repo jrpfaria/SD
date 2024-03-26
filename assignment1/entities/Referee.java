@@ -9,8 +9,8 @@ public class Referee extends Thread {
     private RefereeSite refereeSite;
     private Playground playground;
     private ContestantsBench contestantsBench;
-    private short score1;
-    private short score2;
+    private int score1;
+    private int score2;
 
     public Referee(RefereeSite refereeSite, Playground playground, ContestantsBench contestantsBench) {
         super("Referee");
@@ -26,10 +26,10 @@ public class Referee extends Thread {
 
     @Override
     public void run() {
-        short currentGame;
-        short currentTrial;
-        short ropePosition;
-        short strengthDifference;
+        int currentGame;
+        int currentTrial;
+        int ropePosition;
+        int strengthDifference;
         for (currentGame = 1; currentGame <= SimulPar.NG; currentGame++) {
             refereeSite.announceNewGame();
             for (currentTrial = 1; currentTrial <= SimulPar.NT; currentTrial++) {

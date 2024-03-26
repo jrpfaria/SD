@@ -17,10 +17,10 @@ public class GeneralRepos {
     private RefereeStates refereeState;
     private final CoachStates[] coachState;
     private final ContestantStates[][] contestantState;
-    private final short[][] contestantStrength;
-    private final short[][] contestantPosition;
+    private final int[][] contestantStrength;
+    private final int[][] contestantPosition;
 
-    public GeneralRepos(String logFileName, short[][] contestantStrength) {
+    public GeneralRepos(String logFileName, int[][] contestantStrength) {
         //create file
         if ((logFileName == null) || logFileName.isEmpty())
             this.logFileName = "logger";
@@ -42,7 +42,7 @@ public class GeneralRepos {
             }
         }
         this.contestantStrength = contestantStrength;
-        contestantPosition = new short[2][SimulPar.NC];
+        contestantPosition = new int[2][SimulPar.NC];
 
         //create legend string
         String legend1 = "";
@@ -82,34 +82,34 @@ public class GeneralRepos {
         }
     }
 
-    public synchronized void setCoachState(short team, CoachStates coachState) {
+    public synchronized void setCoachState(int team, CoachStates coachState) {
         if (this.coachState[team]!=coachState) {
             this.coachState[team] = coachState;
             reportStatus();
         }
     }
 
-    public synchronized void setContestantState(short team, short number, ContestantStates contestantState) {
+    public synchronized void setContestantState(int team, int number, ContestantStates contestantState) {
         if (this.contestantState[team][number]!=contestantState) {
             this.contestantState[team][number] = contestantState;
             reportStatus();
         }
     }
 
-    public synchronized void setContestantStrength(short team, short number, short strength) {
+    public synchronized void setContestantStrength(int team, int number, int strength) {
         contestantStrength[team][number] = strength;
     }
 
-    public synchronized void addContestant(short team, short number) {
+    public synchronized void addContestant(int team, int number) {
         for (int i = 0; i < SimulPar.NP; i++) {
             if (contestantPosition[team][i]==0) {
-                contestantPosition[team][i] = (short)(number+1);
+                contestantPosition[team][i] = number+1;
                 break;
             }
         }
     }
 
-    public synchronized void removeContestant(short team, short number) {
+    public synchronized void removeContestant(int team, int number) {
         for (int i = 0; i < SimulPar.NP; i++) {
             if (contestantPosition[team][i]==number+1) {
                 contestantPosition[team][i] = 0;
@@ -118,7 +118,7 @@ public class GeneralRepos {
         }
     }
 
-    public synchronized void setRopePosition(short position) {
+    public synchronized void setRopePosition(int position) {
         this.ropePosition = position;
     }
 
@@ -132,11 +132,11 @@ public class GeneralRepos {
         reportStartOfGame();
     }
 
-    public synchronized void endGame(short team, boolean knockout) {
+    public synchronized void endGame(int team, boolean knockout) {
         reportEndOfGame(team, knockout);
     }
 
-    public synchronized void endMatch(short score1, short score2) {
+    public synchronized void endMatch(int score1, int score2) {
         reportEndOfMatch(score1, score2);
     }
 
@@ -181,7 +181,7 @@ public class GeneralRepos {
         }
     }
 
-    private void reportEndOfGame(short ropePosition, boolean knockout) {
+    private void reportEndOfGame(int ropePosition, boolean knockout) {
         //open file
         TextFile log = new TextFile();
         if (!log.openForAppending(".", logFileName)) {
@@ -192,7 +192,7 @@ public class GeneralRepos {
         //print end of game
         if (ropePosition==0) log.writelnString(String.format("Game %d was a draw", nGame));
         else {
-            short winner = 1;
+            int winner = 1;
             if (ropePosition>0) winner = 2;
             if (knockout) log.writelnString(String.format("Game %d was won by team %d by knockout in %d trials.", nGame, winner, nTrial));
             else if (ropePosition!=0) log.writelnString(String.format("Game %d was won by team %d by %d points.", nGame, winner, Math.abs(ropePosition)));
@@ -205,7 +205,7 @@ public class GeneralRepos {
         }
     }
 
-    private void reportEndOfMatch(short score1, short score2) {
+    private void reportEndOfMatch(int score1, int score2) {
         //open file
         TextFile log = new TextFile();
         if (!log.openForAppending(".", logFileName)) {
@@ -216,7 +216,7 @@ public class GeneralRepos {
         //print end of match
         if (score1==score2) log.writelnString("Match was a draw.");
         else {
-            short winner;
+            int winner;
             if (score1>=score2) winner = 1;
             else winner = 2;
             log.writelnString(String.format("Match was won by team %d (%d-%d).", winner, score1, score2));

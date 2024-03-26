@@ -2,24 +2,20 @@ package assignment1.entities;
 
 import assignment1.sharedRegions.*;
 
-import java.lang.Math;
-
 public class Contestant extends Thread implements Comparable<Contestant> {
     private ContestantStates state;
-    private short team;
-    private short number;
-    private short strength;
-    private RefereeSite refereeSite;
+    private int team;
+    private int number;
+    private int strength;
     private Playground playground;
     private ContestantsBench contestantsBench;
 
-    public Contestant(short team, short number, short strength, RefereeSite refereeSite, Playground playground, ContestantsBench contestantsBench) {
+    public Contestant(int team, int number, int strength, Playground playground, ContestantsBench contestantsBench) {
         super(String.format("Contestant-%d-%d", team+1, number+1));
         this.state = ContestantStates.SEAT_AT_THE_BENCH;
         this.team = team;
         this.number = number;
         this.strength = strength;
-        this.refereeSite = refereeSite;
         this.playground = playground;
         this.contestantsBench = contestantsBench;
     }
@@ -28,15 +24,15 @@ public class Contestant extends Thread implements Comparable<Contestant> {
         return state;
     }
 
-    public short getTeam() {
+    public int getTeam() {
         return team;
     }
 
-    public short getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public short getStrength() {
+    public int getStrength() {
         return strength;
     }
 
@@ -54,7 +50,7 @@ public class Contestant extends Thread implements Comparable<Contestant> {
 
     @Override
     public void run() {
-        byte orders;
+        int orders;
         while (true) {
             orders = contestantsBench.seat_at_the_bench(team, number);
             switch (orders) {
@@ -72,6 +68,6 @@ public class Contestant extends Thread implements Comparable<Contestant> {
 
     @Override
     public int compareTo(Contestant b) {
-        return Short.compare(strength, b.getStrength());
+        return Integer.compare(strength, b.getStrength());
     }
 }

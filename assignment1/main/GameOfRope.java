@@ -10,7 +10,7 @@ public class GameOfRope {
         Referee referee;
         Coach[] coach = new Coach[2];
         Contestant[][] contestant = new Contestant[2][SimulPar.NC];
-        short[][] contestantStrength = new short[2][SimulPar.NC];
+        int[][] contestantStrength = new int[2][SimulPar.NC];
         GeneralRepos repos;
         RefereeSite refereeSite;
         Playground playground;
@@ -38,7 +38,7 @@ public class GameOfRope {
 
         //generate contestant strength
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < SimulPar.NC; j++) contestantStrength[i][j] = (short)(5*Math.random()+6);
+            for (int j = 0; j < SimulPar.NC; j++) contestantStrength[i][j] = (int)(5*Math.random()+6);
         }
 
         //instanciate shared areas
@@ -49,12 +49,12 @@ public class GameOfRope {
 
         //instanciate threads
         referee = new Referee(refereeSite, playground, contestantsBench);
-        for (short i = 0; i < 2; i++) {
-            for (short j = 0; j < SimulPar.NC; j++) {
-                contestant[i][j] = new Contestant(i, j, contestantStrength[i][j], refereeSite, playground, contestantsBench);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < SimulPar.NC; j++) {
+                contestant[i][j] = new Contestant(i, j, contestantStrength[i][j], playground, contestantsBench);
             }
         }
-        for (short i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++) {
             coach[i] = new Coach(i, contestant[i], refereeSite, playground, contestantsBench);
         }
 

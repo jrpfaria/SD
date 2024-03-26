@@ -1,13 +1,13 @@
 ### Contestants Bench
 ```java
 
-void callContestants(short team, short[] contestants)
+void callContestants(int team, int[] contestants)
 //Coach
 //change variables "called" depending on the team
-void synchronized seatDown(short team, short contestant, short strength)
+void synchronized seatDown(int team, int contestant, int strength)
 //Contestant
 //removes strength from "strength" variable, moves to bench
-void synchronized declareMatchWinner(short team)
+void synchronized declareMatchWinner(int team)
 //Referee
 //inform entities that the match is over
 void synchronized callTrial()
@@ -32,16 +32,16 @@ void synchronized informReferee()
 void synchronized startTrial()
 //Referee
 //inform coaches and contestants that trial is starting
-void synchronized pullTheRope(short team, short strength)
+void synchronized pullTheRope(int team, int strength)
 //Contestant
 //add strength to "strength" variable (depending on team)
-short synchronized assertTrialDecision()
+int synchronized assertTrialDecision()
 //Referee
 //check rope
 void synchronized amDone()
 //Contestant
 //informs referee that effort is complete
-void synchronized declareGameWinner(short team)
+void synchronized declareGameWinner(int team)
 //Referee
 //inform coaches of who the winner of the game was
 void followCoachAdvice()

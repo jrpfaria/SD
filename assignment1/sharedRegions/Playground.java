@@ -7,20 +7,20 @@ public class Playground {
     private GeneralRepos repos;
     private boolean startTrial;
     private boolean endTrial;
-    private short amDone = 0;
-    private short[] inPosition;
-    private short ropePosition;
-    private short strengthDifference;
+    private int amDone = 0;
+    private int[] inPosition;
+    private int ropePosition;
+    private int strengthDifference;
 
     public Playground(GeneralRepos repos) {
         this.repos = repos;
-        this.inPosition = new short[2];
+        this.inPosition = new int[2];
     }
 
     //Referee
 
     public synchronized void startTrial() {
-        repos.setRopePosition((short)(ropePosition));
+        repos.setRopePosition(ropePosition);
         repos.startTrial();
         strengthDifference = 0;
         endTrial = false;
@@ -38,7 +38,7 @@ public class Playground {
         amDone = 0;
     }
 
-    public synchronized short assertTrialDecision() {
+    public synchronized int assertTrialDecision() {
         startTrial = false;
         endTrial = true;
         notifyAll();
@@ -46,13 +46,13 @@ public class Playground {
         return strengthDifference;
     }
 
-    public synchronized short declareGameWinner() {
+    public synchronized int declareGameWinner() {
         boolean knockout = false;
         if (Math.abs(strengthDifference)>=4) knockout = true;
         repos.endGame(ropePosition, knockout);
-        short ropePosition = this.ropePosition;
+        int ropePosition = this.ropePosition;
         this.ropePosition = 0;
-        repos.setRopePosition((short)0);
+        repos.setRopePosition(0);
         ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.END_OF_A_GAME);
         repos.setRefereeState(RefereeStates.END_OF_A_GAME);
         return ropePosition;
@@ -60,7 +60,7 @@ public class Playground {
 
     //Coach
 
-    public synchronized void assemble_team(short team) {
+    public synchronized void assemble_team(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.ASSEMBLE_TEAM);
         repos.setCoachState(team, CoachStates.ASSEMBLE_TEAM);
         while (inPosition[team]!=SimulPar.NP) {
@@ -70,7 +70,7 @@ public class Playground {
         inPosition[team] = 0;
     }
 
-    public synchronized void watch_trial(short team) {
+    public synchronized void watch_trial(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
         repos.setCoachState(team, CoachStates.WATCH_TRIAL);
         while (!endTrial) {
@@ -82,12 +82,12 @@ public class Playground {
 
     //Contestant
 
-    public synchronized void followCoachAdvice(short team) {
+    public synchronized void followCoachAdvice(int team) {
         inPosition[team]++;
         notifyAll();
     }
 
-    public synchronized void stand_in_position(short team, short number) {
+    public synchronized void stand_in_position(int team, int number) {
         ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.STAND_IN_POSITION);
         repos.setContestantState(team, number, ContestantStates.STAND_IN_POSITION);
         while (!startTrial) {
@@ -96,11 +96,11 @@ public class Playground {
         }
     }
 
-    public synchronized void getReady(short team, short number) {
+    public synchronized void getReady(int team, int number) {
         repos.addContestant(team, number);
     }
 
-    public void do_your_best(short team, short number, short strength) {
+    public void do_your_best(int team, int number, int strength) {
         synchronized (this) {
         ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.DO_YOUR_BEST);
             repos.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
@@ -117,7 +117,7 @@ public class Playground {
         }
     }
 
-    public synchronized void pullTheRope(short team, short strength) {
+    public synchronized void pullTheRope(int team, int strength) {
         if (team==0) strengthDifference -= strength;
         else strengthDifference += strength;
     }

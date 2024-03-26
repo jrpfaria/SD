@@ -4,7 +4,7 @@ import assignment1.entities.*;
 
 public class RefereeSite {
     private GeneralRepos repos;
-    private byte ready;
+    private int ready;
 
     public RefereeSite(GeneralRepos repos) {
         this.repos = repos;
