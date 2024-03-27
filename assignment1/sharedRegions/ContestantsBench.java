@@ -2,16 +2,27 @@ package assignment1.sharedRegions;
 
 import assignment1.main.SimulPar;
 import assignment1.entities.*;
+import assignment1.commonInfra.Pair;
 
 public class ContestantsBench {
     private GeneralRepos repos;
     private boolean matchOver;
     private int callTrial;
     private int[][] called;
+    private int seated[];
+    private Pair<Integer, Integer>[][] contestants;
 
     public ContestantsBench(GeneralRepos repos) {
         this.repos = repos;
         called = new int[2][SimulPar.NC];
+        seated = new int[2];
+        contestants = (Pair<Integer, Integer>[][]) new Pair[2][];
+        contestants[0] = (Pair<Integer, Integer>[]) new Pair[SimulPar.NC];
+        contestants[1] = (Pair<Integer, Integer>[]) new Pair[SimulPar.NC];
+        for (int i = 0; i < SimulPar.NC; i++) {
+            contestants[0][i] = new Pair<Integer, Integer>(i, 0);
+            contestants[1][i] = new Pair<Integer, Integer>(i, 0);
+        }
     }
 
     //Referee
@@ -33,6 +44,14 @@ public class ContestantsBench {
 
     //Coach
 
+    public synchronized Pair<Integer, Integer>[] reviewNotes(int team) {
+        while (seated[team]<SimulPar.NC) {
+            try {wait();}
+            catch (InterruptedException e) {}
+        }
+        return contestants[team];
+    }
+
     public synchronized int wait_for_referee_command(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.WAIT_FOR_REFEREE_COMMAND);
         repos.setCoachState(team, CoachStates.WAIT_FOR_REFEREE_COMMAND);
@@ -53,22 +72,31 @@ public class ContestantsBench {
 
     //Contestants
 
-    public synchronized int seat_at_the_bench(int team, int number) {
-        Contestant c = (Contestant)Thread.currentThread();
-        c.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
-        repos.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
-        while (!matchOver && called[team][number]==0) {
-            try {wait();}
-            catch (InterruptedException e) {}
+    public int seat_at_the_bench(int team, int number) {
+        Contestant c;
+        synchronized (this) {
+            c = (Contestant)Thread.currentThread();
+            c.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
+            repos.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
+            contestants[team][number].setValue(c.getStrength());
+            seated[team]++;
+            notifyAll();
         }
-        if (matchOver) return 0;
-        int orders = called[team][number];
-        if (orders==1) {
-            c.increaseStrength();
-            repos.setContestantStrength(team, number, c.getStrength());
+        synchronized (this) {
+            while (!matchOver && called[team][number]==0) {
+                try {wait();}
+                catch (InterruptedException e) {}
+            }
+            if (matchOver) return 0;
+            seated[team]--;
+            int orders = called[team][number];
+            if (orders==1) {
+                c.increaseStrength();
+                repos.setContestantStrength(team, number, c.getStrength());
+            }
+            called[team][number] = 0;
+            return orders;
         }
-        called[team][number] = 0;
-        return orders;
     }
 
     public synchronized void seatDown(int team, int number) {

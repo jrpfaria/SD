@@ -2,7 +2,7 @@ package assignment1.entities;
 
 import assignment1.sharedRegions.*;
 
-public class Contestant extends Thread implements Comparable<Contestant> {
+public class Contestant extends Thread {
     private ContestantStates state;
     private int team;
     private int number;
@@ -64,10 +64,5 @@ public class Contestant extends Thread implements Comparable<Contestant> {
             playground.do_your_best(team, number, strength);
             contestantsBench.seatDown(team, number);
         }
-    }
-
-    @Override
-    public int compareTo(Contestant b) {
-        return Integer.compare(strength, b.getStrength());
     }
 }

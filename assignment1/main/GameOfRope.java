@@ -55,7 +55,7 @@ public class GameOfRope {
             }
         }
         for (int i = 0; i < 2; i++) {
-            coach[i] = new Coach(i, contestant[i], refereeSite, playground, contestantsBench);
+            coach[i] = new Coach(i, refereeSite, playground, contestantsBench);
         }
 
         //start threads
