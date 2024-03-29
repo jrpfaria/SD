@@ -19,22 +19,22 @@ public class GameOfRope {
         String fileName;
         char opt;
         boolean success;
-        //read file name from stdin
+        // read file name from stdin
         GenericIO.writelnString("\n" + "Game of Rope");
-        // do {
-        //     GenericIO.writeString("Logging file name? ");
-        //     fileName = GenericIO.readlnString();
-        //     if (FileOp.exists(".", fileName)) {
-        //         do {
-        //             GenericIO.writeString(("There is already a file with this name. Delete it (y - yes; n - no)? "));
-        //             opt = GenericIO.readlnChar();
-        //         } while ((opt != 'y') && (opt != 'n'));
-        //         if (opt == 'y') success = true;
-        //         else success = false;
-        //     }
-        //     else success = true;
-        // } while (!success);
-        fileName = "report.txt";
+        do {
+            GenericIO.writeString("Logging file name? ");
+            fileName = GenericIO.readlnString();
+            if (FileOp.exists(".", fileName)) {
+                do {
+                    GenericIO.writeString(("There is already a file with this name. Delete it (y - yes; n - no)? "));
+                    opt = GenericIO.readlnChar();
+                } while ((opt != 'y') && (opt != 'n'));
+                if (opt == 'y') success = true;
+                else success = false;
+            }
+            else success = true;
+        } while (!success);
+        //fileName = "report.txt";
 
         //generate contestant strength
         for (int i = 0; i < 2; i++) {

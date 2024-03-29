@@ -24,14 +24,6 @@ public class Contestant extends Thread {
         return state;
     }
 
-    public int getTeam() {
-        return team;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
     public int getStrength() {
         return strength;
     }

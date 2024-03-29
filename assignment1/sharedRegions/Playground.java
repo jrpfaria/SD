@@ -105,7 +105,7 @@ public class Playground {
             repos.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
             pullTheRope(team, strength);
         }
-        try {Thread.currentThread().sleep((long)(1000*Math.random()));}
+        try {Thread.sleep((long)(10000*Math.random()));}
         catch (InterruptedException e) {}
         synchronized (this) {
             amDone();

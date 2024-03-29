@@ -12,6 +12,7 @@ public class ContestantsBench {
     private int seated[];
     private Pair<Integer, Integer>[][] contestants;
 
+    @SuppressWarnings("unchecked")
     public ContestantsBench(GeneralRepos repos) {
         this.repos = repos;
         called = new int[2][SimulPar.NC];

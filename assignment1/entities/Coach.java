@@ -27,8 +27,8 @@ public class Coach extends Thread {
         this.method = Math.random() < 0.5;
     }
 
-    public int getTeam() {
-        return this.team;
+    public CoachStates getCoachState() {
+        return this.state;
     }
 
     public void setCoachState(CoachStates state) {

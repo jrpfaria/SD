@@ -20,6 +20,10 @@ public class Referee extends Thread {
         this.contestantsBench = contestantsBench;
     }
 
+    public RefereeStates getRefereeState() {
+        return this.state;
+    }
+
     public void setRefereeState(RefereeStates state){
         this.state = state;
     }
