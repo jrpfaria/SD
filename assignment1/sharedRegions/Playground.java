@@ -63,7 +63,7 @@ public class Playground {
     public synchronized void assemble_team(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.ASSEMBLE_TEAM);
         repos.setCoachState(team, CoachStates.ASSEMBLE_TEAM);
-        while (inPosition[team]!=SimulPar.NP) {
+        while (inPosition[team]<SimulPar.NP) {
             try {wait();}
             catch (InterruptedException e) {}
         }
@@ -77,7 +77,6 @@ public class Playground {
             try {wait();}
             catch (InterruptedException e) {}
         }
-        amDone = 0;
     }
 
     //Contestant

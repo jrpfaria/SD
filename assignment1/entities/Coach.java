@@ -24,7 +24,7 @@ public class Coach extends Thread {
         this.refereeSite = refereeSite;
         this.playground = playground;
         this.contestantsBench = contestantsBench;
-        this.method = true; //Math.random() < 0.5;
+        this.method = Math.random() < 0.5;
     }
 
     public int getTeam() {
