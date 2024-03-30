@@ -38,7 +38,7 @@ public class GameOfRope {
 
         //generate contestant strength
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < SimulPar.NC; j++) contestantStrength[i][j] = (int)(5*Math.random()+6);
+            for (int j = 0; j < SimulPar.NC; j++) contestantStrength[i][j] = (int)((SimulPar.MAXS-SimulPar.MINS+1)*Math.random()+SimulPar.MINS);
         }
 
         //instanciate shared areas
@@ -50,42 +50,42 @@ public class GameOfRope {
         //instanciate threads
         referee = new Referee(refereeSite, playground, contestantsBench);
         for (int i = 0; i < 2; i++) {
+            coach[i] = new Coach(i, refereeSite, playground, contestantsBench);
+        }
+        for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++) {
                 contestant[i][j] = new Contestant(i, j, contestantStrength[i][j], playground, contestantsBench);
             }
         }
-        for (int i = 0; i < 2; i++) {
-            coach[i] = new Coach(i, refereeSite, playground, contestantsBench);
-        }
 
         //start threads
         referee.start();
-        System.out.println("Referee has started.");
+        GenericIO.writelnString("Referee has started.");
         for (int i = 0; i < 2; i++) {
             coach[i].start();
-            System.out.printf("Coach-%d has started.\n", i+1);
+            GenericIO.writelnString(String.format("Coach-%d has started.", i+1));
         }
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++) {
                 contestant[i][j].start();
-                System.out.printf("Contestant-%d-%d has started.\n", i+1, j+1);
+                GenericIO.writelnString(String.format("Contestant-%d-%d has started.", i+1, j+1));
             }
         }
 
         //join threads
         try {referee.join();}
         catch (InterruptedException e) {}
-        System.out.println("Referee has ended.");
+        GenericIO.writelnString("Referee has ended.");
         for (int i = 0; i < 2; i++) {
             try {coach[i].join();}
             catch (InterruptedException e) {}
-            System.out.printf("Coach-%d has ended.\n", i+1);
+            GenericIO.writelnString(String.format("Coach-%d has ended.", i+1));
         }
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++) {
                 try {contestant[i][j].join();}
                 catch (InterruptedException e) {}
-                System.out.printf("Contestant-%d-%d has ended.\n", i+1, j+1);
+                GenericIO.writelnString(String.format("Contestant-%d-%d has ended.", i+1, j+1));
             }
         }
     }
