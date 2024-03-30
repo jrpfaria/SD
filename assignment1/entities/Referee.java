@@ -8,12 +8,34 @@ import assignment1.main.SimulPar;
 import assignment1.sharedRegions.*;
 
 public class Referee extends Thread {
-
+    /**
+     * Stores the referee's state
+     */
     private RefereeStates state;
+
+    /**
+     * Stores the reference for the refereeSite shared area
+     */
     private RefereeSite refereeSite;
+    
+    /**
+     * Stores the reference for the playground shared area
+     */
     private Playground playground;
+    
+    /**
+     * Stores the reference for the contestantsBench shared area
+     */
     private ContestantsBench contestantsBench;
+    
+    /**
+     * Stores team 1's score
+     */
     private int score1;
+    
+    /**
+     * Stores team 2's score
+     */
     private int score2;
 
     /**

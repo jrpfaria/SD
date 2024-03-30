@@ -7,11 +7,34 @@ package assignment1.entities;
 import assignment1.sharedRegions.*;
 
 public class Contestant extends Thread {
+    /**
+     * Stores the contestant's state
+     */
     private ContestantStates state;
+
+    /**
+     * Stores the index for the team to which the player belongs
+     */
     private int team;
+    
+    /**
+     * Stores the index for the player within the team
+     */
     private int number;
+    
+    /**
+     * Stores the strength of the player
+     */
     private int strength;
+    
+    /**
+     * Stores the reference to the playground shared area
+     */
     private Playground playground;
+    
+    /**
+     * Stores the reference to the contestantsBench shared area
+     */
     private ContestantsBench contestantsBench;
 
     /**
