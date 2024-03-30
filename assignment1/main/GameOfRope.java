@@ -5,21 +5,31 @@ import assignment1.sharedRegions.*;
 import genclass.GenericIO;
 import genclass.FileOp;
 
-public class GameOfRope {
-    public static void main(String[] args) {
-        Referee referee;
-        Coach[] coach = new Coach[2];
-        Contestant[][] contestant = new Contestant[2][SimulPar.NC];
-        int[][] contestantStrength = new int[2][SimulPar.NC];
-        GeneralRepos repos;
-        RefereeSite refereeSite;
-        Playground playground;
-        ContestantsBench contestantsBench;
+/**
+ * The GameOfRope class represents the main class for simulating the game of rope.
+ * It initializes the entities, shared regions, starts the threads, and waits for their conclusion.
+ */
 
-        String fileName;
-        char opt;
-        boolean success;
+public class GameOfRope {
+    /**
+     *    Main method.
+     *
+     *    @param args runtime arguments
+     */
+    public static void main(String[] args) {
+        Referee referee;                                            // referee thread
+        Coach[] coach = new Coach[2];                               // two coach threads
+        Contestant[][] contestant = new Contestant[2][SimulPar.NC]; // two arrays of contestant threads
+        int[][] contestantStrength = new int[2][SimulPar.NC];       // two arrays of contestant strength
+        GeneralRepos repos;                                         // reference to the general repository
+        RefereeSite refereeSite;                                    // reference to the referee site
+        Playground playground;                                      // reference to the playground
+        ContestantsBench contestantsBench;                          // reference to the contestants bench
+
         // read file name from stdin
+        String fileName;    // logging file name
+        char opt;           // selected option
+        boolean success;    // end of operation flag
         GenericIO.writelnString("\n" + "Game of Rope");
         do {
             GenericIO.writeString("Logging file name? ");
@@ -34,20 +44,19 @@ public class GameOfRope {
             }
             else success = true;
         } while (!success);
-        //fileName = "report.txt";
 
-        //generate contestant strength
+        // generate contestant strength
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++) contestantStrength[i][j] = (int)((SimulPar.MAXS-SimulPar.MINS+1)*Math.random()+SimulPar.MINS);
         }
 
-        //instanciate shared areas
+        // instantiate shared areas
         repos = new GeneralRepos(fileName, contestantStrength);
         refereeSite = new RefereeSite(repos);
         playground = new Playground(repos);
         contestantsBench = new ContestantsBench(repos);
 
-        //instanciate threads
+        // instantiate threads
         referee = new Referee(refereeSite, playground, contestantsBench);
         for (int i = 0; i < 2; i++) {
             coach[i] = new Coach(i, refereeSite, playground, contestantsBench);
@@ -58,7 +67,7 @@ public class GameOfRope {
             }
         }
 
-        //start threads
+        // starting the simulation
         referee.start();
         GenericIO.writelnString("Referee has started.");
         for (int i = 0; i < 2; i++) {
@@ -72,7 +81,7 @@ public class GameOfRope {
             }
         }
 
-        //join threads
+        // waiting for the end of the simulation
         try {referee.join();}
         catch (InterruptedException e) {}
         GenericIO.writelnString("Referee has ended.");
