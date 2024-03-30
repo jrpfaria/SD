@@ -5,21 +5,65 @@ import assignment1.entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
 
+/**
+ *  General Repository.
+ *
+ *    It is responsible to keep the visible internal state of the problem and to provide means for it
+ *    to be printed in the logging file.
+ *    It is implemented as an implicit monitor.
+ *    All public methods are executed in mutual exclusion.
+ *    There are no internal synchronization points.
+ */
+
 public class GeneralRepos {
 
+    /**
+     * Name of the logging file.
+    */
     private final String logFileName;
-
+    /**
+     * Legend to identify columns in the file.
+    */
     private final String legend;
-
+    /**
+     * Number of current game.
+    */
     private int nGame;
+    /**
+     * Number of current trial.
+    */
     private int nTrial;
+    /**
+     * Position of the rope.
+    */
     private int ropePosition;
+    /**
+     * State of the referee.
+    */
     private RefereeStates refereeState;
+    /**
+     * State of the coaches.
+    */
     private final CoachStates[] coachState;
+    /**
+     * State of the contestants.
+    */
     private final ContestantStates[][] contestantState;
+    /**
+     * Strength of the contestants.
+    */
     private final int[][] contestantStrength;
+    /**
+     * Number and position of the contestants currently in the playground.
+    */
     private final int[][] contestantPosition;
 
+    /**
+     *   Instantiation of a general repository object.
+     *
+     *     @param logFileName name of the logging file
+     *     @param contestantStrength strength of each contestant of each team
+    */
     public GeneralRepos(String logFileName, int[][] contestantStrength) {
         //create file
         if ((logFileName == null) || logFileName.isEmpty())
@@ -74,32 +118,58 @@ public class GeneralRepos {
         //report
         reportInitialStatus();
     }
-
+    /**
+     *   Set referee state.
+     *
+     *   @param refereeState referee state
+     */
     public synchronized void setRefereeState(RefereeStates refereeState) {
         if (this.refereeState!=refereeState) {
             this.refereeState = refereeState;
             reportStatus();
         }
     }
-
+    /**
+     *   Set coach state.
+     *
+     *   @param team coach team
+     *   @param coachState coach state
+     */
     public synchronized void setCoachState(int team, CoachStates coachState) {
         if (this.coachState[team]!=coachState) {
             this.coachState[team] = coachState;
             reportStatus();
         }
     }
-
+    /**
+     *   Set contestant state.
+     *
+     *   @param team contestant team
+     *   @param number contestant number
+     *   @param contestantState contestant state
+     */
     public synchronized void setContestantState(int team, int number, ContestantStates contestantState) {
         if (this.contestantState[team][number]!=contestantState) {
             this.contestantState[team][number] = contestantState;
             reportStatus();
         }
     }
-
+    /**
+     *   Set contestant strength.
+     *
+     *   @param team contestant team
+     *   @param number contestant number
+     *   @param strength contestant strength
+     */
     public synchronized void setContestantStrength(int team, int number, int strength) {
         contestantStrength[team][number] = strength;
     }
-
+    /**
+     *   Add contestant to the contestantPosition array.
+     *
+     *   @param team contestant team
+     *   @param number contestant number
+     */
     public synchronized void addContestant(int team, int number) {
         for (int i = 0; i < SimulPar.NP; i++) {
             if (contestantPosition[team][i]==0) {
@@ -108,7 +178,12 @@ public class GeneralRepos {
             }
         }
     }
-
+    /**
+     *   Remove contestant from the contestantPosition array.
+     *
+     *   @param team contestant team
+     *   @param number contestant number
+     */
     public synchronized void removeContestant(int team, int number) {
         for (int i = 0; i < SimulPar.NP; i++) {
             if (contestantPosition[team][i]==number+1) {
@@ -117,29 +192,49 @@ public class GeneralRepos {
             }
         }
     }
-
+    /**
+     *   Set position of rope.
+     *
+     *   @param position rope position
+     */
     public synchronized void setRopePosition(int position) {
         this.ropePosition = position;
     }
-
+    /**
+     *   Start trial.
+     */
     public synchronized void startTrial() {
         nTrial++;
     }
-
+    /**
+     *   Start game.
+     */
     public synchronized void startGame() {
         nGame++;
         nTrial = 0;
         reportStartOfGame();
     }
-
+    /** 
+     * End game.
+     *
+     * @param team winning team
+     * @param knockout true if game was won by knockout, false if game was won by points
+     */
     public synchronized void endGame(int team, boolean knockout) {
         reportEndOfGame(team, knockout);
     }
-
+    /**
+     * End match.
+     * 
+     * @param score1 score of team 1
+     * @param score2 score of team 2
+     */
     public synchronized void endMatch(int score1, int score2) {
         reportEndOfMatch(score1, score2);
     }
-
+    /**
+     *  Write the header to the logging file.
+     */
     private void reportInitialStatus() {
         //open file
         TextFile log = new TextFile();
@@ -161,7 +256,9 @@ public class GeneralRepos {
         //report
         reportStatus();
     }
-
+    /**
+     *  Write a line in the logging file indicating the start of a game.
+     */
     private void reportStartOfGame() {
         //open file
         TextFile log = new TextFile();
@@ -180,7 +277,12 @@ public class GeneralRepos {
             System.exit(1);
         }
     }
-
+    /**
+     *  Write a line in the logging file indicating the outcome of the game
+     * 
+     * @param ropePosition position of the rope
+     * @param knockout true if game was won by knockout, false if game was won by points
+     */
     private void reportEndOfGame(int ropePosition, boolean knockout) {
         //open file
         TextFile log = new TextFile();
@@ -204,7 +306,12 @@ public class GeneralRepos {
             System.exit(1);
         }
     }
-
+    /**
+     *  Write a line in the logging file indicating the outcome of the match
+     * 
+     * @param score1 score of team 1
+     * @param score2 score of team 2
+     */
     private void reportEndOfMatch(int score1, int score2) {
         //open file
         TextFile log = new TextFile();
@@ -228,7 +335,12 @@ public class GeneralRepos {
             System.exit(1);
         }
     }
-
+    /**
+     *  Write a state line at the end of the logging file.
+     *
+     *  The current state of the entities is organized in a line to be printed.
+     *  Internal operation.
+    */
     private void reportStatus() {
         //open file
         TextFile log = new TextFile();
