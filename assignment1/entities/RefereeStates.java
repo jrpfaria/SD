@@ -1,3 +1,5 @@
+package assignment1.entities;
+
 /**
  * The RefereeStates enum represents the possible states of a referee in the game simulation.
  * Referees can be in one of the following states: START_OF_THE_MATCH, START_OF_A_GAME, TEAMS_READY,
