@@ -110,6 +110,7 @@ public class ContestantsBench {
      *  The coaches wait for either the match to end or for a trial to be called
      * 
      *  @param team team of coach
+     *  @returns 0 if match is over, 1 if trial was called
      */
     public synchronized int wait_for_referee_command(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.WAIT_FOR_REFEREE_COMMAND);
@@ -144,6 +145,7 @@ public class ContestantsBench {
      *  
      * @param team team of contestant
      * @param number of contestant
+     * @returns 0 if match is over, 1 if player has to stay in the bench, 2 if player will participate in the trial
      */
     public int seat_at_the_bench(int team, int number) {
         Contestant c;

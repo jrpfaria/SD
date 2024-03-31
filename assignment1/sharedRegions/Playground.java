@@ -120,6 +120,7 @@ public class Playground {
      *  Operation assemble_team
      *  The coaches wait for the contestants to get in position to play
      * 
+     * @param team team of the coach
      */
     public synchronized void assemble_team(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.ASSEMBLE_TEAM);
@@ -134,6 +135,7 @@ public class Playground {
      *  Operation watch_trial
      *  The coaches wait for the trial to end
      * 
+     * @param team team of the coach
      */
     public synchronized void watch_trial(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
@@ -150,6 +152,7 @@ public class Playground {
      *  Operation followCoachAdvice
      *  The contestants notify their coach that they're in position
      * 
+     * @param team team of the contestant
      */
     public synchronized void followCoachAdvice(int team) {
         inPosition[team]++;
@@ -159,6 +162,8 @@ public class Playground {
      *  Operation stand_in_position
      *  The contestants wait for the trial to start
      * 
+     * @param team team of the contestant
+     * @param number number of the contestant
      */
     public synchronized void stand_in_position(int team, int number) {
         ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.STAND_IN_POSITION);
@@ -173,6 +178,8 @@ public class Playground {
      *  Operation getReady
      *  The contestants inform the general repository of their participation in the trial
      * 
+     *  @param team team of the contestant
+     *  @param number number of the contestant
      */
     public synchronized void getReady(int team, int number) {
         repos.addContestant(team, number);
@@ -180,6 +187,11 @@ public class Playground {
     /**
      *  Operation do_your_best
      *  The contestants pull the rope, sleep for a random amount of time, inform the referee that they're done playing, and wait for the trial to end
+     *
+     *  @param team team of the contestant
+     *  @param number number of the contestant
+     *  @param strength strength of the contestant
+     * 
      */
     public void do_your_best(int team, int number, int strength) {
         synchronized (this) {
@@ -201,6 +213,8 @@ public class Playground {
      *  Operation pullTheRope
      *  The contestants add or subtract their strength to the strengthDifference variable
      * 
+     *  @param team team of the contestant
+     *  @param strength strength of the contestant
      */
     public synchronized void pullTheRope(int team, int strength) {
         if (team==0) strengthDifference -= strength;
