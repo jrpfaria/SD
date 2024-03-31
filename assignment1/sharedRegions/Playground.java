@@ -3,15 +3,52 @@ package assignment1.sharedRegions;
 import assignment1.main.SimulPar;
 import assignment1.entities.*;
 
-public class Playground {
-    private GeneralRepos repos;
-    private boolean startTrial;
-    private boolean endTrial;
-    private int amDone = 0;
-    private int[] inPosition;
-    private int ropePosition;
-    private int strengthDifference;
+/**
+ *    Playground.
+ *
+ *    It is responsible to keep a continuously updated account of the position of the rope and strength difference between players
+ *    and is implemented as an implicit monitor.
+ *    All public methods are executed in mutual exclusion 
+ *    (except for do_your_best, which is composed of two separate blocks that are executed in mutual exclusion)
+ *    There are four internal synchronization points: the referee waits for the contestants to stop playing,
+ *    the coaches wait for the contestants to be ready and the trail do conclude,
+ *    and the contestants wait for the trial to start and to end
+ */
 
+public class Playground {
+    /**
+     *   Reference to the general repository.
+     */
+    private GeneralRepos repos;
+    /**
+     *   Flag the indicated the start of a trial.
+     */
+    private boolean startTrial;
+    /**
+     *   Flag the indicated the end of a trial.
+     */
+    private boolean endTrial;
+    /**
+     *  Number of contestants that are done pulling the rope.
+     */
+    private int amDone = 0;
+    /**
+     *   Number of contestants of each team that are in position to pull the rope.
+     */
+    private int[] inPosition;
+    /**
+     * Position of the rope.
+     */
+    private int ropePosition;
+    /**
+     *   Difference in strength between the two teams.
+     */
+    private int strengthDifference;
+    /**
+     *  Playground instantiation.
+     *
+     *    @param repos reference to the general repository
+     */
     public Playground(GeneralRepos repos) {
         this.repos = repos;
         this.inPosition = new int[2];
@@ -19,6 +56,11 @@ public class Playground {
 
     //Referee
 
+    /** 
+     *  Operation startTrial
+     *  Called by the referee to notify contestants and general repository of the beginning of the trial.
+     *  Update rope position on the general repository and reset position in the playground.
+     */
     public synchronized void startTrial() {
         repos.setRopePosition(ropePosition);
         repos.startTrial();
@@ -27,7 +69,10 @@ public class Playground {
         startTrial = true;
         notifyAll();
     }
-
+    /**
+     *  Operation wait_for_trial_conclusion
+     *  The referee waits while contestants pull the rope.
+     */
     public synchronized void wait_for_trial_conclusion() {
         ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION);
         repos.setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION);
@@ -37,7 +82,13 @@ public class Playground {
         }
         amDone = 0;
     }
-
+    /** 
+     *  Operation assertTrialDecision
+     *  The referee notifies the contestants and coaches of the end of the trial.
+     *  Update rope position based on the strength of the teams.
+     * 
+     *  @returns strength difference between teams
+     */
     public synchronized int assertTrialDecision() {
         startTrial = false;
         endTrial = true;
@@ -45,7 +96,12 @@ public class Playground {
         ropePosition += strengthDifference;
         return strengthDifference;
     }
-
+    /**
+     *  Operation declareGameWinner
+     *  The referee calls the general repository to log the end of the game
+     * 
+     *  @returns rope position
+     */
     public synchronized int declareGameWinner() {
         boolean knockout = false;
         if (Math.abs(strengthDifference)>=4) knockout = true;
@@ -60,6 +116,11 @@ public class Playground {
 
     //Coach
 
+    /**
+     *  Operation assemble_team
+     *  The coaches wait for the contestants to get in position to play
+     * 
+     */
     public synchronized void assemble_team(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.ASSEMBLE_TEAM);
         repos.setCoachState(team, CoachStates.ASSEMBLE_TEAM);
@@ -69,7 +130,11 @@ public class Playground {
         }
         inPosition[team] = 0;
     }
-
+    /**
+     *  Operation watch_trial
+     *  The coaches wait for the trial to end
+     * 
+     */
     public synchronized void watch_trial(int team) {
         ((Coach)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
         repos.setCoachState(team, CoachStates.WATCH_TRIAL);
@@ -81,11 +146,20 @@ public class Playground {
 
     //Contestant
 
+    /**
+     *  Operation followCoachAdvice
+     *  The contestants notify their coach that they're in position
+     * 
+     */
     public synchronized void followCoachAdvice(int team) {
         inPosition[team]++;
         notifyAll();
     }
-
+    /**
+     *  Operation stand_in_position
+     *  The contestants wait for the trial to start
+     * 
+     */
     public synchronized void stand_in_position(int team, int number) {
         ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.STAND_IN_POSITION);
         repos.setContestantState(team, number, ContestantStates.STAND_IN_POSITION);
@@ -95,10 +169,18 @@ public class Playground {
         }
     }
 
+    /**
+     *  Operation getReady
+     *  The contestants inform the general repository of their participation in the trial
+     * 
+     */
     public synchronized void getReady(int team, int number) {
         repos.addContestant(team, number);
     }
-
+    /**
+     *  Operation do_your_best
+     *  The contestants pull the rope, sleep for a random amount of time, inform the referee that they're done playing, and wait for the trial to end
+     */
     public void do_your_best(int team, int number, int strength) {
         synchronized (this) {
         ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.DO_YOUR_BEST);
@@ -115,12 +197,20 @@ public class Playground {
             }
         }
     }
-
+    /**
+     *  Operation pullTheRope
+     *  The contestants add or subtract their strength to the strengthDifference variable
+     * 
+     */
     public synchronized void pullTheRope(int team, int strength) {
         if (team==0) strengthDifference -= strength;
         else strengthDifference += strength;
     }
-
+    /**
+     *  Operation amDone
+     *  The contestants inform the referee that they're done pulling the rope
+     * 
+     */
     public synchronized void amDone() {
         amDone++;
         notifyAll();

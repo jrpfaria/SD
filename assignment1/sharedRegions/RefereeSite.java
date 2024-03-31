@@ -18,7 +18,7 @@ public class RefereeSite {
      */
     private int ready;
     /**
-     *  Referee shop instantiation.
+     *  Referee site instantiation.
      *
      *    @param repos reference to the general repository
     */
