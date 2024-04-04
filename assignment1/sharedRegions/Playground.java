@@ -87,7 +87,7 @@ public class Playground {
      *  The referee notifies the contestants and coaches of the end of the trial.
      *  Update rope position based on the strength of the teams.
      * 
-     *  @returns strength difference between teams
+     *  @return strength difference between teams
      */
     public synchronized int assertTrialDecision() {
         startTrial = false;
@@ -100,7 +100,7 @@ public class Playground {
      *  Operation declareGameWinner
      *  The referee calls the general repository to log the end of the game
      * 
-     *  @returns rope position
+     *  @return rope position
      */
     public synchronized int declareGameWinner() {
         boolean knockout = false;
