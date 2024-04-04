@@ -1,9 +1,8 @@
+package assignment1.entities;
 /**
  * The ContestantStates enum represents the possible states of a contestant in the game simulation.
  * Contestants can be in one of the following states: SEAT_AT_THE_BENCH, STAND_IN_POSITION, DO_YOUR_BEST.
  */
-package assignment1.entities;
-
 public enum ContestantStates {
     /**
      * Represents the state where the contestant is seated at the bench, waiting for instructions.

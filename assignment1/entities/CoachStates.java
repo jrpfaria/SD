@@ -1,9 +1,8 @@
+package assignment1.entities;
 /**
  * The CoachStates enum represents the possible states of a coach in the game simulation.
  * Coaches can be in one of the following states: WAIT_FOR_REFEREE_COMMAND, ASSEMBLE_TEAM, WATCH_TRIAL.
  */
-package assignment1.entities;
-
 public enum CoachStates {
     /**
      * Represents the state where the coach is waiting for a command from the referee while on the bench.

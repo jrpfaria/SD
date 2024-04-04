@@ -1,7 +1,3 @@
-/**
- * The Coach class represents a coach entity in the game simulation.
- * Coaches manage their teams, select players for each game, and participate in various activities.
- */
 package assignment1.entities;
 
 import assignment1.main.SimulPar;
@@ -11,7 +7,10 @@ import assignment1.commonInfra.Pair;
 import java.lang.Math;
 import java.util.Arrays;
 import java.util.Collections;
-
+/**
+ * The Coach class represents a coach entity in the game simulation.
+ * Coaches manage their teams, select players for each game, and participate in various activities.
+ */
 public class Coach extends Thread {
     /**
      * Stores the coach's state

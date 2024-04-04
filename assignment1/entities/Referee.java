@@ -1,12 +1,11 @@
-/**
- * The Referee class represents the referee entity in the game simulation.
- * The referee oversees the match, announces new games, manages trials, and declares winners.
- */
 package assignment1.entities;
 
 import assignment1.main.SimulPar;
 import assignment1.sharedRegions.*;
-
+/**
+ * The Referee class represents the referee entity in the game simulation.
+ * The referee oversees the match, announces new games, manages trials, and declares winners.
+ */
 public class Referee extends Thread {
     /**
      * Stores the referee's state

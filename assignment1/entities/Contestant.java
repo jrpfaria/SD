@@ -1,11 +1,10 @@
+package assignment1.entities;
+
+import assignment1.sharedRegions.*;
 /**
  * The Contestant class represents a contestant entity in the game simulation.
  * Contestants participate in various activities during the game and follow instructions from coaches.
  */
-package assignment1.entities;
-
-import assignment1.sharedRegions.*;
-
 public class Contestant extends Thread {
     /**
      * Stores the contestant's state
