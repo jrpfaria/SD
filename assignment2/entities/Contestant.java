@@ -123,7 +123,7 @@ public class Contestant extends Thread {
                 case 1: continue; // Player was not called; rest and start again
                 case 2: break; // Player was called; continue execution
             }
-            playground.followCoachAdvice(team); // Follow coach's advice
+            playground.followCoachAdvice(team, number); // Follow coach's advice
             playground.stand_in_position(team, number); // Stand in position on the playground
             playground.getReady(team, number); // Get ready for the trial
             playground.do_your_best(team, number, strength); // Perform the trial with current strength

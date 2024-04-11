@@ -34,7 +34,6 @@ public class RefereeSite {
      *  It is called by the referee when he declares the start of a game.
      */
     public synchronized void announceNewGame() {
-        repos.startGame();
         ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.START_OF_A_GAME);
         repos.setRefereeState(RefereeStates.START_OF_A_GAME);
     }

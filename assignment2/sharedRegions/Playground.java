@@ -63,7 +63,6 @@ public class Playground {
      */
     public synchronized void startTrial() {
         repos.setRopePosition(ropePosition);
-        repos.startTrial();
         strengthDifference = 0;
         endTrial = false;
         startTrial = true;
@@ -107,7 +106,6 @@ public class Playground {
         int ropePosition = this.ropePosition;
         this.ropePosition = 0;
         ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.END_OF_A_GAME);
-        repos.setRefereeState(RefereeStates.END_OF_A_GAME);
         repos.endGame(ropePosition, knockout);
         repos.setRopePosition(0);
         return ropePosition;
@@ -128,6 +126,8 @@ public class Playground {
             try {wait();}
             catch (InterruptedException e) {}
         }
+        ((Coach)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
+        repos.setCoachState(team, CoachStates.WATCH_TRIAL);
         inPosition[team] = 0;
     }
     /**
@@ -137,8 +137,6 @@ public class Playground {
      * @param team team of the coach
      */
     public synchronized void watch_trial(int team) {
-        ((Coach)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
-        repos.setCoachState(team, CoachStates.WATCH_TRIAL);
         while (!endTrial) {
             try {wait();}
             catch (InterruptedException e) {}
@@ -153,7 +151,7 @@ public class Playground {
      * 
      * @param team team of the contestant
      */
-    public synchronized void followCoachAdvice(int team) {
+    public synchronized void followCoachAdvice(int team, int number) {
         inPosition[team]++;
         notifyAll();
     }
@@ -165,9 +163,9 @@ public class Playground {
      * @param number number of the contestant
      */
     public synchronized void stand_in_position(int team, int number) {
+        repos.addContestant(team, number);
         ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.STAND_IN_POSITION);
         repos.setContestantState(team, number, ContestantStates.STAND_IN_POSITION);
-        repos.addContestant(team, number);
         while (!startTrial) {
             try {wait();}
             catch (InterruptedException e) {}

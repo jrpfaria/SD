@@ -117,6 +117,7 @@ public class GeneralRepos {
 
         //report
         reportInitialStatus();
+        startGame();
     }
     /**
      *   Set referee state.
@@ -171,10 +172,20 @@ public class GeneralRepos {
      *   @param number contestant number
      */
     public synchronized void addContestant(int team, int number) {
-        for (int i = 0; i < SimulPar.NP; i++) {
-            if (contestantPosition[team][i]==0) {
-                contestantPosition[team][i] = number+1;
-                break;
+        if (team==0) {
+            for (int i = 0; i < SimulPar.NP; i++) {
+                if (contestantPosition[team][i]==0) {
+                    contestantPosition[team][i] = number+1;
+                    break;
+                }
+            }
+        }
+        else {
+            for (int i = SimulPar.NP-1; i >= 0; i--) {
+                if (contestantPosition[team][i]==0) {
+                    contestantPosition[team][i] = number+1;
+                    break;
+                }
             }
         }
     }
@@ -201,9 +212,9 @@ public class GeneralRepos {
         this.ropePosition = position;
     }
     /**
-     *   Start trial.
+     *   Call trial.
      */
-    public synchronized void startTrial() {
+    public synchronized void callTrial() {
         nTrial++;
     }
     /**
@@ -221,7 +232,9 @@ public class GeneralRepos {
      * @param knockout true if game was won by knockout, false if game was won by points
      */
     public synchronized void endGame(int team, boolean knockout) {
+        setRefereeState(RefereeStates.END_OF_A_GAME);
         reportEndOfGame(team, knockout);
+        if (nGame+1<=SimulPar.NG) startGame();
     }
     /**
      * End match.
@@ -231,6 +244,7 @@ public class GeneralRepos {
      */
     public synchronized void endMatch(int score1, int score2) {
         reportEndOfMatch(score1, score2);
+        setRefereeState(RefereeStates.END_OF_THE_MATCH);
     }
     /**
      *  Write the header to the logging file.
@@ -360,16 +374,18 @@ public class GeneralRepos {
         for (int i = 0; i < SimulPar.NC; i++) lineStatus += String.format(" %s %2d", contestantState[1][i], contestantStrength[1][i]);
 
         for (int i = 0; i < SimulPar.NP; i++) {
-            if (nTrial==0 || contestantPosition[0][i]==0) lineStatus += " -";
+            if (contestantPosition[0][i]==0) lineStatus += " -";
             else lineStatus += " " + contestantPosition[0][i];
         }
         lineStatus += " " + ".";
         for (int i = 0; i < SimulPar.NP; i++) {
-            if (nTrial==0 || contestantPosition[1][i]==0) lineStatus += " -";
+            if (contestantPosition[1][i]==0) lineStatus += " -";
             else lineStatus += " " + contestantPosition[1][i];
         }
 
-        lineStatus += String.format(" %2d %2d", nTrial, ropePosition);
+        if (nTrial==0) lineStatus += "  -";
+        else lineStatus += String.format(" %2d", nTrial);
+        lineStatus += String.format(" %2d", ropePosition);
 
         //close file
         log.writelnString(lineStatus);
