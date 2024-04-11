@@ -1,4 +1,4 @@
-package assignment1.main;
+package assignment2.main;
 
 /**
  *    Definition of the simulation parameters.

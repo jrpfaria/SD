@@ -1,9 +1,14 @@
-package assignment1.main;
+package assignment2.main;
 
-import assignment1.entities.*;
-import assignment1.sharedRegions.*;
-import genclass.GenericIO;
+import assignment2.entities.Coach;
+import assignment2.entities.Contestant;
+import assignment2.entities.Referee;
+import assignment2.sharedRegions.ContestantsBench;
+import assignment2.sharedRegions.GeneralRepos;
+import assignment2.sharedRegions.Playground;
+import assignment2.sharedRegions.RefereeSite;
 import genclass.FileOp;
+import genclass.GenericIO;
 
 /**
  * The GameOfRope class represents the main class for simulating the game of rope.
@@ -39,8 +44,7 @@ public class GameOfRope {
                     GenericIO.writeString(("There is already a file with this name. Delete it (y - yes; n - no)? "));
                     opt = GenericIO.readlnChar();
                 } while ((opt != 'y') && (opt != 'n'));
-                if (opt == 'y') success = true;
-                else success = false;
+                success = opt == 'y';
             }
             else success = true;
         } while (!success);
