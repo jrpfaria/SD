@@ -224,6 +224,7 @@ public class GeneralRepos {
         nGame++;
         nTrial = 0;
         reportStartOfGame();
+        setRefereeState(RefereeStates.START_OF_A_GAME);
     }
     /** 
      * End game.

@@ -35,7 +35,6 @@ public class RefereeSite {
      */
     public synchronized void announceNewGame() {
         ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.START_OF_A_GAME);
-        repos.setRefereeState(RefereeStates.START_OF_A_GAME);
     }
     /**
      *  Operation teams_ready.

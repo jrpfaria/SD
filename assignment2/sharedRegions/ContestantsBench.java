@@ -83,10 +83,10 @@ public class ContestantsBench {
      * @param score2 score of team 2
      */
     public synchronized void declareMatchWinner(int score1, int score2) {
+        ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.END_OF_THE_MATCH);
+        repos.endMatch(score1, score2);
         matchOver = true;
         notifyAll();
-        repos.endMatch(score1, score2);
-        ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.END_OF_THE_MATCH);
     }
 
     //Coach
