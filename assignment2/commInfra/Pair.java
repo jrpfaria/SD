@@ -1,4 +1,6 @@
-package assignment2.commonInfra;
+package commInfra;
+
+import java.io.Serializable;
 
 /**
  * The Pair class is used to represent a key-value pair that can be compared to other instances by value, which makes it useful for sorting information.
@@ -6,7 +8,7 @@ package assignment2.commonInfra;
  * @param <Y> data type of value
  */
 
-public class Pair<X, Y extends Comparable<Y>> implements Comparable<Pair<X, Y>> {
+public class Pair<X, Y extends Comparable<Y>> implements Comparable<Pair<X, Y>>, Serializable {
     /**
      * key of the pair
     */

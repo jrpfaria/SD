@@ -2,7 +2,7 @@ package assignment2.sharedRegions;
 
 import assignment2.main.SimulPar;
 import assignment2.entities.*;
-import assignment2.commonInfra.Pair;
+import assignment2.commInfra.Pair;
 
 /**
  *    ContestantsBench.

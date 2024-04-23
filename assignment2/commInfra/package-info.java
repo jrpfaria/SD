@@ -1,4 +1,4 @@
 /**
  * Common infrastructure.
  */
-package assignment2.commonInfra;
+package assignment2.commInfra;

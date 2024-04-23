@@ -1,8 +1,8 @@
-package assignment2.entities;
+package clientSide.entities;
 
-import assignment2.main.SimulPar;
-import assignment2.sharedRegions.*;
-import assignment2.commonInfra.Pair;
+import clientSide.stubs.*;
+import serverSide.main.SimulPar;
+import commInfra.Pair;
 
 import java.lang.Math;
 import java.util.Arrays;
@@ -25,17 +25,17 @@ public class Coach extends Thread {
     /**
      * Stores the reference for the refereeSite shared area
      */
-    private final RefereeSite refereeSite;
+    private final RefereeSiteStub refereeSiteStub;
     
     /**
      * Stores the reference for the playground shared area
      */
-    private final Playground playground;
+    private final PlaygroundStub playgroundStub;
     
     /**
      * Stores the reference for the contestantsBench shared area
      */
-    private final ContestantsBench contestantsBench;
+    private final ContestantsBenchStub contestantsBenchStub;
 
     /**
      * Stores the method which the coach will follow for selecting players
@@ -55,13 +55,13 @@ public class Coach extends Thread {
      * @param playground The playground shared memory area.
      * @param contestantsBench The contestants bench shared memory area.
      */
-    public Coach(int team, RefereeSite refereeSite, Playground playground, ContestantsBench contestantsBench) {
+    public Coach(int team, RefereeSiteStub refereeSiteStub, PlaygroundStub playgroundStub, ContestantsBenchStub contestantsBenchStub) {
         super(String.format("Coach-%d", team+1));
         this.state = CoachStates.WAIT_FOR_REFEREE_COMMAND;
         this.team = team;
-        this.refereeSite = refereeSite;
-        this.playground = playground;
-        this.contestantsBench = contestantsBench;
+        this.refereeSiteStub = refereeSiteStub;
+        this.playgroundStub = playgroundStub;
+        this.contestantsBenchStub = contestantsBenchStub;
         this.method = Math.random() < 0.5; // Randomly choose the coaching method: sweaty or gambler's dream
     }
 
@@ -129,16 +129,16 @@ public class Coach extends Thread {
     @Override
     public void run() {
         int orders;
-        Pair<Integer, Integer>[] contestants = contestantsBench.reviewNotes(team); // Review notes to help with assembling the team
+        Pair<Integer, Integer>[] contestants = contestantsBenchStub.reviewNotes(team); // Review notes to help with assembling the team
         int[] roster = selectPlayers(contestants); // Select players for the game
         while (true) {
-            orders = contestantsBench.wait_for_referee_command(team); // Wait for referee's command
+            orders = contestantsBenchStub.wait_for_referee_command(team); // Wait for referee's command
             if (orders == 0) return; // Terminate if no further orders
-            contestantsBench.callContestants(team, roster); // Call selected contestants
-            playground.assemble_team(team); // Assemble team on the playground
-            refereeSite.informReferee(); // Inform referee that team is ready
-            playground.watch_trial(team); // Watch the trial on the playground
-            contestants = contestantsBench.reviewNotes(team); // Review notes for next game
+            contestantsBenchStub.callContestants(team, roster); // Call selected contestants
+            playgroundStub.assemble_team(team); // Assemble team on the playground
+            refereeSiteStub.informReferee(); // Inform referee that team is ready
+            playgroundStub.watch_trial(team); // Watch the trial on the playground
+            contestants = contestantsBenchStub.reviewNotes(team); // Review notes for next game
             roster = selectPlayers(contestants); // Select players for next game
         }
     }
