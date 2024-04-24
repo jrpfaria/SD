@@ -1,4 +1,4 @@
-package commInfra;
+package assignment2.commInfra;
 
 import clientSide.entities.*;
 import java.io.*;

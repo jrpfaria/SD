@@ -10,18 +10,18 @@ public class ClientGameOfRopeContestant {
     public static void main(String[] args) {
         String genReposServerHostName;
         int genReposServerPortNumb = -1;   
-        String refereeSiteServerHostName;
-        int refereeSiteServerPortNumb = -1;
+        String fileName;
         String playgroundServerHostName;
         int playgroundServerPortNumb = -1;
         String contestantsBenchServerHostName;
         int contestantsBenchServerPortNumb = -1;
-        Contestant[] contestant = new Contestant[2][SimulPar.NC];
+        Contestant[][] contestant = new Contestant[2][SimulPar.NC];
+        int[][] contestantStrength = new int[2][SimulPar.NC];
         GeneralReposStub genReposStub;
         PlaygroundStub playgroundStub;
         ContestantsBenchStub contestantsBenchStub;
 
-        if (args.length != 6) {
+        if (args.length != 7) {
             GenericIO.writelnString("Wrong number of parameters!");
             System.exit(1);
         }
@@ -65,12 +65,19 @@ public class ClientGameOfRopeContestant {
             System.exit(1);
         }
 
+        fileName = args[6];
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < SimulPar.NC; j++) contestantStrength[i][j] = (int)((SimulPar.MAXS-SimulPar.MINS+1)*Math.random()+SimulPar.MINS);
+        }
+
         genReposStub = new GeneralReposStub(genReposServerHostName, genReposServerPortNumb);
+        genReposStub.initSimul(fileName, contestantStrength);
         playgroundStub = new PlaygroundStub(playgroundServerHostName, playgroundServerPortNumb);
         contestantsBenchStub = new ContestantsBenchStub(contestantsBenchServerHostName, contestantsBenchServerPortNumb);
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++) {
-                contestant[i][j] = new Contestant(i, playgroundStub, contestantsBenchStub);
+                contestant[i][j] = new Contestant(i, j, contestantStrength[i][j], playgroundStub, contestantsBenchStub);
             }
         }
 
@@ -80,7 +87,8 @@ public class ClientGameOfRopeContestant {
             }
         }
 
-        GenericIO.writelnString ();
+        GenericIO.writelnString();
+
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++) {
                 try {
@@ -90,7 +98,9 @@ public class ClientGameOfRopeContestant {
                 GenericIO.writelnString("Contestant " + (i+1) + "-" + (j+1) + " has terminated.");
             }
         }
+
         GenericIO.writelnString();
+
         genReposStub.shutdown();
         playgroundStub.shutdown();
         contestantsBenchStub.shutdown();

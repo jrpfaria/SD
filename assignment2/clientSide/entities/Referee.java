@@ -56,8 +56,12 @@ public class Referee extends Thread {
      * Sets the state of the referee.
      * @param state The state to set for the referee.
      */
-    public void setRefereeState(RefereeStates state){
+    public void setRefereeState(RefereeStates state) {
         this.state = state;
+    }
+
+    public void getRefereeState(RefereeStates state) {
+        return this.state;
     }
 
     /**

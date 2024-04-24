@@ -33,6 +33,7 @@ public class ServerGameOfRopeRefereeSite {
             GenericIO.writelnString("args[0] is not a valid port number!");
             System.exit(1);
         }
+        reposServerName = args[1];
 
         reposStub = new GeneralReposStub(reposServerName, reposPortNumb);
         refereeSite = new RefereeSite(reposStub);

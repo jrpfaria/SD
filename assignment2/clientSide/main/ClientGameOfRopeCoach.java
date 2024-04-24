@@ -91,7 +91,7 @@ public class ClientGameOfRopeCoach {
             coach[i].start();
         }
 
-        GenericIO.writelnString ();
+        GenericIO.writelnString();
         for (int i = 0; i < 2; i++) {
             try {
                 coach[i].join();
@@ -99,6 +99,7 @@ public class ClientGameOfRopeCoach {
             catch (InterruptedException e) {}
             GenericIO.writelnString("Coach " + (i+1) + " has terminated.");
         }
+
         GenericIO.writelnString();
         genReposStub.shutdown();
         refereeSiteStub.shutdown();

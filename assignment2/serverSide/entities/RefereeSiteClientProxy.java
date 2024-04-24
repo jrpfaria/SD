@@ -5,11 +5,44 @@ import clientSide.entities.*;
 import commInfra.*;
 import genclass.GenericIO;
 
-public class RefereeSiteClientProxy extends Thread { // TODO
+public class RefereeSiteClientProxy extends Thread implements RefereeCloning, CoachCloning {
     
     private static int nProxy = 0;
     private ServerCom sconi;
     private RefereeSiteInterface refereeSiteInter;
+
+    // Referee
+    private RefereeStates refereeState;
+
+    public void setRefereeState(RefereeStates state) {
+        this.refereeState = state;
+    }
+
+    public RefereeStates getRefereeState() {
+        return this.refereeState;
+    }
+
+    // Coach
+    private CoachStates coachState;
+    private int coachTeam;
+
+    public void setCoachState(CoachStates state) {
+        this.coachState = state;
+    }
+
+    public CoachStates getCoachState() {
+        return this.coachState;
+    }
+
+    public void setCoachTeam(int team) {
+        this.coachTeam = team;
+    }
+
+    public int getCoachTeam() {
+        return this.coachTeam;
+    }
+
+    //
     
     public RefereeSiteClientProxy(ServerCom sconi, RefereeSiteInterface refereeSiteInter) {
         super("RefereeSite_" + RefereeSiteClientProxy.getProxyId());

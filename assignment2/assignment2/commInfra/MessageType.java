@@ -1,4 +1,4 @@
-package commInfra;
+package assignment2.commInfra;
 
 public enum MessageType { // TODO
     SETNFIC,
