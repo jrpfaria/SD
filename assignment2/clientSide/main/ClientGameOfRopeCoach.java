@@ -84,7 +84,7 @@ public class ClientGameOfRopeCoach {
         playgroundStub = new PlaygroundStub(playgroundServerHostName, playgroundServerPortNumb);
         contestantsBenchStub = new ContestantsBenchStub(contestantsBenchServerHostName, contestantsBenchServerPortNumb);
         for (int i = 0; i < 2; i++) {
-            coach[i] = new Coach(i, refereeSiteStub, playgroundStub, contestantsBenchStub);
+            coach[i] = new Coach(i, Math.random() < 0.5, refereeSiteStub, playgroundStub, contestantsBenchStub);
         }
 
         for (int i = 0; i < 2; i++) {

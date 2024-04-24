@@ -1,6 +1,8 @@
 package clientSide.entities;
 
 import clientSide.stubs.*;
+import serverSide.main.*;
+
 /**
  * The Contestant class represents a contestant entity in the game simulation.
  * Contestants participate in various activities during the game and follow instructions from coaches.
@@ -117,21 +119,25 @@ public class Contestant extends Thread {
     public void run() {
         int orders;
         while (true) {
-            orders = contestantsBenchStub.seat_at_the_bench(team, number); // Wait for instructions while seated at the bench
+            orders = contestantsBenchStub.seat_at_the_bench(); // Wait for instructions while seated at the bench
             switch (orders) {
                 case 0: return; // Match is over; terminate thread
                 case 1: increaseStrength(); continue; // Player was not called; rest and start again
                 case 2: break; // Player was called; continue execution
             }
-            playgroundStub.followCoachAdvice(team, number); // Follow coach's advice
-            playgroundStub.stand_in_position(team, number); // Stand in position on the playground
-            playgroundStub.getReady(team, number); // Get ready for the trial
-            playgroundStub.do_your_best(team, number, strength); // Perform the trial with current strength
-            try {Thread.sleep((long)((SimulPar.MAXT-SimulPar.MINT+1)*Math.random()+SimulPar.MINT));}
-            catch (InterruptedException e) {}
+            playgroundStub.followCoachAdvice(); // Follow coach's advice
+            playgroundStub.stand_in_position(); // Stand in position on the playground
+            playgroundStub.getReady(); // Get ready for the trial
+            playgroundStub.do_your_best(); // Perform the trial with current strength
+            pullTheRope();
             playgroundStub.amDone();
             reduceStrength();
-            contestantsBenchStub.seatDown(team, number, strength); // Seat down after the trial
+            contestantsBenchStub.seatDown(); // Seat down after the trial
         }
+    }
+
+    private void pullTheRope() {
+        try {Thread.sleep((long)((SimulPar.MAXT-SimulPar.MINT+1)*Math.random()+SimulPar.MINT));}
+        catch (InterruptedException e) {}
     }
 }

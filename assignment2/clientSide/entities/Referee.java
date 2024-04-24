@@ -60,7 +60,7 @@ public class Referee extends Thread {
         this.state = state;
     }
 
-    public void getRefereeState(RefereeStates state) {
+    public RefereeStates getRefereeState(RefereeStates state) {
         return this.state;
     }
 

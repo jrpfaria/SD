@@ -7,6 +7,7 @@ import commInfra.Pair;
 import java.lang.Math;
 import java.util.Arrays;
 import java.util.Collections;
+
 /**
  * The Coach class represents a coach entity in the game simulation.
  * Coaches manage their teams, select players for each game, and participate in various activities.
@@ -51,18 +52,19 @@ public class Coach extends Thread {
      * Constructor for Coach class.
      * Initializes the coach with a specific team, referee site, playground, and contestants bench.
      * @param team The team index of the coach.
+     * @param method The coaching method: sweaty or gambler's dream
      * @param refereeSite The referee site shared memory area.
      * @param playground The playground shared memory area.
      * @param contestantsBench The contestants bench shared memory area.
      */
-    public Coach(int team, RefereeSiteStub refereeSiteStub, PlaygroundStub playgroundStub, ContestantsBenchStub contestantsBenchStub) {
+    public Coach(int team, boolean method, RefereeSiteStub refereeSiteStub, PlaygroundStub playgroundStub, ContestantsBenchStub contestantsBenchStub) {
         super(String.format("Coach-%d", team+1));
         this.state = CoachStates.WAIT_FOR_REFEREE_COMMAND;
         this.team = team;
+        this.method = method;
         this.refereeSiteStub = refereeSiteStub;
         this.playgroundStub = playgroundStub;
         this.contestantsBenchStub = contestantsBenchStub;
-        this.method = Math.random() < 0.5; // Randomly choose the coaching method: sweaty or gambler's dream
     }
 
     /**
@@ -79,6 +81,10 @@ public class Coach extends Thread {
      */
     public void setCoachState(CoachStates state) {
         this.state = state;
+    }
+
+    public CoachStates getCoachState() {
+        return this.state;
     }
 
     /**
@@ -129,16 +135,16 @@ public class Coach extends Thread {
     @Override
     public void run() {
         int orders;
-        Pair<Integer, Integer>[] contestants = contestantsBenchStub.reviewNotes(team); // Review notes to help with assembling the team
+        Pair<Integer, Integer>[] contestants = contestantsBenchStub.reviewNotes(); // Review notes to help with assembling the team
         int[] roster = selectPlayers(contestants); // Select players for the game
         while (true) {
-            orders = contestantsBenchStub.wait_for_referee_command(team); // Wait for referee's command
+            orders = contestantsBenchStub.wait_for_referee_command(); // Wait for referee's command
             if (orders == 0) return; // Terminate if no further orders
-            contestantsBenchStub.callContestants(team, roster); // Call selected contestants
-            playgroundStub.assemble_team(team); // Assemble team on the playground
+            contestantsBenchStub.callContestants(roster); // Call selected contestants
+            playgroundStub.assemble_team(); // Assemble team on the playground
             refereeSiteStub.informReferee(); // Inform referee that team is ready
-            playgroundStub.watch_trial(team); // Watch the trial on the playground
-            contestants = contestantsBenchStub.reviewNotes(team); // Review notes for next game
+            playgroundStub.watch_trial(); // Watch the trial on the playground
+            contestants = contestantsBenchStub.reviewNotes(); // Review notes for next game
             roster = selectPlayers(contestants); // Select players for next game
         }
     }

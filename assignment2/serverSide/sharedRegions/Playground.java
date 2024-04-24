@@ -48,6 +48,7 @@ public class Playground {
      *   Difference in strength between the two teams.
      */
     private int strengthDifference;
+
     /**
      *  Playground instantiation.
      *
@@ -72,6 +73,7 @@ public class Playground {
         startTrial = true;
         notifyAll();
     }
+
     /**
      *  Operation wait_for_trial_conclusion
      *  The referee waits while contestants pull the rope.
@@ -84,6 +86,7 @@ public class Playground {
         }
         amDone = 0;
     }
+
     /** 
      *  Operation assertTrialDecision
      *  The referee notifies the contestants and coaches of the end of the trial.
@@ -98,6 +101,7 @@ public class Playground {
         ropePosition += strengthDifference;
         return ropePosition;
     }
+    
     /**
      *  Operation declareGameWinner
      *  The referee calls the general repository to log the end of the game
@@ -121,8 +125,9 @@ public class Playground {
      * 
      * @param team team of the coach
      */
-    public synchronized void assemble_team(int team) {
-        ((Coach)Thread.currentThread()).setCoachState(CoachStates.ASSEMBLE_TEAM);
+    public synchronized void assemble_team() {
+        int team = ((PlaygroundClientProxy)Thread.currentThread()).getCoachTeam();
+        ((PlaygroundClientProxy)Thread.currentThread()).setCoachState(CoachStates.ASSEMBLE_TEAM);
         reposStub.setCoachState(team, CoachStates.ASSEMBLE_TEAM);
         while (inPosition[team]<SimulPar.NP) {
             try {wait();}
@@ -132,13 +137,14 @@ public class Playground {
         reposStub.setCoachState(team, CoachStates.WATCH_TRIAL);
         inPosition[team] = 0;
     }
+
     /**
      *  Operation watch_trial
      *  The coaches wait for the trial to end
      * 
      * @param team team of the coach
      */
-    public synchronized void watch_trial(int team) {
+    public synchronized void watch_trial() {
         while (!endTrial) {
             try {wait();}
             catch (InterruptedException e) {}
@@ -148,15 +154,17 @@ public class Playground {
     //Contestant
 
     /**
-     *  Operation followCoachAdvice
-     *  The contestants notify their coach that they're in position
+     * Operation followCoachAdvice
+     * The contestants notify their coach that they're in position
      * 
      * @param team team of the contestant
      */
-    public synchronized void followCoachAdvice(int team, int number) {
+    public synchronized void followCoachAdvice() {
+        int team = ((PlaygroundClientProxy)Thread.currentThread()).getContestantTeam();
         inPosition[team]++;
         notifyAll();
     }
+
     /**
      *  Operation stand_in_position
      *  The contestants wait for the trial to start
@@ -164,9 +172,11 @@ public class Playground {
      * @param team team of the contestant
      * @param number number of the contestant
      */
-    public synchronized void stand_in_position(int team, int number) {
+    public synchronized void stand_in_position() {
+        int team = ((PlaygroundClientProxy)Thread.currentThread()).getContestantTeam();
+        int number = ((PlaygroundClientProxy)Thread.currentThread()).getContestantNumber();
         reposStub.addContestant(team, number);
-        ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.STAND_IN_POSITION);
+        ((PlaygroundClientProxy)Thread.currentThread()).setContestantState(ContestantStates.STAND_IN_POSITION);
         reposStub.setContestantState(team, number, ContestantStates.STAND_IN_POSITION);
         while (!startTrial) {
             try {wait();}
@@ -181,41 +191,15 @@ public class Playground {
      *  @param team team of the contestant
      *  @param number number of the contestant
      */
-    public synchronized void getReady(int team, int number) {
+    public synchronized void getReady() {
+        int team = ((PlaygroundClientProxy)Thread.currentThread()).getContestantTeam();
+        int number = ((PlaygroundClientProxy)Thread.currentThread()).getContestantNumber();
+        int strength = ((PlaygroundClientProxy)Thread.currentThread()).getContestantStrength();
         reposStub.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
-    }
-    /**
-     *  Operation do_your_best
-     *  The contestants pull the rope, sleep for a random amount of time, inform the referee that they're done playing, and wait for the trial to end
-     *
-     *  @param team team of the contestant
-     *  @param number number of the contestant
-     *  @param strength strength of the contestant
-     * 
-     */
-    public void do_your_best(int team, int number, int strength) {
-        synchronized (this) {
-            pullTheRope(team, strength);
-        }
-        synchronized (this) {
-            amDone();
-            while (!endTrial) {
-                try {wait();}
-                catch (InterruptedException e) {}
-            }
-        }
-    }
-    /**
-     *  Operation pullTheRope
-     *  The contestants add or subtract their strength to the strengthDifference variable
-     * 
-     *  @param team team of the contestant
-     *  @param strength strength of the contestant
-     */
-    public synchronized void pullTheRope(int team, int strength) {
         if (team==0) strengthDifference -= strength;
         else strengthDifference += strength;
     }
+
     /**
      *  Operation amDone
      *  The contestants inform the referee that they're done pulling the rope
@@ -224,5 +208,9 @@ public class Playground {
     public synchronized void amDone() {
         amDone++;
         notifyAll();
+        while (!endTrial) {
+            try {wait();}
+            catch (InterruptedException e) {}
+        }
     }
 }

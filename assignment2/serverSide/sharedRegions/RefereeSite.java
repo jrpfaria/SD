@@ -6,6 +6,7 @@ import clientSide.entities.*;
 import clientSide.stubs.*;
 import commInfra.*;
 import genclass.GenericIO;
+
 /**
  *    Referee site.
  *
@@ -22,6 +23,7 @@ public class RefereeSite {
      *   Number of coaches whose teams are ready.
      */
     private int ready;
+    
     /**
      *  Referee site instantiation.
      *
@@ -39,8 +41,9 @@ public class RefereeSite {
      *  It is called by the referee when he declares the start of a game.
      */
     public synchronized void announceNewGame() {
-        ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.START_OF_A_GAME);
+        ((RefereeSiteClientProxy)Thread.currentThread()).setRefereeState(RefereeStates.START_OF_A_GAME);
     }
+
     /**
      *  Operation teams_ready.
      *
