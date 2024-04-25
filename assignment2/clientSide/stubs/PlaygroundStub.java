@@ -21,7 +21,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
+            try {Thread.sleep((long)10);}
             catch (InterruptedException e) {}
         }
 
@@ -42,7 +42,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
+            try {Thread.sleep((long)10);}
             catch (InterruptedException e) {}
         }
 
@@ -63,7 +63,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
+            try {Thread.sleep((long)10);}
             catch (InterruptedException e) {}
         }
 
@@ -86,7 +86,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
+            try {Thread.sleep((long)10);}
             catch (InterruptedException e) {}
         }
 
@@ -105,16 +105,18 @@ public class PlaygroundStub {
 
     // Coach
 
-    public void assemble_team(int team) {
+    public void assemble_team() {
         ClientCom com;
         Message outMessage, inMessage;
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
+            try {Thread.sleep((long)10);}
             catch (InterruptedException e) {}
         }
 
+        Coach t = (Coach)Thread.currentThread();
+        int team = t.getTeam();
         outMessage = new Message(MessageType.ASTM, team);
         com.writeObject(outMessage);
 
@@ -126,17 +128,17 @@ public class PlaygroundStub {
         }
     }
 
-    public void watch_trial(int team) {
+    public void watch_trial() {
         ClientCom com;
         Message outMessage, inMessage;
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
+            try {Thread.sleep((long)10);}
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.WATL, team);
+        outMessage = new Message(MessageType.WATL);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -149,17 +151,89 @@ public class PlaygroundStub {
 
     // Contestant
 
-    public void followCoachAdvice(int team, int number) {
+    public void followCoachAdvice() {
         ClientCom com;
         Message outMessage, inMessage;
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
+            try {Thread.sleep((long)10);}
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.FCA, team, number);
+        Contestant t = (Contestant)Thread.currentThread();
+        int team = t.getTeam();
+        outMessage = new Message(MessageType.FCA, team);
+        com.writeObject(outMessage);
+
+        inMessage = (Message)com.readObject();
+        if (inMessage.getMsgType()!=MessageType.ACK) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString(inMessage.toString());
+            System.exit(1);
+        }
+    }
+
+    public void stand_in_position() {
+        ClientCom com;
+        Message outMessage, inMessage;
+
+        com = new ClientCom(serverHostName, serverPortNumb);
+        while (!com.open()) {
+            try {Thread.sleep((long)10);}
+            catch (InterruptedException e) {}
+        }
+
+        Contestant t = (Contestant)Thread.currentThread();
+        int team = t.getTeam();
+        int number = t.getNumber();
+        outMessage = new Message(MessageType.SIP, team, number);
+        com.writeObject(outMessage);
+
+        inMessage = (Message)com.readObject();
+        if (inMessage.getMsgType()!=MessageType.ACK) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString(inMessage.toString());
+            System.exit(1);
+        }
+    }
+
+    public void getReady() {
+        ClientCom com;
+        Message outMessage, inMessage;
+
+        com = new ClientCom(serverHostName, serverPortNumb);
+        while (!com.open()) {
+            try {Thread.sleep((long)10);}
+            catch (InterruptedException e) {}
+        }
+
+        Contestant t = (Contestant)Thread.currentThread();
+        int team = t.getTeam();
+        int number = t.getNumber();
+        int strength = t.getStrength();
+        outMessage = new Message(MessageType.GR, team, number, strength);
+        com.writeObject(outMessage);
+
+        inMessage = (Message)com.readObject();
+        if (inMessage.getMsgType()!=MessageType.ACK) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString(inMessage.toString());
+            System.exit(1);
+        }
+    }
+
+    public void amDone() {
+        ClientCom com;
+        Message outMessage, inMessage;
+
+        com = new ClientCom(serverHostName, serverPortNumb);
+        while (!com.open()) {
+            try {Thread.sleep((long)10);}
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message(MessageType.AD);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();

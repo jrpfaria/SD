@@ -3,8 +3,6 @@ package commInfra;
 import clientSide.entities.*;
 import java.io.*;
 
-import genclass.GenericIO;
-
 public class Message implements Serializable { // TODO
     private static final long serialVersionUID = 2021L;
     
@@ -17,6 +15,8 @@ public class Message implements Serializable { // TODO
     private int strength;
     private String fileName;
     private int value;
+    private Pair<Integer, Integer>[] contestants;
+    private int[] roster;
 
     public Message(MessageType msgType) {
         this.msgType = msgType;
@@ -37,6 +37,11 @@ public class Message implements Serializable { // TODO
         this.msgType = msgType;
         this.team = team;
         this.number = number;
+    }
+
+    public Message(MessageType msgType, int[] roster) {
+        this.msgType = msgType;
+        this.roster = roster;
     }
 
     public MessageType getMsgType() {
@@ -109,5 +114,21 @@ public class Message implements Serializable { // TODO
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public Pair<Integer, Integer>[] getContestants() {
+        return contestants;
+    }
+
+    public void setContestants(Pair<Integer, Integer>[] contestants) {
+        this.contestants = contestants;
+    }
+
+    public int[] getRoster() {
+        return roster;
+    }
+
+    public void setRoster(int[] roster) {
+        this.roster = roster;
     }
 }

@@ -131,7 +131,6 @@ public class Contestant extends Thread {
             playgroundStub.do_your_best(); // Perform the trial with current strength
             pullTheRope();
             playgroundStub.amDone();
-            reduceStrength();
             contestantsBenchStub.seatDown(); // Seat down after the trial
         }
     }
@@ -139,5 +138,6 @@ public class Contestant extends Thread {
     private void pullTheRope() {
         try {Thread.sleep((long)((SimulPar.MAXT-SimulPar.MINT+1)*Math.random()+SimulPar.MINT));}
         catch (InterruptedException e) {}
+        reduceStrength();
     }
 }

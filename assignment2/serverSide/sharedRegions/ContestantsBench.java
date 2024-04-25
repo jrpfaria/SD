@@ -44,6 +44,8 @@ public class ContestantsBench {
      */
     private final Pair<Integer, Integer>[][] contestants;
 
+    private int nEntities = 0;
+
     /**
      *  ContestantsBench instantiation.
      *
@@ -70,10 +72,11 @@ public class ContestantsBench {
      *  Called by the referee to notify the coaches that a trial was called.
      */
     public synchronized void callTrial() {
+        ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
         callTrial = 2;
         notifyAll();
         reposStub.callTrial();
-        ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.TEAMS_READY);
+        t.setRefereeState(RefereeStates.TEAMS_READY);
         reposStub.setRefereeState(RefereeStates.TEAMS_READY);
     }
 
@@ -86,7 +89,8 @@ public class ContestantsBench {
      * @param score2 score of team 2
      */
     public synchronized void declareMatchWinner(int score1, int score2) {
-        ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.END_OF_THE_MATCH);
+        ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
+        t.setRefereeState(RefereeStates.END_OF_THE_MATCH);
         reposStub.endMatch(score1, score2);
         matchOver = true;
         notifyAll();
@@ -102,6 +106,8 @@ public class ContestantsBench {
      *  @return roster of players
      */
     public synchronized Pair<Integer, Integer>[] reviewNotes() {
+        ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
+        int team = t.getCoachTeam();
         while (seated[team]<SimulPar.NC) {
             try {wait();}
             catch (InterruptedException e) {}
@@ -117,7 +123,9 @@ public class ContestantsBench {
      *  @return 0 if match is over, 1 if trial was called
      */
     public synchronized int wait_for_referee_command() {
-        ((Coach)Thread.currentThread()).setCoachState(CoachStates.WAIT_FOR_REFEREE_COMMAND);
+        ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
+        int team = t.getCoachTeam();
+        t.setCoachState(CoachStates.WAIT_FOR_REFEREE_COMMAND);
         reposStub.setCoachState(team, CoachStates.WAIT_FOR_REFEREE_COMMAND);
         while (!matchOver && callTrial==0) {
             try {wait();}
@@ -136,6 +144,8 @@ public class ContestantsBench {
      * @param roster numbers of the contestants that will participate
      */
     public synchronized void callContestants(int[] roster) {
+        ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
+        int team = t.getCoachTeam();
         for (int i = 0; i < SimulPar.NC; i++) called[team][i] = 1;
         for (int number: roster) called[team][number] = 2;
         notifyAll();
@@ -152,11 +162,12 @@ public class ContestantsBench {
      * @return 0 if match is over, 1 if player has to stay in the bench, 2 if player will participate in the trial
      */
     public int seat_at_the_bench() {
-        int team = ((ContestantsBenchClientProxy)Thread.currentThread()).getContestantTeam();
-        int number = ((ContestantsBenchClientProxy)Thread.currentThread()).getContestantNumber();
-        int strength = ((ContestantsBenchClientProxy)Thread.currentThread()).getContestantStrength();
+        ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
+        int team = t.getContestantTeam();
+        int number = t.getContestantNumber();
+        int strength = t.getContestantStrength();
         synchronized (this) {
-            ((ContestantsBenchClientProxy)Thread.currentThread()).setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
+            t.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
             reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
             contestants[team][number].setValue(strength);
             seated[team]++;
@@ -183,10 +194,19 @@ public class ContestantsBench {
      * @param number of contestant
      */
     public synchronized void seatDown() {
-        int team = ((ContestantsBenchClientProxy)Thread.currentThread()).getContestantTeam();
-        int number = ((ContestantsBenchClientProxy)Thread.currentThread()).getContestantNumber();
-        int strength = ((ContestantsBenchClientProxy)Thread.currentThread()).getContestantStrength();
+        ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
+        int team = t.getContestantTeam();
+        int number = t.getContestantNumber();
+        int strength = t.getContestantStrength();
         reposStub.removeContestant(team, number);
         reposStub.setContestantStrength(team, number, strength);
+    }
+
+    //
+    
+    public synchronized void shutdown() {
+        nEntities += 1;
+        if (nEntities >= SimulPar.E) ServerGameOfRopePlayground.waitConnection = false;
+        notifyAll();
     }
 }

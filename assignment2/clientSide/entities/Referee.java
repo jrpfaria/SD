@@ -73,7 +73,6 @@ public class Referee extends Thread {
         int currentGame;
         int currentTrial;
         int ropePosition;
-        int strengthDifference;
 
         // Iterate through each game
         for (currentGame = 1; currentGame <= SimulPar.NG; currentGame++) {

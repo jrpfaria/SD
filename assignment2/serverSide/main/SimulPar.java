@@ -41,4 +41,8 @@ public class SimulPar {
      * max sleep time for contestant in ms, default = 5000
     */
     public static final int MAXT = 500;
+    /**
+     * number of entities requesting shutdown
+     */
+    public static final int E = 3;
 }

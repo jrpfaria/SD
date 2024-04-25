@@ -23,6 +23,8 @@ public class RefereeSite {
      *   Number of coaches whose teams are ready.
      */
     private int ready;
+
+    private int nEntities = 0;
     
     /**
      *  Referee site instantiation.
@@ -66,6 +68,14 @@ public class RefereeSite {
      */
     public synchronized void informReferee() {
         ready++;
+        notifyAll();
+    }
+
+    //
+
+    public synchronized void shutdown() {
+        nEntities += 1;
+        if (nEntities >= SimulPar.E) ServerGameOfRopePlayground.waitConnection = false;
         notifyAll();
     }
 }

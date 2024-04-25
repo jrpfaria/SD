@@ -3,7 +3,6 @@ package clientSide.main;
 import clientSide.entities.*;
 import clientSide.stubs.*;
 import serverSide.main.*;
-import commInfra.*;
 import genclass.GenericIO;
 
 public class ClientGameOfRopeContestant {

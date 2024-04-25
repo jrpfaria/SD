@@ -58,6 +58,8 @@ public class GeneralRepos {
     */
     private final int[][] contestantPosition;
 
+    private int nEntities = 0;
+
     /**
      *   Instantiation of a general repository object.
      *
@@ -394,5 +396,13 @@ public class GeneralRepos {
             GenericIO.writelnString("The operation of closing the file " + logFileName + " failed!");
             System.exit(1);
         }
+    }
+
+    //
+
+    public synchronized void shutdown() {
+        nEntities += 1;
+        if (nEntities >= SimulPar.E) ServerGameOfRopePlayground.waitConnection = false;
+        notifyAll();
     }
 }

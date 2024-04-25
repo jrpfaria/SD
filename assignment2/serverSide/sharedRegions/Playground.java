@@ -39,7 +39,7 @@ public class Playground {
     /**
      *   Number of contestants of each team that are in position to pull the rope.
      */
-    private final int[] inPosition;
+    private final int[] inPosition = new int[2];
     /**
      * Position of the rope.
      */
@@ -49,6 +49,8 @@ public class Playground {
      */
     private int strengthDifference;
 
+    private int nEntities = 0;
+
     /**
      *  Playground instantiation.
      *
@@ -56,7 +58,6 @@ public class Playground {
      */
     public Playground(GeneralReposStub reposStub) {
         this.reposStub = reposStub;
-        this.inPosition = new int[2];
     }
 
     //Referee
@@ -133,7 +134,7 @@ public class Playground {
             try {wait();}
             catch (InterruptedException e) {}
         }
-        ((Coach)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
+        ((PlaygroundClientProxy)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
         reposStub.setCoachState(team, CoachStates.WATCH_TRIAL);
         inPosition[team] = 0;
     }
@@ -192,9 +193,10 @@ public class Playground {
      *  @param number number of the contestant
      */
     public synchronized void getReady() {
-        int team = ((PlaygroundClientProxy)Thread.currentThread()).getContestantTeam();
-        int number = ((PlaygroundClientProxy)Thread.currentThread()).getContestantNumber();
-        int strength = ((PlaygroundClientProxy)Thread.currentThread()).getContestantStrength();
+        PlaygroundClientProxy t = (PlaygroundClientProxy)Thread.currentThread();
+        int team = t.getContestantTeam();
+        int number = t.getContestantNumber();
+        int strength = t.getContestantStrength();
         reposStub.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
         if (team==0) strengthDifference -= strength;
         else strengthDifference += strength;
@@ -212,5 +214,13 @@ public class Playground {
             try {wait();}
             catch (InterruptedException e) {}
         }
+    }
+
+    //
+    
+    public synchronized void shutdown() {
+        nEntities += 1;
+        if (nEntities >= SimulPar.E) ServerGameOfRopePlayground.waitConnection = false;
+        notifyAll();
     }
 }
