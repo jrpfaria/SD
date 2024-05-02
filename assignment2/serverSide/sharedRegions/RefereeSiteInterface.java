@@ -17,6 +17,9 @@ public class RefereeSiteInterface {
         Message outMessage = null;
 
         switch (inMessage.getMsgType()) {
+            case MessageType.ANG: break;
+            case MessageType.INFR: break;
+            case MessageType.TRY: break;
             case SHUT: break;
             default: throw new MessageException("Invalid message type!", inMessage);
         }
