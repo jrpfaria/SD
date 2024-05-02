@@ -73,6 +73,12 @@ public class Message implements Serializable { // TODO
         this.contestantStrength = contestantStrength;
     }
 
+    public Message(MessageType msgType, int position, boolean knockout) {
+        this.msgType = msgType;
+        this.position = position;
+        this.knockout = knockout;
+    }
+
     public MessageType getMsgType() {
         return this.msgType;
     }
@@ -175,6 +181,22 @@ public class Message implements Serializable { // TODO
 
     public void setLogFileName(String logFileName) {
         this.logFileName = logFileName;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public boolean isKnockout() {
+        return knockout;
+    }
+
+    public void setKnockout(boolean knockout) {
+        this.knockout = knockout;
     }
 
 }
