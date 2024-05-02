@@ -8,9 +8,11 @@ import commInfra.*;
 public class RefereeSiteInterface {
     
     private final RefereeSite refereeSite;
+    private RefereeSiteClientProxy t;
 
     public RefereeSiteInterface(RefereeSite refereeSite) {
         this.refereeSite = refereeSite;
+        t = (RefereeSiteClientProxy)Thread.currentThread();
     }
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO

@@ -55,6 +55,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        ((Coach)Thread.currentThread()).setCoachState(inMessage.getCoachState());
     }
 
     public int assertTrialDecision() {
@@ -100,6 +102,8 @@ public class PlaygroundStub {
             System.exit(1);
         }
 
+        ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+
         return inMessage.getValue();
     }
 
@@ -126,6 +130,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        t.setCoachState(inMessage.getCoachState());
     }
 
     public void watch_trial() {
@@ -196,6 +202,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        t.setContestantState(inMessage.getContestantState());
     }
 
     public void getReady() {
@@ -221,6 +229,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        t.setContestantState(inMessage.getContestantState());
     }
 
     public void amDone() {

@@ -34,6 +34,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
     public void declareMatchWinner(int score1, int score2) {
@@ -55,6 +57,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
     // Coach
@@ -105,6 +109,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        t.setCoachState(inMessage.getCoachState());
 
         return inMessage.getValue();
     }
@@ -157,6 +163,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        ((Contestant)Thread.currentThread()).setContestantState(inMessage.getContestantState());
 
         return inMessage.getValue();
     }

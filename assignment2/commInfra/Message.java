@@ -21,6 +21,7 @@ public class Message implements Serializable { // TODO
     private String logFileName;
     private int position;
     private boolean knockout;
+    private int score1, score2;
 
     public Message(MessageType msgType) {
         this.msgType = msgType;
@@ -29,6 +30,16 @@ public class Message implements Serializable { // TODO
     public Message(MessageType msgType, RefereeStates state) {
         this.msgType = msgType;
         this.refereeState = state;
+    }
+
+    public Message(MessageType msgType, CoachStates state) {
+        this.msgType = msgType;
+        this.coachState = state;
+    }
+
+    public Message(MessageType msgType, ContestantStates state) {
+        this.msgType = msgType;
+        this.contestantState = state;
     }
 
     public Message(MessageType msgType, int team, CoachStates state) {
@@ -49,10 +60,15 @@ public class Message implements Serializable { // TODO
         this.team = team;
     }
 
-    public Message(MessageType msgType, int team, int number) {
+    public Message(MessageType msgType, int a, int b) {
         this.msgType = msgType;
-        this.team = team;
-        this.number = number;
+        switch (msgType) {
+            case DMW:
+                this.score1 = a;
+                this.score2 = b;
+                break;
+            default: break;
+        }
     }
 
     public Message(MessageType msgType, int team, int number, int strength) {
@@ -197,6 +213,22 @@ public class Message implements Serializable { // TODO
 
     public void setKnockout(boolean knockout) {
         this.knockout = knockout;
+    }
+
+    public int getScore1() {
+        return score1;
+    }
+
+    public void setScore1(int score1) {
+        this.score1 = score1;
+    }
+
+    public int getScore2() {
+        return score2;
+    }
+
+    public void setScore2(int score2) {
+        this.score2 = score2;
     }
 
 }

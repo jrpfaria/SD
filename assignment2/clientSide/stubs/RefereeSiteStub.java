@@ -34,6 +34,8 @@ public class RefereeSiteStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
     public void teams_ready() {

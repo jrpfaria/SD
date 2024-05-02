@@ -44,6 +44,7 @@ public class RefereeSite {
      */
     public synchronized void announceNewGame() {
         ((RefereeSiteClientProxy)Thread.currentThread()).setRefereeState(RefereeStates.START_OF_A_GAME);
+        reposStub.setRefereeState(RefereeStates.START_OF_A_GAME);
     }
 
     /**

@@ -80,7 +80,10 @@ public class Playground {
      *  The referee waits while contestants pull the rope.
      */
     public synchronized void wait_for_trial_conclusion() {
+        PlaygroundClientProxy t = (PlaygroundClientProxy)Thread.currentThread();
+        t.setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION);
         reposStub.setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION);
+
         while (amDone<2*SimulPar.NP) {
             try {wait();}
             catch (InterruptedException e) {}
@@ -110,9 +113,11 @@ public class Playground {
      *  @return rope position
      */
     public synchronized int declareGameWinner() {
+        PlaygroundClientProxy t = (PlaygroundClientProxy)Thread.currentThread();
         boolean knockout = Math.abs(strengthDifference) >= 4;
         int ropePosition = this.ropePosition;
         this.ropePosition = 0;
+        t.setRefereeState(RefereeStates.END_OF_A_GAME);
         reposStub.endGame(ropePosition, knockout);
         reposStub.setRopePosition(0);
         return ropePosition;
@@ -127,14 +132,15 @@ public class Playground {
      * @param team team of the coach
      */
     public synchronized void assemble_team() {
-        int team = ((PlaygroundClientProxy)Thread.currentThread()).getCoachTeam();
-        ((PlaygroundClientProxy)Thread.currentThread()).setCoachState(CoachStates.ASSEMBLE_TEAM);
+        PlaygroundClientProxy t = (PlaygroundClientProxy)Thread.currentThread();
+        int team = t.getCoachTeam();
+        t.setCoachState(CoachStates.ASSEMBLE_TEAM);
         reposStub.setCoachState(team, CoachStates.ASSEMBLE_TEAM);
         while (inPosition[team]<SimulPar.NP) {
             try {wait();}
             catch (InterruptedException e) {}
         }
-        ((PlaygroundClientProxy)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
+        t.setCoachState(CoachStates.WATCH_TRIAL);
         reposStub.setCoachState(team, CoachStates.WATCH_TRIAL);
         inPosition[team] = 0;
     }
@@ -161,7 +167,8 @@ public class Playground {
      * @param team team of the contestant
      */
     public synchronized void followCoachAdvice() {
-        int team = ((PlaygroundClientProxy)Thread.currentThread()).getContestantTeam();
+        PlaygroundClientProxy t = (PlaygroundClientProxy)Thread.currentThread();
+        int team = t.getContestantTeam();
         inPosition[team]++;
         notifyAll();
     }
@@ -174,10 +181,11 @@ public class Playground {
      * @param number number of the contestant
      */
     public synchronized void stand_in_position() {
-        int team = ((PlaygroundClientProxy)Thread.currentThread()).getContestantTeam();
-        int number = ((PlaygroundClientProxy)Thread.currentThread()).getContestantNumber();
+        PlaygroundClientProxy t = (PlaygroundClientProxy)Thread.currentThread();
+        int team = t.getContestantTeam();
+        int number = t.getContestantNumber();
         reposStub.addContestant(team, number);
-        ((PlaygroundClientProxy)Thread.currentThread()).setContestantState(ContestantStates.STAND_IN_POSITION);
+        t.setContestantState(ContestantStates.STAND_IN_POSITION);
         reposStub.setContestantState(team, number, ContestantStates.STAND_IN_POSITION);
         while (!startTrial) {
             try {wait();}
@@ -197,6 +205,7 @@ public class Playground {
         int team = t.getContestantTeam();
         int number = t.getContestantNumber();
         int strength = t.getContestantStrength();
+        t.setContestantState(ContestantStates.DO_YOUR_BEST);
         reposStub.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
         if (team==0) strengthDifference -= strength;
         else strengthDifference += strength;
