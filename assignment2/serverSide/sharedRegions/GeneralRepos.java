@@ -1,5 +1,7 @@
 package serverSide.sharedRegions;
 
+import clientSide.entities.*;
+import serverSide.main.*;
 import serverSide.main.SimulPar;
 import serverSide.entities.*;
 import genclass.GenericIO;
@@ -20,7 +22,7 @@ public class GeneralRepos {
     /**
      * Name of the logging file.
     */
-    private final String logFileName;
+    private String logFileName;
     /**
      * Legend to identify columns in the file.
     */
@@ -52,7 +54,7 @@ public class GeneralRepos {
     /**
      * Strength of the contestants.
     */
-    private final int[][] contestantStrength;
+    private int[][] contestantStrength;
     /**
      * Number and position of the contestants currently in the playground.
     */
@@ -67,10 +69,7 @@ public class GeneralRepos {
      *     @param contestantStrength strength of each contestant of each team
     */
     public GeneralRepos() {
-        //create file
-        if ((logFileName == null) || logFileName.isEmpty())
-            this.logFileName = "logger";
-            else this.logFileName = logFileName;
+        logFileName = "logger";
         
         //initialize variables
         nGame = 0;
@@ -87,7 +86,7 @@ public class GeneralRepos {
                 contestantState[i][j] = ContestantStates.SEAT_AT_THE_BENCH;
             }
         }
-        this.contestantStrength = contestantStrength;
+        
         contestantPosition = new int[2][SimulPar.NC];
 
         //create legend string
@@ -116,11 +115,17 @@ public class GeneralRepos {
         for (int i = 1; i <= SimulPar.NP; i++) legend2 += " " + i;
         legend2 += " NB PS";
         legend = legend1 + legend2;
+    }
+
+    public synchronized void initSimul(String logFileName, int[][] contestantStrength) {
+        if ((logFileName != null) && (!logFileName.isEmpty())) this.logFileName = logFileName;
+        this.contestantStrength = contestantStrength;
 
         //report
         reportInitialStatus();
         startGame();
     }
+
     /**
      *   Set referee state.
      *
@@ -132,6 +137,7 @@ public class GeneralRepos {
             reportStatus();
         }
     }
+
     /**
      *   Set coach state.
      *
@@ -144,6 +150,7 @@ public class GeneralRepos {
             reportStatus();
         }
     }
+
     /**
      *   Set contestant state.
      *
@@ -157,6 +164,7 @@ public class GeneralRepos {
             reportStatus();
         }
     }
+
     /**
      *   Set contestant strength.
      *
@@ -167,6 +175,7 @@ public class GeneralRepos {
     public synchronized void setContestantStrength(int team, int number, int strength) {
         contestantStrength[team][number] = strength;
     }
+
     /**
      *   Add contestant to the contestantPosition array.
      *
@@ -191,6 +200,7 @@ public class GeneralRepos {
             }
         }
     }
+
     /**
      *   Remove contestant from the contestantPosition array.
      *
@@ -205,6 +215,7 @@ public class GeneralRepos {
             }
         }
     }
+
     /**
      *   Set position of rope.
      *
@@ -213,12 +224,14 @@ public class GeneralRepos {
     public synchronized void setRopePosition(int position) {
         this.ropePosition = position;
     }
+
     /**
      *   Call trial.
      */
     public synchronized void callTrial() {
         nTrial++;
     }
+
     /**
      *   Start game.
      */
@@ -228,6 +241,7 @@ public class GeneralRepos {
         reportStartOfGame();
         setRefereeState(RefereeStates.START_OF_A_GAME);
     }
+
     /** 
      * End game.
      *
@@ -239,6 +253,7 @@ public class GeneralRepos {
         reportEndOfGame(team, knockout);
         if (nGame+1<=SimulPar.NG) startGame();
     }
+
     /**
      * End match.
      * 
@@ -249,6 +264,7 @@ public class GeneralRepos {
         reportEndOfMatch(score1, score2);
         setRefereeState(RefereeStates.END_OF_THE_MATCH);
     }
+
     /**
      *  Write the header to the logging file.
      */
@@ -273,6 +289,7 @@ public class GeneralRepos {
         //report
         reportStatus();
     }
+
     /**
      *  Write a line in the logging file indicating the start of a game.
      */
@@ -294,6 +311,7 @@ public class GeneralRepos {
             System.exit(1);
         }
     }
+
     /**
      *  Write a line in the logging file indicating the outcome of the game
      * 
@@ -323,6 +341,7 @@ public class GeneralRepos {
             System.exit(1);
         }
     }
+
     /**
      *  Write a line in the logging file indicating the outcome of the match
      * 
@@ -352,6 +371,7 @@ public class GeneralRepos {
             System.exit(1);
         }
     }
+
     /**
      *  Write a state line at the end of the logging file.
      *

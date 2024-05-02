@@ -4,6 +4,7 @@ public enum MessageType { // TODO
     // GeneralRepos
     SETNFIC,
     NFICDONE,
+<<<<<<< Updated upstream
 
     // RefereeSite
     ANG, // Announce New Game
@@ -32,6 +33,38 @@ public enum MessageType { // TODO
     SD, // Seat Down
     
     // General Purpose
+=======
+    ANG,
+    INFR,
+    TRY,
+    STT,
+    WTC,
+    ATD,
+    DGW,
+    ASTM,
+    WATL,
+    FCA,
+    CLT,
+    DMW,
+    RVN,
+    WFRC,
+    CLC,
+    SAB,
+    SD,
+    AD,
+    GR,
+    SIP,
+    STREFST,
+    STCOAST,
+    STCONTST,
+    STCONTSTR,
+    ADDCONT,
+    RMCONT,
+    STRP,
+    STG,
+    EOG,
+    EOM,
+>>>>>>> Stashed changes
     SHUT,
     SHUTDONE,
     SACK,

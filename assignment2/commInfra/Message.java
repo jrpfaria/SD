@@ -17,9 +17,31 @@ public class Message implements Serializable { // TODO
     private int value;
     private Pair<Integer, Integer>[] contestants;
     private int[] roster;
+    private int[][] contestantStrength;
+    private String logFileName;
+    private int position;
+    private boolean knockout;
 
     public Message(MessageType msgType) {
         this.msgType = msgType;
+    }
+
+    public Message(MessageType msgType, RefereeStates state) {
+        this.msgType = msgType;
+        this.refereeState = state;
+    }
+
+    public Message(MessageType msgType, int team, CoachStates state) {
+        this.msgType = msgType;
+        this.team = team;
+        this.coachState = state;
+    }
+
+    public Message(MessageType msgType, int team, int number, ContestantStates state) {
+        this.msgType = msgType;
+        this.team = team;
+        this.number = number;
+        this.contestantState = state;
     }
 
     public Message(MessageType msgType, int team) {
@@ -43,6 +65,12 @@ public class Message implements Serializable { // TODO
         this.msgType = msgType;
         this.team = team;
         this.roster = roster;
+    }
+
+    public Message(MessageType msgType, String logFileName, int[][] contestantStrength) {
+        this.msgType = msgType;
+        this.logFileName = logFileName;
+        this.contestantStrength = contestantStrength;
     }
 
     public MessageType getMsgType() {
@@ -132,4 +160,21 @@ public class Message implements Serializable { // TODO
     public void setRoster(int[] roster) {
         this.roster = roster;
     }
+
+    public int[][] getContestantStrength() {
+        return contestantStrength;
+    }
+
+    public void setContestantStrength(int[][] contestantStrength) {
+        this.contestantStrength = contestantStrength;
+    }
+
+    public String getLogFileName() {
+        return logFileName;
+    }
+
+    public void setLogFileName(String logFileName) {
+        this.logFileName = logFileName;
+    }
+
 }
