@@ -22,19 +22,19 @@ public class ContestantsBenchInterface {
         }
 
         switch (inMessage.getMsgType()) {
-            case MessageType.CLT:
+            case CLT:
                 break;
-            case MessageType.DMW:
+            case DMW:
                 break;
-            case MessageType.RVN:
+            case RVN:
                 break;
-            case MessageType.WFRC:
+            case WFRC:
                 break;
-            case MessageType.CLC:
+            case CLC:
                 break;
-            case MessageType.SAB:
+            case SAB:
                 break;
-            case MessageType.SD:
+            case SD:
                 break;            
             case SHUT:
                 contestantsBench.shutdown();
