@@ -17,16 +17,16 @@ public class PlaygroundInterface {
         Message outMessage = null;
 
         switch (inMessage.getMsgType()) {
-            case MessageType.STT: break;
-            case MessageType.WTC: break;
-            case MessageType.ATD: break;
-            case MessageType.DGW: break;
-            case MessageType.ASTM: break;
-            case MessageType.WATL: break;
-            case MessageType.FCA: break;
-            case MessageType.SIP: break;
-            case MessageType.GR: break;
-            case MessageType.AD: break;
+            case STT: break;
+            case WTC: break;
+            case ATD: break;
+            case DGW: break;
+            case ASTM: break;
+            case WATL: break;
+            case FCA: break;
+            case SIP: break;
+            case GR: break;
+            case AD: break;
             case SHUT: break;
             default: throw new MessageException("Invalid message type!", inMessage);
         }
