@@ -19,6 +19,16 @@ public class GeneralReposInterface {
         switch (inMessage.getMsgType()) {
             case SETNFIC: break;
             case NFICDONE: break;
+            case STREFST: break;
+            case STCOAST: break;
+            case STCONTST: break;
+            case STCONTSTR: break;
+            case ADDCONT: break;
+            case RMCONT: break;
+            case STRP: break;
+            case STG: break;
+            case EOG: break;
+            case EOM: break;
             case SHUT: break;
             default: throw new MessageException("Invalid message type!", inMessage);
         }
