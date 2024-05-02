@@ -128,7 +128,6 @@ public class Contestant extends Thread {
             playgroundStub.followCoachAdvice(); // Follow coach's advice
             playgroundStub.stand_in_position(); // Stand in position on the playground
             playgroundStub.getReady(); // Get ready for the trial
-            playgroundStub.do_your_best(); // Perform the trial with current strength
             pullTheRope();
             playgroundStub.amDone();
             contestantsBenchStub.seatDown(); // Seat down after the trial

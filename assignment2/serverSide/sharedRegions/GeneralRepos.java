@@ -1,7 +1,7 @@
-package assignment2.sharedRegions;
+package serverSide.sharedRegions;
 
-import assignment2.main.SimulPar;
-import assignment2.entities.*;
+import serverSide.main.SimulPar;
+import serverSide.entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
 

@@ -39,8 +39,9 @@ public class Message implements Serializable { // TODO
         this.number = number;
     }
 
-    public Message(MessageType msgType, int[] roster) {
+    public Message(MessageType msgType, int team, int[] roster) {
         this.msgType = msgType;
+        this.team = team;
         this.roster = roster;
     }
 

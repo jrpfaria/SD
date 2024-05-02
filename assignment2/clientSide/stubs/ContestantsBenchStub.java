@@ -69,7 +69,9 @@ public class ContestantsBenchStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.RVN);
+        Coach t = (Coach)Thread.currentThread();
+        int team = t.getTeam();
+        outMessage = new Message(MessageType.RVN, team);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -92,7 +94,9 @@ public class ContestantsBenchStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.WFRC);
+        Coach t = (Coach)Thread.currentThread();
+        int team = t.getTeam();
+        outMessage = new Message(MessageType.WFRC, team);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -114,8 +118,10 @@ public class ContestantsBenchStub {
             try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
-
-        outMessage = new Message(MessageType.CLC, roster);
+        
+        Coach t = (Coach)Thread.currentThread();
+        int team = t.getTeam();
+        outMessage = new Message(MessageType.CLC, team, roster);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -138,7 +144,11 @@ public class ContestantsBenchStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.SAB);
+        Contestant t = (Contestant)Thread.currentThread();
+        int team = t.getTeam();
+        int number = t.getNumber();
+        int strength = t.getStrength();
+        outMessage = new Message(MessageType.SAB, team, number, strength);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -161,7 +171,11 @@ public class ContestantsBenchStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.SD);
+        Contestant t = (Contestant)Thread.currentThread();
+        int team = t.getTeam();
+        int number = t.getNumber();
+        int strength = t.getStrength();
+        outMessage = new Message(MessageType.SD, team, number, strength);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();

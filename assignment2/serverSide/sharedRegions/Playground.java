@@ -201,7 +201,7 @@ public class Playground {
         if (team==0) strengthDifference -= strength;
         else strengthDifference += strength;
     }
-
+    
     /**
      *  Operation amDone
      *  The contestants inform the referee that they're done pulling the rope
