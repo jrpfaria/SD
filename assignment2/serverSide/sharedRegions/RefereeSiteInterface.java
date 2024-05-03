@@ -29,7 +29,8 @@ public class RefereeSiteInterface {
         switch (inMessage.getMsgType()) {
             case ANG:
                 refereeSite.announceNewGame();
-                outMessage = new Message(MessageType.ACK, t.getRefereeState());
+                outMessage = new Message(MessageType.ACK);
+                outMessage.setRefereeState(t.getRefereeState());
                 break;
             case TRY:
                 refereeSite.teams_ready();

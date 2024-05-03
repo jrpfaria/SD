@@ -79,7 +79,7 @@ public class PlaygroundStub {
             System.exit(1);
         }
 
-        return inMessage.getValue();
+        return inMessage.getPosition();
     }
 
     public int declareGameWinner() {
@@ -121,7 +121,8 @@ public class PlaygroundStub {
 
         Coach t = (Coach)Thread.currentThread();
         int team = t.getTeam();
-        outMessage = new Message(MessageType.ASTM, team);
+        outMessage = new Message(MessageType.ASTM);
+        outMessage.setTeam(team);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -169,7 +170,8 @@ public class PlaygroundStub {
 
         Contestant t = (Contestant)Thread.currentThread();
         int team = t.getTeam();
-        outMessage = new Message(MessageType.FCA, team);
+        outMessage = new Message(MessageType.FCA);
+        outMessage.setTeam(team);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -193,7 +195,8 @@ public class PlaygroundStub {
         Contestant t = (Contestant)Thread.currentThread();
         int team = t.getTeam();
         int number = t.getNumber();
-        outMessage = new Message(MessageType.SIP, team, number);
+        outMessage = new Message(MessageType.SIP);
+        outMessage.setTeam(team).setNumber(number);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -220,7 +223,8 @@ public class PlaygroundStub {
         int team = t.getTeam();
         int number = t.getNumber();
         int strength = t.getStrength();
-        outMessage = new Message(MessageType.GR, team, number, strength);
+        outMessage = new Message(MessageType.GR);
+        outMessage.setTeam(team).setNumber(number).setStrength(strength);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();

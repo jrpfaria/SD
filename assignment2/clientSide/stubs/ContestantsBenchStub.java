@@ -48,7 +48,8 @@ public class ContestantsBenchStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.DMW, score1, score2);
+        outMessage = new Message(MessageType.DMW);
+        outMessage.setScore1(score1).setScore2(score2);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -75,7 +76,8 @@ public class ContestantsBenchStub {
 
         Coach t = (Coach)Thread.currentThread();
         int team = t.getTeam();
-        outMessage = new Message(MessageType.RVN, team);
+        outMessage = new Message(MessageType.RVN);
+        outMessage.setTeam(team);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -100,7 +102,8 @@ public class ContestantsBenchStub {
 
         Coach t = (Coach)Thread.currentThread();
         int team = t.getTeam();
-        outMessage = new Message(MessageType.WFRC, team);
+        outMessage = new Message(MessageType.WFRC);
+        outMessage.setTeam(team);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -127,7 +130,8 @@ public class ContestantsBenchStub {
         
         Coach t = (Coach)Thread.currentThread();
         int team = t.getTeam();
-        outMessage = new Message(MessageType.CLC, team, roster);
+        outMessage = new Message(MessageType.CLC);
+        outMessage.setTeam(team).setRoster(roster);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -154,7 +158,8 @@ public class ContestantsBenchStub {
         int team = t.getTeam();
         int number = t.getNumber();
         int strength = t.getStrength();
-        outMessage = new Message(MessageType.SAB, team, number, strength);
+        outMessage = new Message(MessageType.SAB);
+        outMessage.setTeam(team).setNumber(number).setStrength(strength);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
@@ -183,7 +188,8 @@ public class ContestantsBenchStub {
         int team = t.getTeam();
         int number = t.getNumber();
         int strength = t.getStrength();
-        outMessage = new Message(MessageType.SD, team, number, strength);
+        outMessage = new Message(MessageType.SD);
+        outMessage.setTeam(team).setNumber(number).setStrength(strength);
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();

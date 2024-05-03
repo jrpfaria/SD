@@ -23,7 +23,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.SETNFIC, fileName, contestantStength);
+        outMessage = new Message(MessageType.SETNFIC);
+        outMessage.setFileName(fileName).setContestantStrength(contestantStength);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -44,7 +45,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.STREFST, state);
+        outMessage = new Message(MessageType.STREFST);
+        outMessage.setRefereeState(state);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -65,7 +67,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.STCOAST, team, state);
+        outMessage = new Message(MessageType.STCOAST);
+        outMessage.setTeam(team).setCoachState(state);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -86,7 +89,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.STCONTST, team, number, state);
+        outMessage = new Message(MessageType.STCONTST);
+        outMessage.setTeam(team).setNumber(number).setContestantState(state);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -107,7 +111,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.STCONTSTR, team, number, strength);
+        outMessage = new Message(MessageType.STCONTSTR);
+        outMessage.setTeam(team).setNumber(number).setStrength(strength);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -128,7 +133,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.ADDCONT, team, number);
+        outMessage = new Message(MessageType.ADDCONT);
+        outMessage.setTeam(team).setNumber(number);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -149,7 +155,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.RMCONT, team, number);
+        outMessage = new Message(MessageType.RMCONT);
+        outMessage.setTeam(team).setNumber(number);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -170,7 +177,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.STRP, position);
+        outMessage = new Message(MessageType.STRP);
+        outMessage.setPosition(position);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -233,7 +241,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.EOG, position, knockout);
+        outMessage = new Message(MessageType.EOG);
+        outMessage.setPosition(position).setKnockout(knockout);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
@@ -254,7 +263,8 @@ public class GeneralReposStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message(MessageType.EOM, score1, score2);
+        outMessage = new Message(MessageType.EOM);
+        outMessage.setScore1(score1).setScore2(score2);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();

@@ -33,40 +33,45 @@ public class ContestantsBenchInterface {
         switch (inMessage.getMsgType()) {
             case CLT:
                 contestantsBench.callTrial();
-                outMessage = new Message(MessageType.ACK, t.getRefereeState());
+                outMessage = new Message(MessageType.ACK);
+                outMessage.setRefereeState(t.getRefereeState());
                 break;
             case DMW:
                 contestantsBench.declareMatchWinner(inMessage.getScore1(), inMessage.getScore2());
-                outMessage = new Message(MessageType.ACK, t.getContestantState());
+                outMessage = new Message(MessageType.ACK);
+                outMessage.setContestantState(t.getContestantState());
                 break;
             case RVN:
-                t.setTeam(inMessage.getTeam());
-                Pair<Integer, Integer> r = contestantsBench.reviewNotes();
-                outMessage = new Message(MessageType.ACK, r);
+                t.setCoachTeam(inMessage.getTeam());
+                Pair<Integer, Integer>[] roster = contestantsBench.reviewNotes();
+                outMessage = new Message(MessageType.ACK);
+                outMessage.setContestants(roster);
                 break;
             case WFRC:
-                t.setTeam(inMessage.getTeam());
-                r = contestantsBench.wait_for_referee_command();
-                outMessage = new Message(MessageType.ACK, t.getCoachState(), r);
+                t.setCoachTeam(inMessage.getTeam());
+                int orders = contestantsBench.wait_for_referee_command();
+                outMessage = new Message(MessageType.ACK);
+                outMessage.setCoachState(t.getCoachState()).setValue(orders);
                 break;
             case CLC:
-                t.setTeam(inMessage.getTeam());
-                contestantsBench.callContestants(t.getRoster());
+                t.setCoachTeam(inMessage.getTeam());
+                contestantsBench.callContestants(inMessage.getRoster());
                 outMessage = new Message(MessageType.ACK);
                 break;
             case SAB: // unsure if this is correct, might be missing something
-                t.setTeam(inMessage.getTeam());
-                t.setNumber(inMessage.getNumber());
+                t.setContestantTeam(inMessage.getTeam());
+                t.setContestantNumber(inMessage.getNumber());
                 t.setContestantStrength(inMessage.getStrength());
-                int r = contestantsBench.seatAtBench();
-                outMessage = new Message(MessageType.ACK, t.getContestantStrength(), r);
+                orders = contestantsBench.seat_at_the_bench();
+                outMessage = new Message(MessageType.ACK);
+                outMessage.setContestantState(t.getContestantState()).setValue(orders);
                 break;
             case SD:
-                t.setTeam(inMessage.getTeam());
-                t.setNumber(inMessage.getNumber());
+                t.setContestantTeam(inMessage.getTeam());
+                t.setContestantNumber(inMessage.getNumber());
                 t.setContestantStrength(inMessage.getStrength());
                 contestantsBench.seatDown();
-                outMessage = new Message(MessageType.ACK, t.getContestantStrength());
+                outMessage = new Message(MessageType.ACK);
                 break;            
             case SHUT:
                 contestantsBench.shutdown();
