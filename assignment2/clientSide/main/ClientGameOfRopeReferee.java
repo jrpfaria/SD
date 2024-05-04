@@ -86,13 +86,15 @@ public class ClientGameOfRopeReferee {
         referee.start();
 
         GenericIO.writelnString();
+
         try {
             referee.join();
         }
-
         catch (InterruptedException e) {}
+
         GenericIO.writelnString("Referee has terminated.");
         GenericIO.writelnString();
+        
         genReposStub.shutdown();
         refereeSiteStub.shutdown();
         playgroundStub.shutdown();

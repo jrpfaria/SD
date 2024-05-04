@@ -20,7 +20,7 @@ public class ServerGameOfRopePlayground {
         String reposServerName;
         int reposPortNumb = -1;
 
-        if (args.length != 1) {
+        if (args.length != 3) {
             GenericIO.writelnString("Wrong number of parameters!");
             System.exit(1);
         }
@@ -34,6 +34,15 @@ public class ServerGameOfRopePlayground {
             System.exit(1);
         }
         reposServerName = args[1];
+        try {reposPortNumb = Integer.parseInt(args[2]);}
+        catch (NumberFormatException e) {
+            GenericIO.writelnString("args[2] is not a number!");
+            System.exit(1);
+        }
+        if ((reposPortNumb < 4000) || (reposPortNumb >= 65536)) {
+            GenericIO.writelnString("args[2] is not a valid port number!");
+            System.exit(1);
+        }
 
         reposStub = new GeneralReposStub(reposServerName, reposPortNumb);
         playground = new Playground(reposStub);
