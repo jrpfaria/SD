@@ -20,7 +20,7 @@ public class ClientGameOfRopeContestant {
         PlaygroundStub playgroundStub;
         ContestantsBenchStub contestantsBenchStub;
 
-        if (args.length != 7) {
+        if (args.length != 8) {
             GenericIO.writelnString("Wrong number of parameters!");
             System.exit(1);
         }
