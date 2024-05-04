@@ -5,4 +5,5 @@ sshpass -f password scp dirPlayground.zip sd102@l040101-ws05.ua.pt:test/GameOfRo
 echo "Decompressing data sent to the playground node."
 sshpass -f password ssh sd102@l040101-ws05.ua.pt 'cd test/GameOfRope ; unzip -uq dirPlayground.zip'
 echo "Executing program at the playground node."
+sshpass -f password ssh sd102@l040101-ws05.ua.pt 'kill $(lsof -t -i:22110)'
 sshpass -f password ssh sd102@l040101-ws05.ua.pt 'cd test/GameOfRope/dirPlayground ; java serverSide.main.ServerGameOfRopePlayground 22110 l040101-ws01.ua.pt 22110'

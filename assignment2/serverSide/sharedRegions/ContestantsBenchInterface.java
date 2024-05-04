@@ -12,10 +12,11 @@ public class ContestantsBenchInterface {
 
     public ContestantsBenchInterface(ContestantsBench contestantsBench) {
         this.contestantsBench = contestantsBench;
-        t = (ContestantsBenchClientProxy)Thread.currentThread();
     }
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
+        t = (ContestantsBenchClientProxy)Thread.currentThread();
+        
         Message outMessage = null;
 
         switch (inMessage.getMsgType()) {

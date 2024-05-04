@@ -48,7 +48,7 @@ cp serverSide/main/*.class dirReferee/serverSide/main
 cp clientSide/main/*.class dirReferee/clientSide/main
 cp clientSide/entities/*.class dirReferee/clientSide/entities
 cp clientSide/stubs/*.class dirReferee/clientSide/stubs
-cp commInfra/*.class dirCoaches/commInfra
+cp commInfra/*.class dirReferee/commInfra
 echo "  Coaches"
 rm -rf dirCoaches
 mkdir -p dirCoaches dirCoaches/serverSide dirCoaches/serverSide/main dirCoaches/clientSide dirCoaches/clientSide/main dirCoaches/clientSide/entities \
@@ -66,7 +66,7 @@ cp serverSide/main/*.class dirContestants/serverSide/main
 cp clientSide/main/*.class dirContestants/clientSide/main
 cp clientSide/entities/*.class dirContestants/clientSide/entities
 cp clientSide/stubs/*.class dirContestants/clientSide/stubs
-cp commInfra/*.class dirCoaches/commInfra
+cp commInfra/*.class dirContestants/commInfra
 echo "Compressing execution environments."
 echo "  General Repository of Information"
 rm -f  dirGeneralRepos.zip

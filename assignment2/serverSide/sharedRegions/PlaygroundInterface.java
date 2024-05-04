@@ -12,10 +12,11 @@ public class PlaygroundInterface {
 
     public PlaygroundInterface(Playground playground) {
         this.playground = playground;
-        t = (PlaygroundClientProxy)Thread.currentThread();
     }
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
+        t = (PlaygroundClientProxy)Thread.currentThread();
+
         Message outMessage = null;
 
         switch (inMessage.getMsgType()) {

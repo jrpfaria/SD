@@ -12,10 +12,11 @@ public class RefereeSiteInterface {
 
     public RefereeSiteInterface(RefereeSite refereeSite) {
         this.refereeSite = refereeSite;
-        t = (RefereeSiteClientProxy)Thread.currentThread();
     }
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
+        t = (RefereeSiteClientProxy)Thread.currentThread();
+        
         Message outMessage = null;
 
         switch (inMessage.getMsgType()) {

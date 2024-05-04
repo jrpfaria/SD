@@ -28,6 +28,7 @@ public class GeneralReposStub {
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
+        GenericIO.writelnString("Class " + inMessage.getClass());
         if (inMessage.getMsgType()!=MessageType.NFICDONE) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
