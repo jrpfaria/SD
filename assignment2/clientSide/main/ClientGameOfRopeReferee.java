@@ -94,10 +94,10 @@ public class ClientGameOfRopeReferee {
 
         GenericIO.writelnString("Referee has terminated.");
         GenericIO.writelnString();
-        
-        genReposStub.shutdown();
+
         refereeSiteStub.shutdown();
         playgroundStub.shutdown();
         contestantsBenchStub.shutdown();
+        genReposStub.shutdown();
     }
 }

@@ -113,7 +113,10 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
         inMessage = (Message)sconi.readObject();
 
-        try {outMessage = contestantsBenchInter.processAndReply(inMessage);}
+        try {
+            GenericIO.writelnString("Thread " + getName() + " received: " + inMessage + "!");
+            outMessage = contestantsBenchInter.processAndReply(inMessage);
+        }
         catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
@@ -121,6 +124,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
         }
 
         sconi.writeObject(outMessage);
-        sconi.close();
+        GenericIO.writelnString("Thread " + getName() + " replied: " + outMessage + "!");
+        //sconi.close();
     }
 }

@@ -14,7 +14,6 @@ public class Message implements Serializable { // TODO
     private int team = 0;
     private int number = 0;
     private int strength = 0;
-    private String fileName = null;
     private int value = 0;
     private Pair<Integer, Integer>[] contestants = (Pair<Integer, Integer>[]) new Pair[SimulPar.NC];
     private int[] roster = new int[SimulPar.NP];
@@ -26,6 +25,11 @@ public class Message implements Serializable { // TODO
 
     public Message(MessageType msgType) {
         this.msgType = msgType;
+    }
+
+    @Override
+    public String toString() {
+        return this.msgType.toString();
     }
 
     public MessageType getMsgType() {
@@ -90,16 +94,7 @@ public class Message implements Serializable { // TODO
         this.strength = strength;
         return this;
     }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public Message setFileName(String fileName) {
-        this.fileName = fileName;
-        return this;
-    }
-
+    
     public int getValue() {
         return value;
     }

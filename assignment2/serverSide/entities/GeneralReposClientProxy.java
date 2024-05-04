@@ -41,7 +41,10 @@ public class GeneralReposClientProxy extends Thread {
 
         inMessage = (Message)sconi.readObject();
 
-        try {outMessage = reposInter.processAndReply(inMessage);}
+        try {
+            GenericIO.writelnString("Thread " + getName() + " received: " + inMessage + "!");
+            outMessage = reposInter.processAndReply(inMessage);
+        }
         catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
@@ -49,6 +52,7 @@ public class GeneralReposClientProxy extends Thread {
         }
 
         sconi.writeObject(outMessage);
-        sconi.close();
+        GenericIO.writelnString("Thread " + getName() + " replied: " + outMessage + "!");
+        //sconi.close();
     }
 }

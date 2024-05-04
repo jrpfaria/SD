@@ -99,9 +99,9 @@ public class ClientGameOfRopeCoach {
         }
 
         GenericIO.writelnString();
-        genReposStub.shutdown();
         refereeSiteStub.shutdown();
         playgroundStub.shutdown();
         contestantsBenchStub.shutdown();
+        genReposStub.shutdown();
     }
 }

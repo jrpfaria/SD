@@ -75,7 +75,10 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
         inMessage = (Message)sconi.readObject();
 
-        try {outMessage = refereeSiteInter.processAndReply(inMessage);}
+        try {
+            GenericIO.writelnString("Thread " + getName() + " received: " + inMessage + "!");
+            outMessage = refereeSiteInter.processAndReply(inMessage);
+        }
         catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
@@ -83,6 +86,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
         }
 
         sconi.writeObject(outMessage);
-        sconi.close();
+        GenericIO.writelnString("Thread " + getName() + " replied: " + outMessage + "!");
+        //sconi.close();
     }
 }

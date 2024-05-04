@@ -60,7 +60,7 @@ public class PlaygroundInterface {
                 outMessage.setCoachState(t.getCoachState());
                 break;
             case WATL:
-                playground.wait_for_trial_conclusion();
+                playground.watch_trial();
                 outMessage = new Message(MessageType.ACK);
                 break;
             case FCA:

@@ -109,7 +109,7 @@ public class ContestantsBench {
         ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
         int team = t.getCoachTeam();
         while (seated[team]<SimulPar.NC) {
-            try {wait();}
+            try {wait();GenericIO.writelnString(""+seated[team]);}
             catch (InterruptedException e) {}
         }
         return contestants[team];
@@ -206,7 +206,7 @@ public class ContestantsBench {
     
     public synchronized void shutdown() {
         nEntities += 1;
-        if (nEntities >= SimulPar.E) ServerGameOfRopePlayground.waitConnection = false;
+        if (nEntities >= SimulPar.E) ServerGameOfRopeContestantsBench.waitConnection = false;
         notifyAll();
     }
 }

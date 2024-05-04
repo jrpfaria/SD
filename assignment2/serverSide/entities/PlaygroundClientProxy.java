@@ -113,7 +113,10 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
         inMessage = (Message)sconi.readObject();
 
-        try {outMessage = playgroundInter.processAndReply(inMessage);}
+        try {
+            GenericIO.writelnString("Thread " + getName() + " received: " + inMessage + "!");
+            outMessage = playgroundInter.processAndReply(inMessage);
+        }
         catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
@@ -121,6 +124,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
         }
 
         sconi.writeObject(outMessage);
-        sconi.close();
+        GenericIO.writelnString("Thread " + getName() + " replied: " + outMessage + "!");
+        //sconi.close();
     }
 }

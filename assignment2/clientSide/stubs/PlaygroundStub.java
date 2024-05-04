@@ -60,7 +60,7 @@ public class PlaygroundStub {
 
         com.close();
 
-        ((Coach)Thread.currentThread()).setCoachState(inMessage.getCoachState());
+        ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
     public int assertTrialDecision() {
@@ -112,7 +112,7 @@ public class PlaygroundStub {
 
         ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
 
-        return inMessage.getValue();
+        return inMessage.getTeam();
     }
 
     // Coach

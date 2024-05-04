@@ -1,3 +1,4 @@
+export CLASSPATH=../lib/genclass.jar
 echo "Compiling source code."
 javac */*.java */*/*.java
 echo "Distributing intermediate code to the different execution environments."

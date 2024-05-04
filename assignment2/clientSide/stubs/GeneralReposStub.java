@@ -24,7 +24,7 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.SETNFIC);
-        outMessage.setFileName(fileName).setContestantStrength(contestantStength);
+        outMessage.setLogFileName(fileName).setContestantStrength(contestantStength);
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
