@@ -21,7 +21,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -34,6 +34,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void wait_for_trial_conclusion() {
@@ -42,7 +44,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -56,6 +58,8 @@ public class PlaygroundStub {
             System.exit(1);
         }
 
+        com.close();
+
         ((Coach)Thread.currentThread()).setCoachState(inMessage.getCoachState());
     }
 
@@ -65,7 +69,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -79,6 +83,8 @@ public class PlaygroundStub {
             System.exit(1);
         }
 
+        com.close();
+
         return inMessage.getPosition();
     }
 
@@ -88,7 +94,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -101,6 +107,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
 
         ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
 
@@ -115,7 +123,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -132,6 +140,8 @@ public class PlaygroundStub {
             System.exit(1);
         }
 
+        com.close();
+
         t.setCoachState(inMessage.getCoachState());
     }
 
@@ -141,7 +151,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -154,6 +164,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     // Contestant
@@ -164,7 +176,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -180,6 +192,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void stand_in_position() {
@@ -188,7 +202,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -206,6 +220,8 @@ public class PlaygroundStub {
             System.exit(1);
         }
 
+        com.close();
+
         t.setContestantState(inMessage.getContestantState());
     }
 
@@ -215,7 +231,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -234,6 +250,8 @@ public class PlaygroundStub {
             System.exit(1);
         }
 
+        com.close();
+
         t.setContestantState(inMessage.getContestantState());
     }
 
@@ -243,7 +261,7 @@ public class PlaygroundStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -256,6 +274,8 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void shutdown() {
@@ -277,5 +297,7 @@ public class PlaygroundStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 }

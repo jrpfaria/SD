@@ -21,7 +21,7 @@ public class RefereeSiteStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -29,11 +29,14 @@ public class RefereeSiteStub {
         com.writeObject(outMessage);
 
         inMessage = (Message)com.readObject();
+
         if (inMessage.getMsgType()!=MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
 
         ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
@@ -44,7 +47,7 @@ public class RefereeSiteStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -57,6 +60,8 @@ public class RefereeSiteStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     // Coach
@@ -66,7 +71,7 @@ public class RefereeSiteStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)10);}
+            try {Thread.sleep((long)1000);}
             catch (InterruptedException e) {}
         }
 
@@ -79,6 +84,8 @@ public class RefereeSiteStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     //
@@ -102,5 +109,7 @@ public class RefereeSiteStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 }

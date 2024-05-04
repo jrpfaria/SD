@@ -35,6 +35,8 @@ public class ContestantsBenchStub {
             System.exit(1);
         }
 
+        com.close();
+
         ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
@@ -58,6 +60,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
 
         ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
@@ -87,6 +91,8 @@ public class ContestantsBenchStub {
             System.exit(1);
         }
 
+        com.close();
+
         return inMessage.getContestants();
     }
 
@@ -112,6 +118,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
 
         t.setCoachState(inMessage.getCoachState());
 
@@ -140,6 +148,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     // Contestants
@@ -168,6 +178,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
 
         ((Contestant)Thread.currentThread()).setContestantState(inMessage.getContestantState());
 
@@ -198,6 +210,8 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     //
@@ -221,5 +235,7 @@ public class ContestantsBenchStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 }

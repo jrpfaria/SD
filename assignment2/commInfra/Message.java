@@ -1,27 +1,28 @@
 package commInfra;
 
 import clientSide.entities.*;
+import serverSide.main.*;
 import java.io.*;
 
 public class Message implements Serializable { // TODO
     private static final long serialVersionUID = 2021L;
     
     private MessageType msgType;
-    private RefereeStates refereeState;
-    private CoachStates coachState;
-    private ContestantStates contestantState;
-    private int team;
-    private int number;
-    private int strength;
-    private String fileName;
-    private int value;
-    private Pair<Integer, Integer>[] contestants;
-    private int[] roster;
-    private int[][] contestantStrength;
-    private String logFileName;
-    private int position;
-    private boolean knockout;
-    private int score1, score2;
+    private RefereeStates refereeState = null;
+    private CoachStates coachState = null;
+    private ContestantStates contestantState = null;
+    private int team = 0;
+    private int number = 0;
+    private int strength = 0;
+    private String fileName = null;
+    private int value = 0;
+    private Pair<Integer, Integer>[] contestants = (Pair<Integer, Integer>[]) new Pair[SimulPar.NC];
+    private int[] roster = new int[SimulPar.NP];
+    private int[][] contestantStrength = new int[2][SimulPar.NC];
+    private String logFileName = null;
+    private int position = 0;
+    private boolean knockout = false;
+    private int score1 = 0, score2 = 0;
 
     public Message(MessageType msgType) {
         this.msgType = msgType;

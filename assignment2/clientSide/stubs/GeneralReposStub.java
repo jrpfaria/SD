@@ -28,12 +28,13 @@ public class GeneralReposStub {
         com.writeObject(outMessage);
         
         inMessage = (Message)com.readObject();
-        GenericIO.writelnString("Class " + inMessage.getClass());
         if (inMessage.getMsgType()!=MessageType.NFICDONE) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void setRefereeState(RefereeStates state) {
@@ -56,6 +57,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void setCoachState(int team, CoachStates state) {
@@ -78,6 +81,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void setContestantState(int team, int number, ContestantStates state) {
@@ -100,6 +105,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void setContestantStrength(int team, int number, int strength) {
@@ -122,6 +129,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void addContestant(int team, int number) {
@@ -144,6 +153,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void removeContestant(int team, int number) {
@@ -166,6 +177,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void setRopePosition(int position) {
@@ -188,6 +201,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void callTrial() {
@@ -209,6 +224,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void startGame() {
@@ -230,6 +247,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void endGame(int position, boolean knockout) {
@@ -252,6 +271,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void endMatch(int score1, int score2) {
@@ -274,6 +295,8 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 
     public void shutdown() {
@@ -295,5 +318,7 @@ public class GeneralReposStub {
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
+
+        com.close();
     }
 }

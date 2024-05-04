@@ -156,5 +156,9 @@ public enum MessageType { // TODO
     /**
      * ACK - Acknowledgement
      */
-    ACK
+    ACK,
+    /**
+     * ERR - Error
+     */
+    ERR
 }

@@ -78,6 +78,8 @@ public class ContestantsBenchInterface {
                 contestantsBench.shutdown();
                 outMessage = new Message(MessageType.SHUTDONE);
                 break;
+            default:
+                outMessage = new Message(MessageType.ERR);
         }
 
         return outMessage;
