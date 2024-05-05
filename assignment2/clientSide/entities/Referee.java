@@ -83,9 +83,7 @@ public class Referee extends Thread {
                 contestantsBenchStub.callTrial(); // Call for a trial to start
                 refereeSiteStub.teams_ready(); // Signal that teams are ready
                 playgroundStub.startTrial(); // Start the trial on the playground
-                GenericIO.writelnString("WTC");
                 playgroundStub.wait_for_trial_conclusion(); // Wait for the trial to conclude
-                GenericIO.writelnString("ATD");
                 ropePosition = playgroundStub.assertTrialDecision(); // Determine the trial outcome
                 // Break out of the trial loop if the strength difference exceeds the threshold, making it a knock out
                 if (Math.abs(ropePosition) >= SimulPar.KT) break;

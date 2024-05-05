@@ -4,6 +4,7 @@ import serverSide.main.*;
 import serverSide.entities.*;
 import clientSide.entities.*;
 import commInfra.*;
+import genclass.GenericIO;
 
 public class ContestantsBenchInterface {
     
@@ -40,7 +41,7 @@ public class ContestantsBenchInterface {
             case DMW:
                 contestantsBench.declareMatchWinner(inMessage.getScore1(), inMessage.getScore2());
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setContestantState(t.getContestantState());
+                outMessage.setRefereeState(t.getRefereeState());
                 break;
             case RVN:
                 t.setCoachTeam(inMessage.getTeam());
@@ -63,6 +64,8 @@ public class ContestantsBenchInterface {
                 t.setContestantTeam(inMessage.getTeam());
                 t.setContestantNumber(inMessage.getNumber());
                 t.setContestantStrength(inMessage.getStrength());
+                if (t.getContestantTeam()!=inMessage.getTeam()) GenericIO.writelnString("ERROR: different team");
+                if (t.getContestantNumber()!=inMessage.getNumber()) GenericIO.writelnString("ERROR: different number");
                 orders = contestantsBench.seat_at_the_bench();
                 outMessage = new Message(MessageType.ACK);
                 outMessage.setContestantState(t.getContestantState()).setValue(orders);

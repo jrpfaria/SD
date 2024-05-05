@@ -109,7 +109,7 @@ public class ContestantsBench {
         ContestantsBenchClientProxy t = (ContestantsBenchClientProxy)Thread.currentThread();
         int team = t.getCoachTeam();
         while (seated[team]<SimulPar.NC) {
-            try {wait();GenericIO.writelnString(""+seated[team]);}
+            try {wait();}
             catch (InterruptedException e) {}
         }
         return contestants[team];
@@ -167,10 +167,12 @@ public class ContestantsBench {
         int number = t.getContestantNumber();
         int strength = t.getContestantStrength();
         synchronized (this) {
+            GenericIO.writelnString("seating " + team + "-" + number);
             t.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
             reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
             contestants[team][number].setValue(strength);
             seated[team]++;
+            GenericIO.writelnString("seated" + team + " = " + seated[team]);
             notifyAll();
         }
         synchronized (this) {

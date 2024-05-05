@@ -11,17 +11,17 @@ public class Message implements Serializable { // TODO
     private RefereeStates refereeState = null;
     private CoachStates coachState = null;
     private ContestantStates contestantState = null;
-    private int team = 0;
-    private int number = 0;
-    private int strength = 0;
-    private int value = 0;
-    private Pair<Integer, Integer>[] contestants = (Pair<Integer, Integer>[]) new Pair[SimulPar.NC];
-    private int[] roster = new int[SimulPar.NP];
-    private int[][] contestantStrength = new int[2][SimulPar.NC];
+    private int team = -1;
+    private int number = -1;
+    private int strength = -1;
+    private int value = -1;
+    private Pair<Integer, Integer>[] contestants;
+    private int[] roster;
+    private int[][] contestantStrength;
     private String logFileName = null;
     private int position = 0;
     private boolean knockout = false;
-    private int score1 = 0, score2 = 0;
+    private int score1 = -1, score2 = -1;
 
     public Message(MessageType msgType) {
         this.msgType = msgType;
@@ -29,7 +29,7 @@ public class Message implements Serializable { // TODO
 
     @Override
     public String toString() {
-        return this.msgType.toString();
+        return this.msgType.toString() + " team:" + team + " number:" + number;
     }
 
     public MessageType getMsgType() {

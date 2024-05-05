@@ -114,7 +114,7 @@ public class Playground {
      */
     public synchronized int declareGameWinner() {
         PlaygroundClientProxy t = (PlaygroundClientProxy)Thread.currentThread();
-        boolean knockout = Math.abs(strengthDifference) >= 4;
+        boolean knockout = Math.abs(ropePosition) >= 4;
         int ropePosition = this.ropePosition;
         this.ropePosition = 0;
         t.setRefereeState(RefereeStates.END_OF_A_GAME);

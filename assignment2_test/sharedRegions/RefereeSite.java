@@ -1,9 +1,10 @@
 package sharedRegions;
 
-import commInfra.*;
+import main.*;
 import entities.*;
+import entities.*;
+import commInfra.*;
 import genclass.GenericIO;
-import main.SimulPar;
 
 /**
  *    Referee site.
@@ -42,6 +43,8 @@ public class RefereeSite {
      */
     public synchronized void announceNewGame() {
         ((Referee)Thread.currentThread()).setRefereeState(RefereeStates.START_OF_A_GAME);
+        repos.setRefereeState(RefereeStates.START_OF_A_GAME);
+        repos.startGame();
     }
 
     /**

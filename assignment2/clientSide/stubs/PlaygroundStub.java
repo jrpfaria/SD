@@ -112,7 +112,7 @@ public class PlaygroundStub {
 
         ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
 
-        return inMessage.getTeam();
+        return inMessage.getPosition();
     }
 
     // Coach

@@ -1,7 +1,10 @@
 package sharedRegions;
 
+import main.*;
 import entities.*;
-import main.SimulPar;
+import entities.*;
+import commInfra.*;
+import genclass.GenericIO;
 
 /**
  *    Playground.
@@ -76,7 +79,10 @@ public class Playground {
      *  The referee waits while contestants pull the rope.
      */
     public synchronized void wait_for_trial_conclusion() {
+        Referee t = (Referee)Thread.currentThread();
+        t.setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION);
         repos.setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION);
+
         while (amDone<2*SimulPar.NP) {
             try {wait();}
             catch (InterruptedException e) {}
@@ -106,9 +112,11 @@ public class Playground {
      *  @return rope position
      */
     public synchronized int declareGameWinner() {
+        Referee t = (Referee)Thread.currentThread();
         boolean knockout = Math.abs(strengthDifference) >= 4;
         int ropePosition = this.ropePosition;
         this.ropePosition = 0;
+        t.setRefereeState(RefereeStates.END_OF_A_GAME);
         repos.endGame(ropePosition, knockout);
         repos.setRopePosition(0);
         return ropePosition;
@@ -123,14 +131,15 @@ public class Playground {
      * @param team team of the coach
      */
     public synchronized void assemble_team() {
-        int team = ((Coach)Thread.currentThread()).getTeam();
-        ((Coach)Thread.currentThread()).setCoachState(CoachStates.ASSEMBLE_TEAM);
+        Coach t = (Coach)Thread.currentThread();
+        int team = t.getTeam();
+        t.setCoachState(CoachStates.ASSEMBLE_TEAM);
         repos.setCoachState(team, CoachStates.ASSEMBLE_TEAM);
         while (inPosition[team]<SimulPar.NP) {
             try {wait();}
             catch (InterruptedException e) {}
         }
-        ((Coach)Thread.currentThread()).setCoachState(CoachStates.WATCH_TRIAL);
+        t.setCoachState(CoachStates.WATCH_TRIAL);
         repos.setCoachState(team, CoachStates.WATCH_TRIAL);
         inPosition[team] = 0;
     }
@@ -157,7 +166,8 @@ public class Playground {
      * @param team team of the contestant
      */
     public synchronized void followCoachAdvice() {
-        int team = ((Contestant)Thread.currentThread()).getTeam();
+        Contestant t = (Contestant)Thread.currentThread();
+        int team = t.getTeam();
         inPosition[team]++;
         notifyAll();
     }
@@ -170,10 +180,11 @@ public class Playground {
      * @param number number of the contestant
      */
     public synchronized void stand_in_position() {
-        int team = ((Contestant)Thread.currentThread()).getTeam();
-        int number = ((Contestant)Thread.currentThread()).getNumber();
+        Contestant t = (Contestant)Thread.currentThread();
+        int team = t.getTeam();
+        int number = t.getNumber();
         repos.addContestant(team, number);
-        ((Contestant)Thread.currentThread()).setContestantState(ContestantStates.STAND_IN_POSITION);
+        t.setContestantState(ContestantStates.STAND_IN_POSITION);
         repos.setContestantState(team, number, ContestantStates.STAND_IN_POSITION);
         while (!startTrial) {
             try {wait();}
@@ -193,6 +204,7 @@ public class Playground {
         int team = t.getTeam();
         int number = t.getNumber();
         int strength = t.getStrength();
+        t.setContestantState(ContestantStates.DO_YOUR_BEST);
         repos.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
         if (team==0) strengthDifference -= strength;
         else strengthDifference += strength;
@@ -211,5 +223,4 @@ public class Playground {
             catch (InterruptedException e) {}
         }
     }
-
 }

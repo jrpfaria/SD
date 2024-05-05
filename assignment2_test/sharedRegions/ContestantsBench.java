@@ -1,9 +1,9 @@
 package sharedRegions;
 
-import sharedRegions.*;
+import main.*;
+import entities.*;
 import entities.*;
 import commInfra.*;
-import main.*;
 import genclass.GenericIO;
 
 /**

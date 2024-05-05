@@ -1,6 +1,8 @@
 package sharedRegions;
 
+import entities.*;
 import main.*;
+import main.SimulPar;
 import entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
@@ -17,6 +19,7 @@ import genclass.TextFile;
 
 public class GeneralRepos {
 
+    private boolean init;
     /**
      * Name of the logging file.
     */
@@ -67,8 +70,6 @@ public class GeneralRepos {
      *     @param contestantStrength strength of each contestant of each team
     */
     public GeneralRepos() {
-        logFileName = "logger";
-        
         //initialize variables
         nGame = 0;
         nTrial = 0;
@@ -115,13 +116,22 @@ public class GeneralRepos {
         legend = legend1 + legend2;
     }
 
+    public synchronized void check_init() {
+        while (!init) {
+            try {wait();}
+            catch (InterruptedException e) {}
+        }
+    }
+
     public synchronized void initSimul(String logFileName, int[][] contestantStrength) {
-        if ((logFileName != null) && (!logFileName.isEmpty())) this.logFileName = logFileName;
+        this.logFileName = logFileName;
         this.contestantStrength = contestantStrength;
 
         //report
         reportInitialStatus();
-        startGame();
+
+        init = true;
+        notifyAll();
     }
 
     /**
@@ -130,6 +140,8 @@ public class GeneralRepos {
      *   @param refereeState referee state
      */
     public synchronized void setRefereeState(RefereeStates refereeState) {
+        check_init();
+
         if (this.refereeState!=refereeState) {
             this.refereeState = refereeState;
             reportStatus();
@@ -143,6 +155,8 @@ public class GeneralRepos {
      *   @param coachState coach state
      */
     public synchronized void setCoachState(int team, CoachStates coachState) {
+        check_init();
+
         if (this.coachState[team]!=coachState) {
             this.coachState[team] = coachState;
             reportStatus();
@@ -157,6 +171,8 @@ public class GeneralRepos {
      *   @param contestantState contestant state
      */
     public synchronized void setContestantState(int team, int number, ContestantStates contestantState) {
+        check_init();
+
         if (this.contestantState[team][number]!=contestantState) {
             this.contestantState[team][number] = contestantState;
             reportStatus();
@@ -171,6 +187,8 @@ public class GeneralRepos {
      *   @param strength contestant strength
      */
     public synchronized void setContestantStrength(int team, int number, int strength) {
+        check_init();
+
         contestantStrength[team][number] = strength;
     }
 
@@ -181,6 +199,8 @@ public class GeneralRepos {
      *   @param number contestant number
      */
     public synchronized void addContestant(int team, int number) {
+        check_init();
+
         if (team==0) {
             for (int i = 0; i < SimulPar.NP; i++) {
                 if (contestantPosition[team][i]==0) {
@@ -206,6 +226,8 @@ public class GeneralRepos {
      *   @param number contestant number
      */
     public synchronized void removeContestant(int team, int number) {
+        check_init();
+
         for (int i = 0; i < SimulPar.NP; i++) {
             if (contestantPosition[team][i]==number+1) {
                 contestantPosition[team][i] = 0;
@@ -220,6 +242,8 @@ public class GeneralRepos {
      *   @param position rope position
      */
     public synchronized void setRopePosition(int position) {
+        check_init();
+
         this.ropePosition = position;
     }
 
@@ -227,6 +251,8 @@ public class GeneralRepos {
      *   Call trial.
      */
     public synchronized void callTrial() {
+        check_init();
+
         nTrial++;
     }
 
@@ -234,6 +260,8 @@ public class GeneralRepos {
      *   Start game.
      */
     public synchronized void startGame() {
+        check_init();
+
         nGame++;
         nTrial = 0;
         reportStartOfGame();
@@ -247,9 +275,10 @@ public class GeneralRepos {
      * @param knockout true if game was won by knockout, false if game was won by points
      */
     public synchronized void endGame(int team, boolean knockout) {
+        check_init();
+
         setRefereeState(RefereeStates.END_OF_A_GAME);
         reportEndOfGame(team, knockout);
-        if (nGame+1<=SimulPar.NG) startGame();
     }
 
     /**
@@ -259,6 +288,8 @@ public class GeneralRepos {
      * @param score2 score of team 2
      */
     public synchronized void endMatch(int score1, int score2) {
+        check_init();
+        
         reportEndOfMatch(score1, score2);
         setRefereeState(RefereeStates.END_OF_THE_MATCH);
     }
@@ -415,5 +446,4 @@ public class GeneralRepos {
             System.exit(1);
         }
     }
-
 }
