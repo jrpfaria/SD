@@ -1,9 +1,6 @@
 package serverSide.sharedRegions;
 
-import clientSide.entities.*;
 import commInfra.*;
-import serverSide.entities.*;
-import serverSide.main.*;
 
 public class GeneralReposInterface {
 

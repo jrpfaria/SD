@@ -1,14 +1,11 @@
 package serverSide.sharedRegions;
 
-import clientSide.entities.*;
 import commInfra.*;
 import serverSide.entities.*;
-import serverSide.main.*;
 
 public class RefereeSiteInterface {
 
     private final RefereeSite refereeSite;
-    private RefereeSiteClientProxy t;
 
     public RefereeSiteInterface(RefereeSite refereeSite) {
         this.refereeSite = refereeSite;

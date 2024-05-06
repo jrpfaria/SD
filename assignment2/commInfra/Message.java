@@ -1,7 +1,6 @@
 package commInfra;
 
 import clientSide.entities.*;
-import serverSide.main.*;
 
 import java.io.Serializable;
 

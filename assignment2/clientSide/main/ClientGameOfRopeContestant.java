@@ -10,8 +10,6 @@ public class ClientGameOfRopeContestant {
         String genReposServerHostName;
         int genReposServerPortNumb = -1;
         String fileName;
-        String refereeSiteServerHostName;
-        int refereeSiteServerPortNumb = -1;
         String playgroundServerHostName;
         int playgroundServerPortNumb = -1;
         String contestantsBenchServerHostName;
@@ -19,7 +17,6 @@ public class ClientGameOfRopeContestant {
         Contestant[][] contestant = new Contestant[2][SimulPar.NC];
         int[][] contestantStrength = new int[2][SimulPar.NC];
         GeneralReposStub genReposStub;
-        RefereeSiteStub refereeSiteStub;
         PlaygroundStub playgroundStub;
         ContestantsBenchStub contestantsBenchStub;
 
@@ -40,43 +37,31 @@ public class ClientGameOfRopeContestant {
             System.exit(1);
         }
 
-        refereeSiteServerHostName = args[2];
+        playgroundServerHostName = args[2];
         try {
-            refereeSiteServerPortNumb = Integer.parseInt(args[3]);
+            playgroundServerPortNumb = Integer.parseInt(args[3]);
         } catch (NumberFormatException e) {
             GenericIO.writelnString("args[3] is not a number!");
             System.exit(1);
         }
-        if ((refereeSiteServerPortNumb < 4000) || (refereeSiteServerPortNumb >= 65536)) {
+        if ((playgroundServerPortNumb < 4000) || (playgroundServerPortNumb >= 65536)) {
             GenericIO.writelnString("args[3] is not a valid port number!");
             System.exit(1);
         }
 
-        playgroundServerHostName = args[4];
+        contestantsBenchServerHostName = args[4];
         try {
-            playgroundServerPortNumb = Integer.parseInt(args[5]);
+            contestantsBenchServerPortNumb = Integer.parseInt(args[5]);
         } catch (NumberFormatException e) {
             GenericIO.writelnString("args[5] is not a number!");
             System.exit(1);
         }
-        if ((playgroundServerPortNumb < 4000) || (playgroundServerPortNumb >= 65536)) {
+        if ((contestantsBenchServerPortNumb < 4000) || (contestantsBenchServerPortNumb >= 65536)) {
             GenericIO.writelnString("args[5] is not a valid port number!");
             System.exit(1);
         }
 
-        contestantsBenchServerHostName = args[6];
-        try {
-            contestantsBenchServerPortNumb = Integer.parseInt(args[7]);
-        } catch (NumberFormatException e) {
-            GenericIO.writelnString("args[7] is not a number!");
-            System.exit(1);
-        }
-        if ((contestantsBenchServerPortNumb < 4000) || (contestantsBenchServerPortNumb >= 65536)) {
-            GenericIO.writelnString("args[7] is not a valid port number!");
-            System.exit(1);
-        }
-
-        fileName = args[8];
+        fileName = args[6];
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < SimulPar.NC; j++)
@@ -85,7 +70,6 @@ public class ClientGameOfRopeContestant {
 
         genReposStub = new GeneralReposStub(genReposServerHostName, genReposServerPortNumb);
         genReposStub.initSimul(fileName, contestantStrength);
-        refereeSiteStub = new RefereeSiteStub(refereeSiteServerHostName, refereeSiteServerPortNumb);
         playgroundStub = new PlaygroundStub(playgroundServerHostName, playgroundServerPortNumb);
         contestantsBenchStub = new ContestantsBenchStub(contestantsBenchServerHostName, contestantsBenchServerPortNumb);
         for (int i = 0; i < 2; i++) {

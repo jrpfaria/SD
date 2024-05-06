@@ -3,7 +3,6 @@ package serverSide.sharedRegions;
 import clientSide.entities.*;
 import genclass.GenericIO;
 import genclass.TextFile;
-import serverSide.entities.*;
 import serverSide.main.*;
 import serverSide.main.SimulPar;
 

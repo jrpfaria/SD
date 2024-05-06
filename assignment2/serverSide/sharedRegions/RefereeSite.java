@@ -2,7 +2,6 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.*;
 import clientSide.stubs.*;
-import commInfra.*;
 import serverSide.entities.*;
 import serverSide.main.*;
 
