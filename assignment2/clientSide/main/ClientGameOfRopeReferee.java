@@ -85,7 +85,7 @@ public class ClientGameOfRopeReferee {
 
         try {
             referee.join();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
 
         GenericIO.writelnString("Referee has terminated.");

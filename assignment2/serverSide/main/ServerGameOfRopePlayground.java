@@ -63,7 +63,7 @@ public class ServerGameOfRopePlayground {
                 sconi = scon.accept();
                 cliProxy = new PlaygroundClientProxy(sconi, playgroundInter);
                 cliProxy.start();
-            } catch (SocketTimeoutException e) {
+            } catch (SocketTimeoutException ignored) {
             }
         }
         scon.end();

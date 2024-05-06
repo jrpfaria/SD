@@ -38,9 +38,9 @@ public class Referee extends Thread {
      * Constructor for Referee class.
      * Initializes the referee with a referee site, playground, and contestants bench.
      *
-     * @param refereeSite      The referee site shared memory area.
-     * @param playground       The playground shared memory area.
-     * @param contestantsBench The contestants bench shared memory area.
+     * @param refereeSiteStub      The referee site stub.
+     * @param playgroundStub       The playground stub.
+     * @param contestantsBenchStub The contestants bench stub.
      */
     public Referee(RefereeSiteStub refereeSiteStub, PlaygroundStub playgroundStub, ContestantsBenchStub contestantsBenchStub) {
         super("Referee");
@@ -83,7 +83,7 @@ public class Referee extends Thread {
                 playgroundStub.startTrial(); // Start the trial on the playground
                 playgroundStub.wait_for_trial_conclusion(); // Wait for the trial to conclude
                 ropePosition = playgroundStub.assertTrialDecision(); // Determine the trial outcome
-                // Break out of the trial loop if the strength difference exceeds the threshold, making it a knock out
+                // Break out of the trial loop if the strength difference exceeds the threshold, making it a knockout
                 if (Math.abs(ropePosition) >= SimulPar.KT) break;
             }
             ropePosition = playgroundStub.declareGameWinner(); // Declare the winner of the current game

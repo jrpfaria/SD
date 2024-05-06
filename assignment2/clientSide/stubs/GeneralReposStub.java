@@ -21,7 +21,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -47,7 +47,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -73,7 +73,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -99,7 +99,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -125,7 +125,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -151,7 +151,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -177,7 +177,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -203,7 +203,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -229,7 +229,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -254,7 +254,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -279,7 +279,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -305,7 +305,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -331,7 +331,7 @@ public class GeneralReposStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 

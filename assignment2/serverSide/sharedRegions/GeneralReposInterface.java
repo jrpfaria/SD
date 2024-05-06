@@ -11,7 +11,7 @@ public class GeneralReposInterface {
     }
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
-        Message outMessage = null;
+        Message outMessage;
 
         switch (inMessage.getMsgType()) {
             case SETNFIC:

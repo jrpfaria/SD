@@ -108,7 +108,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     @Override
     public void run() {
-        Message inMessage = null, outMessage = null;
+        Message inMessage, outMessage = null;
 
         inMessage = (Message) sconi.readObject();
 

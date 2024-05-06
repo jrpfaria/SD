@@ -38,7 +38,7 @@ public class GeneralReposClientProxy extends Thread {
 
     @Override
     public void run() {
-        Message inMessage = null, outMessage = null;
+        Message inMessage, outMessage = null;
 
         inMessage = (Message) sconi.readObject();
 

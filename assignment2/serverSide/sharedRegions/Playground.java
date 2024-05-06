@@ -52,7 +52,7 @@ public class Playground {
     /**
      * Playground instantiation.
      *
-     * @param repos reference to the general repository
+     * @param reposStub reference to the general repository stub
      */
     public Playground(GeneralReposStub reposStub) {
         this.reposStub = reposStub;
@@ -85,7 +85,7 @@ public class Playground {
         while (amDone < 2 * SimulPar.NP) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
         amDone = 0;
@@ -128,8 +128,6 @@ public class Playground {
     /**
      * Operation assemble_team
      * The coaches wait for the contestants to get in position to play
-     *
-     * @param team team of the coach
      */
     public synchronized void assemble_team() {
         PlaygroundClientProxy t = (PlaygroundClientProxy) Thread.currentThread();
@@ -139,7 +137,7 @@ public class Playground {
         while (inPosition[team] < SimulPar.NP) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
         t.setCoachState(CoachStates.WATCH_TRIAL);
@@ -150,14 +148,12 @@ public class Playground {
     /**
      * Operation watch_trial
      * The coaches wait for the trial to end
-     *
-     * @param team team of the coach
      */
     public synchronized void watch_trial() {
         while (!endTrial) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
     }
@@ -167,8 +163,6 @@ public class Playground {
     /**
      * Operation followCoachAdvice
      * The contestants notify their coach that they're in position
-     *
-     * @param team team of the contestant
      */
     public synchronized void followCoachAdvice() {
         PlaygroundClientProxy t = (PlaygroundClientProxy) Thread.currentThread();
@@ -180,9 +174,6 @@ public class Playground {
     /**
      * Operation stand_in_position
      * The contestants wait for the trial to start
-     *
-     * @param team   team of the contestant
-     * @param number number of the contestant
      */
     public synchronized void stand_in_position() {
         PlaygroundClientProxy t = (PlaygroundClientProxy) Thread.currentThread();
@@ -194,7 +185,7 @@ public class Playground {
         while (!startTrial) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
     }
@@ -202,9 +193,6 @@ public class Playground {
     /**
      * Operation getReady
      * The contestants inform the general repository of their participation in the trial
-     *
-     * @param team   team of the contestant
-     * @param number number of the contestant
      */
     public synchronized void getReady() {
         PlaygroundClientProxy t = (PlaygroundClientProxy) Thread.currentThread();
@@ -227,7 +215,7 @@ public class Playground {
         while (!endTrial) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
     }

@@ -63,7 +63,7 @@ public class ServerGameOfRopeContestantsBench {
                 sconi = scon.accept();
                 cliProxy = new ContestantsBenchClientProxy(sconi, contestantsBenchInter);
                 cliProxy.start();
-            } catch (SocketTimeoutException e) {
+            } catch (SocketTimeoutException ignored) {
             }
         }
         scon.end();

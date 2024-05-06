@@ -48,9 +48,8 @@ public class ContestantsBench {
     /**
      * ContestantsBench instantiation.
      *
-     * @param repos reference to the general repository
+     * @param reposStub reference to the general repository stub
      */
-    @SuppressWarnings("unchecked")
     public ContestantsBench(GeneralReposStub reposStub) {
         this.reposStub = reposStub;
         called = new int[2][SimulPar.NC];
@@ -101,7 +100,6 @@ public class ContestantsBench {
      * Operation reviewNotes
      * Called by the coaches to obtain the strength of each of their players, after they're all in the bench.
      *
-     * @param team team of coach
      * @return roster of players
      */
     public synchronized Pair<Integer, Integer>[] reviewNotes() {
@@ -110,7 +108,7 @@ public class ContestantsBench {
         while (seated[team] < SimulPar.NC) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
         return contestants[team];
@@ -120,7 +118,6 @@ public class ContestantsBench {
      * Operation wait_for_referee_command
      * The coaches wait for either the match to end or for a trial to be called
      *
-     * @param team team of coach
      * @return 0 if match is over, 1 if trial was called
      */
     public synchronized int wait_for_referee_command() {
@@ -131,7 +128,7 @@ public class ContestantsBench {
         while (!matchOver && callTrial == 0) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
         if (matchOver) return 0;
@@ -143,7 +140,6 @@ public class ContestantsBench {
      * Operation callContestants
      * Called by the coaches to notify their contestants that a trial was called and which players will participate.
      *
-     * @param team   team of coach
      * @param roster numbers of the contestants that will participate
      */
     public synchronized void callContestants(int[] roster) {
@@ -160,8 +156,6 @@ public class ContestantsBench {
      * Operation seat_at_the_bench
      * Called by the contestants to update their strength, and wait for either the match to end or a trial to be called.
      *
-     * @param team   team of contestant
-     * @param number of contestant
      * @return 0 if match is over, 1 if player has to stay in the bench, 2 if player will participate in the trial
      */
     public int seat_at_the_bench() {
@@ -182,7 +176,7 @@ public class ContestantsBench {
             while (!matchOver && called[team][number] == 0) {
                 try {
                     wait();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException ignored) {
                 }
             }
             if (matchOver) return 0;
@@ -196,9 +190,6 @@ public class ContestantsBench {
     /**
      * Operation seatDown
      * Called by the contestants to update their strength and remove their number from the general repository.
-     *
-     * @param team   team of contestant
-     * @param number of contestant
      */
     public synchronized void seatDown() {
         ContestantsBenchClientProxy t = (ContestantsBenchClientProxy) Thread.currentThread();

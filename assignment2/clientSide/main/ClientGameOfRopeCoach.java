@@ -89,7 +89,7 @@ public class ClientGameOfRopeCoach {
         for (int i = 0; i < 2; i++) {
             try {
                 coach[i].join();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
             GenericIO.writelnString("Coach " + (i + 1) + " has terminated.");
         }

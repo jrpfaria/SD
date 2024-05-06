@@ -63,9 +63,6 @@ public class GeneralRepos {
 
     /**
      * Instantiation of a general repository object.
-     *
-     * @param logFileName        name of the logging file
-     * @param contestantStrength strength of each contestant of each team
      */
     public GeneralRepos() {
         //initialize variables
@@ -87,38 +84,38 @@ public class GeneralRepos {
         contestantPosition = new int[2][SimulPar.NC];
 
         //create legend string
-        String legend1 = "";
-        String legend2 = "";
-        legend1 += "\nRef";
-        legend2 += "\nSta";
-        legend1 += " Coa 1";
-        legend2 += "  Stat";
+        StringBuilder legend1 = new StringBuilder();
+        StringBuilder legend2 = new StringBuilder();
+        legend1.append("\nRef");
+        legend2.append("\nSta");
+        legend1.append(" Coa 1");
+        legend2.append("  Stat");
         for (int i = 1; i <= SimulPar.NC; i++) {
-            legend1 += " Cont " + i;
-            legend2 += " Sta SG";
+            legend1.append(" Cont ").append(i);
+            legend2.append(" Sta SG");
         }
-        legend1 += " Coa 2";
-        legend2 += "  Stat";
+        legend1.append(" Coa 2");
+        legend2.append("  Stat");
         for (int i = 1; i <= SimulPar.NC; i++) {
-            legend1 += " Cont " + i;
-            legend2 += " Sta SG";
+            legend1.append(" Cont ").append(i);
+            legend2.append(" Sta SG");
         }
         for (int i = SimulPar.NP; i > 0; i--) {
-            legend1 += "  ";
-            legend2 += " " + i;
+            legend1.append("  ");
+            legend2.append(" ").append(i);
         }
-        legend1 += " Trial";
-        legend2 += " .";
-        for (int i = 1; i <= SimulPar.NP; i++) legend2 += " " + i;
-        legend2 += " NB PS";
-        legend = legend1 + legend2;
+        legend1.append(" Trial");
+        legend2.append(" .");
+        for (int i = 1; i <= SimulPar.NP; i++) legend2.append(" ").append(i);
+        legend2.append(" NB PS");
+        legend = legend1 + legend2.toString();
     }
 
     public synchronized void check_init() {
         while (!init) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
     }
@@ -361,7 +358,7 @@ public class GeneralRepos {
             if (ropePosition > 0) winner = 2;
             if (knockout)
                 log.writelnString(String.format("Game %d was won by team %d by knockout in %d trials.", nGame, winner, nTrial));
-            else if (ropePosition != 0)
+            else
                 log.writelnString(String.format("Game %d was won by team %d by %d points.", nGame, winner, Math.abs(ropePosition)));
         }
 
@@ -417,33 +414,33 @@ public class GeneralRepos {
         }
 
         //print status
-        String lineStatus = "";
+        StringBuilder lineStatus = new StringBuilder();
 
-        lineStatus += refereeState;
+        lineStatus.append(refereeState);
 
-        lineStatus += "  " + coachState[0];
+        lineStatus.append("  ").append(coachState[0]);
         for (int i = 0; i < SimulPar.NC; i++)
-            lineStatus += String.format(" %s %2d", contestantState[0][i], contestantStrength[0][i]);
-        lineStatus += "  " + coachState[1];
+            lineStatus.append(String.format(" %s %2d", contestantState[0][i], contestantStrength[0][i]));
+        lineStatus.append("  ").append(coachState[1]);
         for (int i = 0; i < SimulPar.NC; i++)
-            lineStatus += String.format(" %s %2d", contestantState[1][i], contestantStrength[1][i]);
+            lineStatus.append(String.format(" %s %2d", contestantState[1][i], contestantStrength[1][i]));
 
         for (int i = 0; i < SimulPar.NP; i++) {
-            if (contestantPosition[0][i] == 0) lineStatus += " -";
-            else lineStatus += " " + contestantPosition[0][i];
+            if (contestantPosition[0][i] == 0) lineStatus.append(" -");
+            else lineStatus.append(" ").append(contestantPosition[0][i]);
         }
-        lineStatus += " " + ".";
+        lineStatus.append(" " + ".");
         for (int i = 0; i < SimulPar.NP; i++) {
-            if (contestantPosition[1][i] == 0) lineStatus += " -";
-            else lineStatus += " " + contestantPosition[1][i];
+            if (contestantPosition[1][i] == 0) lineStatus.append(" -");
+            else lineStatus.append(" ").append(contestantPosition[1][i]);
         }
 
-        if (nTrial == 0) lineStatus += "  -";
-        else lineStatus += String.format(" %2d", nTrial);
-        lineStatus += String.format(" %2d", ropePosition);
+        if (nTrial == 0) lineStatus.append("  -");
+        else lineStatus.append(String.format(" %2d", nTrial));
+        lineStatus.append(String.format(" %2d", ropePosition));
 
         //close file
-        log.writelnString(lineStatus);
+        log.writelnString(lineStatus.toString());
         if (!log.close()) {
             GenericIO.writelnString("The operation of closing the file " + logFileName + " failed!");
             System.exit(1);

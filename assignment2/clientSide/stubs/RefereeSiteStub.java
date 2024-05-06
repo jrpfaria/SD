@@ -23,7 +23,7 @@ public class RefereeSiteStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -51,7 +51,7 @@ public class RefereeSiteStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -77,7 +77,7 @@ public class RefereeSiteStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -104,7 +104,7 @@ public class RefereeSiteStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 

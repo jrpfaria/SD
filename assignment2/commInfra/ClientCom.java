@@ -108,7 +108,7 @@ public class ClientCom {
             System.exit(1);
         }
 
-        if (!success) return (success);
+        if (!success) return false;
 
         try {
             out = new ObjectOutputStream(commSocket.getOutputStream());
@@ -128,7 +128,7 @@ public class ClientCom {
             System.exit(1);
         }
 
-        return (success);
+        return true;
     }
 
     /**

@@ -13,7 +13,7 @@ public class PlaygroundInterface {
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
 
-        Message outMessage = null;
+        Message outMessage;
 
         switch (inMessage.getMsgType()) {
             case STT:
@@ -42,6 +42,7 @@ public class PlaygroundInterface {
                 throw new MessageException("Invalid message type!", inMessage);
         }
 
+        int position;
         switch (inMessage.getMsgType()) {
             case STT: // unsure if this is correct
                 playground.startTrial();
@@ -52,7 +53,7 @@ public class PlaygroundInterface {
                 outMessage = new Message(MessageType.ACK);
                 outMessage.setRefereeState(((PlaygroundClientProxy) Thread.currentThread()).getRefereeState());
             case ATD:
-                int position = playground.assertTrialDecision();
+                position = playground.assertTrialDecision();
                 outMessage = new Message(MessageType.ACK);
                 outMessage.setPosition(position);
                 break;

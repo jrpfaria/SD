@@ -12,7 +12,7 @@ public class ContestantsBenchInterface {
     }
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
-        Message outMessage = null;
+        Message outMessage;
 
         switch (inMessage.getMsgType()) {
             case CLT:
@@ -35,6 +35,7 @@ public class ContestantsBenchInterface {
                 throw new MessageException("Invalid message type!", inMessage);
         }
 
+        int orders;
         switch (inMessage.getMsgType()) {
             case CLT:
                 contestantsBench.callTrial();
@@ -54,7 +55,7 @@ public class ContestantsBenchInterface {
                 break;
             case WFRC:
                 ((ContestantsBenchClientProxy) Thread.currentThread()).setCoachTeam(inMessage.getTeam());
-                int orders = contestantsBench.wait_for_referee_command();
+                orders = contestantsBench.wait_for_referee_command();
                 outMessage = new Message(MessageType.ACK);
                 outMessage.setCoachState(((ContestantsBenchClientProxy) Thread.currentThread()).getCoachState()).setValue(orders);
                 break;

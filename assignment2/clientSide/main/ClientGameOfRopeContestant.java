@@ -90,7 +90,7 @@ public class ClientGameOfRopeContestant {
             for (int j = 0; j < SimulPar.NC; j++) {
                 try {
                     contestant[i][j].join();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException ignored) {
                 }
                 GenericIO.writelnString("Contestant " + (i + 1) + "-" + (j + 1) + " has terminated.");
             }

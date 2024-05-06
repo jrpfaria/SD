@@ -23,7 +23,7 @@ public class ContestantsBenchStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -50,7 +50,7 @@ public class ContestantsBenchStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -80,7 +80,7 @@ public class ContestantsBenchStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -110,7 +110,7 @@ public class ContestantsBenchStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -142,7 +142,7 @@ public class ContestantsBenchStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -172,7 +172,7 @@ public class ContestantsBenchStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -206,7 +206,7 @@ public class ContestantsBenchStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 
@@ -238,7 +238,7 @@ public class ContestantsBenchStub {
         while (!com.open()) {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
 

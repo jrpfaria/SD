@@ -63,7 +63,7 @@ public class ServerGameOfRopeRefereeSite {
                 sconi = scon.accept();
                 cliProxy = new RefereeSiteClientProxy(sconi, refereeSiteInter);
                 cliProxy.start();
-            } catch (SocketTimeoutException e) {
+            } catch (SocketTimeoutException ignored) {
             }
         }
         scon.end();

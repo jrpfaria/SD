@@ -27,7 +27,7 @@ public class RefereeSite {
     /**
      * Referee site instantiation.
      *
-     * @param repos reference to the general repository
+     * @param reposStub reference to the general repository stub
      */
     public RefereeSite(GeneralReposStub reposStub) {
         this.reposStub = reposStub;
@@ -55,7 +55,7 @@ public class RefereeSite {
         while (ready < 2) {
             try {
                 wait();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
         ready = 0;

@@ -45,11 +45,11 @@ public class Coach extends Thread {
      * Constructor for Coach class.
      * Initializes the coach with a specific team, referee site, playground, and contestants bench.
      *
-     * @param team             The team index of the coach.
-     * @param method           The coaching method: sweaty or gambler's dream
-     * @param refereeSite      The referee site shared memory area.
-     * @param playground       The playground shared memory area.
-     * @param contestantsBench The contestants bench shared memory area.
+     * @param team                 The team index of the coach.
+     * @param method               The coaching method: sweaty or gambler's dream
+     * @param refereeSiteStub      The referee site stub.
+     * @param playgroundStub       The playground stub.
+     * @param contestantsBenchStub The contestants stub.
      */
     public Coach(int team, boolean method, RefereeSiteStub refereeSiteStub, PlaygroundStub playgroundStub, ContestantsBenchStub contestantsBenchStub) {
         super(String.format("Coach-%d", team + 1));
@@ -122,7 +122,7 @@ public class Coach extends Thread {
         if (gameCounter++ < SimulPar.NG * SimulPar.NT) { // Check if still within initial selection phase
             for (int i = 0; i < SimulPar.NP; i++) roster[i] = sorted[i].getKey(); // Select all players initially
         } else { // After initial phase, select only the weakest player
-            for (int i = 0; i < SimulPar.NP; i++) roster[i] = sorted[SimulPar.NP - 1].getKey();
+            for (int i = 0; i < SimulPar.NP; i++) roster[i] = sorted[SimulPar.NP - 1 - i].getKey();
         }
         return roster;
     }

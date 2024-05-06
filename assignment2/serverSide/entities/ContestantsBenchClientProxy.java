@@ -108,7 +108,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     @Override
     public void run() {
-        Message inMessage = null, outMessage = null;
+        Message inMessage, outMessage = null;
 
         inMessage = (Message) sconi.readObject();
 

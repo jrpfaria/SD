@@ -47,7 +47,7 @@ public class ServerGameOfRopeGeneralRepos {
                 sconi = scon.accept();
                 cliProxy = new GeneralReposClientProxy(sconi, reposInter);
                 cliProxy.start();
-            } catch (SocketTimeoutException e) {
+            } catch (SocketTimeoutException ignored) {
             }
         }
         scon.end();

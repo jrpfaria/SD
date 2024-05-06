@@ -37,11 +37,11 @@ public class Contestant extends Thread {
      * Constructor for Contestant class.
      * Initializes a contestant with a specific team, number, strength, playground, and contestants bench.
      *
-     * @param team             The team index of the contestant.
-     * @param number           The contestant number within the team.
-     * @param strength         The strength level of the contestant.
-     * @param playground       The playground shared memory area.
-     * @param contestantsBench The contestants bench shared memory area.
+     * @param team                 The team index of the contestant.
+     * @param number               The contestant number within the team.
+     * @param strength             The strength level of the contestant.
+     * @param playgroundStub       The playground shared stub.
+     * @param contestantsBenchStub The contestants bench stub.
      */
     public Contestant(int team, int number, int strength, PlaygroundStub playgroundStub, ContestantsBenchStub contestantsBenchStub) {
         super(String.format("Contestant-%d-%d", team + 1, number + 1));
@@ -142,7 +142,7 @@ public class Contestant extends Thread {
     private void pullTheRope() {
         try {
             Thread.sleep((long) ((SimulPar.MAXT - SimulPar.MINT + 1) * Math.random() + SimulPar.MINT));
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
         reduceStrength();
     }

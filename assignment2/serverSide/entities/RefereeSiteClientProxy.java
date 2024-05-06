@@ -71,7 +71,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     @Override
     public void run() {
-        Message inMessage = null, outMessage = null;
+        Message inMessage, outMessage = null;
 
         inMessage = (Message) sconi.readObject();
 
