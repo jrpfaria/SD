@@ -9,15 +9,12 @@ import genclass.GenericIO;
 public class ContestantsBenchInterface {
     
     private final ContestantsBench contestantsBench;
-    private ContestantsBenchClientProxy t;
 
     public ContestantsBenchInterface(ContestantsBench contestantsBench) {
         this.contestantsBench = contestantsBench;
     }
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
-        t = (ContestantsBenchClientProxy)Thread.currentThread();
-        
         Message outMessage = null;
 
         switch (inMessage.getMsgType()) {
@@ -36,44 +33,48 @@ public class ContestantsBenchInterface {
             case CLT:
                 contestantsBench.callTrial();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setRefereeState(t.getRefereeState());
+                outMessage.setRefereeState(((ContestantsBenchClientProxy)Thread.currentThread()).getRefereeState());
                 break;
             case DMW:
                 contestantsBench.declareMatchWinner(inMessage.getScore1(), inMessage.getScore2());
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setRefereeState(t.getRefereeState());
+                outMessage.setRefereeState(((ContestantsBenchClientProxy)Thread.currentThread()).getRefereeState());
                 break;
             case RVN:
-                t.setCoachTeam(inMessage.getTeam());
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setCoachTeam(inMessage.getTeam());
                 Pair<Integer, Integer>[] roster = contestantsBench.reviewNotes();
                 outMessage = new Message(MessageType.ACK);
                 outMessage.setContestants(roster);
                 break;
             case WFRC:
-                t.setCoachTeam(inMessage.getTeam());
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setCoachTeam(inMessage.getTeam());
                 int orders = contestantsBench.wait_for_referee_command();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setCoachState(t.getCoachState()).setValue(orders);
+                outMessage.setCoachState(((ContestantsBenchClientProxy)Thread.currentThread()).getCoachState()).setValue(orders);
                 break;
             case CLC:
-                t.setCoachTeam(inMessage.getTeam());
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setCoachTeam(inMessage.getTeam());
                 contestantsBench.callContestants(inMessage.getRoster());
                 outMessage = new Message(MessageType.ACK);
                 break;
             case SAB: // unsure if this is correct, might be missing something
-                t.setContestantTeam(inMessage.getTeam());
-                t.setContestantNumber(inMessage.getNumber());
-                t.setContestantStrength(inMessage.getStrength());
-                if (t.getContestantTeam()!=inMessage.getTeam()) GenericIO.writelnString("ERROR: different team");
-                if (t.getContestantNumber()!=inMessage.getNumber()) GenericIO.writelnString("ERROR: different number");
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setContestantTeam(inMessage.getTeam());
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setContestantNumber(inMessage.getNumber());
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setContestantStrength(inMessage.getStrength());
+                if (((ContestantsBenchClientProxy)Thread.currentThread()).getContestantTeam()!=inMessage.getTeam()) {
+                    throw new MessageException("ERROR: different team", inMessage);
+                }
+                if (((ContestantsBenchClientProxy)Thread.currentThread()).getContestantNumber()!=inMessage.getNumber()) {
+                    throw new MessageException("ERROR: different number", inMessage);
+                }
                 orders = contestantsBench.seat_at_the_bench();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setContestantState(t.getContestantState()).setValue(orders);
+                outMessage.setContestantState(((ContestantsBenchClientProxy)Thread.currentThread()).getContestantState()).setValue(orders);
                 break;
             case SD:
-                t.setContestantTeam(inMessage.getTeam());
-                t.setContestantNumber(inMessage.getNumber());
-                t.setContestantStrength(inMessage.getStrength());
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setContestantTeam(inMessage.getTeam());
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setContestantNumber(inMessage.getNumber());
+                ((ContestantsBenchClientProxy)Thread.currentThread()).setContestantStrength(inMessage.getStrength());
                 contestantsBench.seatDown();
                 outMessage = new Message(MessageType.ACK);
                 break;            

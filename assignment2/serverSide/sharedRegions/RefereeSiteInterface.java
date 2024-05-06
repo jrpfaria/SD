@@ -15,7 +15,6 @@ public class RefereeSiteInterface {
     }
 
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
-        t = (RefereeSiteClientProxy)Thread.currentThread();
         
         Message outMessage = null;
 
@@ -31,7 +30,7 @@ public class RefereeSiteInterface {
             case ANG:
                 refereeSite.announceNewGame();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setRefereeState(t.getRefereeState());
+                outMessage.setRefereeState(((RefereeSiteClientProxy)Thread.currentThread()).getRefereeState());
                 break;
             case TRY:
                 refereeSite.teams_ready();
