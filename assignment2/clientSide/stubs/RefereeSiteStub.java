@@ -5,8 +5,8 @@ import commInfra.*;
 import genclass.GenericIO;
 
 public class RefereeSiteStub {
-    private String serverHostName;
-    private int serverPortNumb;
+    private final String serverHostName;
+    private final int serverPortNumb;
 
     public RefereeSiteStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;
@@ -21,16 +21,18 @@ public class RefereeSiteStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
         outMessage = new Message(MessageType.ANG);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
+        inMessage = (Message) com.readObject();
 
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -38,7 +40,7 @@ public class RefereeSiteStub {
 
         com.close();
 
-        ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
     public void teams_ready() {
@@ -47,15 +49,17 @@ public class RefereeSiteStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
         outMessage = new Message(MessageType.TRY);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -71,15 +75,17 @@ public class RefereeSiteStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
         outMessage = new Message(MessageType.INFR);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -96,15 +102,17 @@ public class RefereeSiteStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
         outMessage = new Message(MessageType.SHUT);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.SHUTDONE) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.SHUTDONE) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);

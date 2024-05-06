@@ -1,12 +1,12 @@
 package serverSide.sharedRegions;
 
-import serverSide.main.*;
-import serverSide.entities.*;
 import clientSide.entities.*;
 import commInfra.*;
+import serverSide.entities.*;
+import serverSide.main.*;
 
 public class PlaygroundInterface {
-    
+
     private final Playground playground;
 
     public PlaygroundInterface(Playground playground) {
@@ -18,20 +18,32 @@ public class PlaygroundInterface {
         Message outMessage = null;
 
         switch (inMessage.getMsgType()) {
-            case STT: break;
-            case WTC: break;
-            case ATD: break;
-            case DGW: break;
-            case ASTM: break;
-            case WATL: break;
-            case FCA: break;
-            case SIP: break;
-            case GR: break;
-            case AD: break;
-            case SHUT: break;
-            default: throw new MessageException("Invalid message type!", inMessage);
+            case STT:
+                break;
+            case WTC:
+                break;
+            case ATD:
+                break;
+            case DGW:
+                break;
+            case ASTM:
+                break;
+            case WATL:
+                break;
+            case FCA:
+                break;
+            case SIP:
+                break;
+            case GR:
+                break;
+            case AD:
+                break;
+            case SHUT:
+                break;
+            default:
+                throw new MessageException("Invalid message type!", inMessage);
         }
-        
+
         switch (inMessage.getMsgType()) {
             case STT: // unsure if this is correct
                 playground.startTrial();
@@ -40,7 +52,7 @@ public class PlaygroundInterface {
             case WTC:
                 playground.wait_for_trial_conclusion();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setRefereeState(((PlaygroundClientProxy)Thread.currentThread()).getRefereeState());
+                outMessage.setRefereeState(((PlaygroundClientProxy) Thread.currentThread()).getRefereeState());
             case ATD:
                 int position = playground.assertTrialDecision();
                 outMessage = new Message(MessageType.ACK);
@@ -49,37 +61,37 @@ public class PlaygroundInterface {
             case DGW:
                 position = playground.declareGameWinner();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setRefereeState(((PlaygroundClientProxy)Thread.currentThread()).getRefereeState()).setPosition(position);
+                outMessage.setRefereeState(((PlaygroundClientProxy) Thread.currentThread()).getRefereeState()).setPosition(position);
                 break;
             case ASTM:
-                ((PlaygroundClientProxy)Thread.currentThread()).setCoachTeam(inMessage.getTeam());
+                ((PlaygroundClientProxy) Thread.currentThread()).setCoachTeam(inMessage.getTeam());
                 playground.assemble_team();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setCoachState(((PlaygroundClientProxy)Thread.currentThread()).getCoachState());
+                outMessage.setCoachState(((PlaygroundClientProxy) Thread.currentThread()).getCoachState());
                 break;
             case WATL:
                 playground.watch_trial();
                 outMessage = new Message(MessageType.ACK);
                 break;
             case FCA:
-                ((PlaygroundClientProxy)Thread.currentThread()).setContestantTeam(inMessage.getTeam());
+                ((PlaygroundClientProxy) Thread.currentThread()).setContestantTeam(inMessage.getTeam());
                 playground.followCoachAdvice();
                 outMessage = new Message(MessageType.ACK);
                 break;
             case SIP:
-                ((PlaygroundClientProxy)Thread.currentThread()).setContestantTeam(inMessage.getTeam());
-                ((PlaygroundClientProxy)Thread.currentThread()).setContestantNumber(inMessage.getNumber());
+                ((PlaygroundClientProxy) Thread.currentThread()).setContestantTeam(inMessage.getTeam());
+                ((PlaygroundClientProxy) Thread.currentThread()).setContestantNumber(inMessage.getNumber());
                 playground.stand_in_position();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setContestantState(((PlaygroundClientProxy)Thread.currentThread()).getContestantState());
+                outMessage.setContestantState(((PlaygroundClientProxy) Thread.currentThread()).getContestantState());
                 break;
             case GR:
-                ((PlaygroundClientProxy)Thread.currentThread()).setContestantTeam(inMessage.getTeam());
-                ((PlaygroundClientProxy)Thread.currentThread()).setContestantNumber(inMessage.getNumber());
-                ((PlaygroundClientProxy)Thread.currentThread()).setContestantStrength(inMessage.getStrength());
+                ((PlaygroundClientProxy) Thread.currentThread()).setContestantTeam(inMessage.getTeam());
+                ((PlaygroundClientProxy) Thread.currentThread()).setContestantNumber(inMessage.getNumber());
+                ((PlaygroundClientProxy) Thread.currentThread()).setContestantStrength(inMessage.getStrength());
                 playground.getReady();
                 outMessage = new Message(MessageType.ACK);
-                outMessage.setContestantState(((PlaygroundClientProxy)Thread.currentThread()).getContestantState());
+                outMessage.setContestantState(((PlaygroundClientProxy) Thread.currentThread()).getContestantState());
                 break;
             case AD:
                 playground.amDone();

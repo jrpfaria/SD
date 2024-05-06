@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * The Pair class is used to represent a key-value pair that can be compared to other instances by value, which makes it useful for sorting information.
+ *
  * @param <X> data type of key
  * @param <Y> data type of value
  */
@@ -11,16 +12,17 @@ import java.io.Serializable;
 public class Pair<X, Y extends Comparable<Y>> implements Comparable<Pair<X, Y>>, Serializable {
     /**
      * key of the pair
-    */
+     */
     private X key;
     /**
      * value of the pair
-    */
+     */
     private Y value;
 
     /**
      * Pair instantiation.
-     * @param key key of the pair
+     *
+     * @param key   key of the pair
      * @param value value of the pair
      */
 
@@ -30,25 +32,8 @@ public class Pair<X, Y extends Comparable<Y>> implements Comparable<Pair<X, Y>>,
     }
 
     /**
-     * Pair key setter.
-     * @param key key of the pair
-     */
-
-    public void setKey(X key) {
-        this.key = key;
-    }
-
-    /**
-     * Pair value setter.
-     * @param value value of the pair
-     */
-
-    public void setValue(Y value) {
-        this.value = value;
-    }
-
-    /**
      * Pair key getter.
+     *
      * @return key of the pair
      */
 
@@ -57,7 +42,18 @@ public class Pair<X, Y extends Comparable<Y>> implements Comparable<Pair<X, Y>>,
     }
 
     /**
+     * Pair key setter.
+     *
+     * @param key key of the pair
+     */
+
+    public void setKey(X key) {
+        this.key = key;
+    }
+
+    /**
      * Pair value getter.
+     *
      * @return value of the pair
      */
 
@@ -66,7 +62,18 @@ public class Pair<X, Y extends Comparable<Y>> implements Comparable<Pair<X, Y>>,
     }
 
     /**
+     * Pair value setter.
+     *
+     * @param value value of the pair
+     */
+
+    public void setValue(Y value) {
+        this.value = value;
+    }
+
+    /**
      * Pair compareTo function.
+     *
      * @param b the Pair to be compared.
      * @return a negative integer, zero, or a positive integer as this Pair's value is less than, equal to, or greater than the specified Pair's value.
      */

@@ -1,11 +1,12 @@
 package serverSide.main;
 
-import serverSide.entities.*;
-import serverSide.sharedRegions.*;
 import clientSide.stubs.*;
 import commInfra.*;
 import genclass.GenericIO;
-import java.net.*;
+import serverSide.entities.*;
+import serverSide.sharedRegions.*;
+
+import java.net.SocketTimeoutException;
 
 public class ServerGameOfRopeContestantsBench {
 
@@ -24,8 +25,9 @@ public class ServerGameOfRopeContestantsBench {
             GenericIO.writelnString("Wrong number of parameters!");
             System.exit(1);
         }
-        try {portNumb = Integer.parseInt(args[0]);}
-        catch (NumberFormatException e) {
+        try {
+            portNumb = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[0] is not a number!");
             System.exit(1);
         }
@@ -34,8 +36,9 @@ public class ServerGameOfRopeContestantsBench {
             System.exit(1);
         }
         reposServerName = args[1];
-        try {reposPortNumb = Integer.parseInt(args[2]);}
-        catch (NumberFormatException e) {
+        try {
+            reposPortNumb = Integer.parseInt(args[2]);
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[2] is not a number!");
             System.exit(1);
         }
@@ -60,8 +63,8 @@ public class ServerGameOfRopeContestantsBench {
                 sconi = scon.accept();
                 cliProxy = new ContestantsBenchClientProxy(sconi, contestantsBenchInter);
                 cliProxy.start();
+            } catch (SocketTimeoutException e) {
             }
-            catch (SocketTimeoutException e) {}
         }
         scon.end();
         GenericIO.writelnString("Server was shutdown.");

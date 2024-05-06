@@ -7,7 +7,7 @@ import genclass.GenericIO;
 public class ClientGameOfRopeReferee {
     public static void main(String[] args) {
         String genReposServerHostName;
-        int genReposServerPortNumb = -1;   
+        int genReposServerPortNumb = -1;
         String refereeSiteServerHostName;
         int refereeSiteServerPortNumb = -1;
         String playgroundServerHostName;
@@ -28,8 +28,7 @@ public class ClientGameOfRopeReferee {
         genReposServerHostName = args[0];
         try {
             genReposServerPortNumb = Integer.parseInt(args[1]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[1] is not a number!");
             System.exit(1);
         }
@@ -41,8 +40,7 @@ public class ClientGameOfRopeReferee {
         refereeSiteServerHostName = args[2];
         try {
             refereeSiteServerPortNumb = Integer.parseInt(args[3]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[3] is not a number!");
             System.exit(1);
         }
@@ -54,8 +52,7 @@ public class ClientGameOfRopeReferee {
         playgroundServerHostName = args[4];
         try {
             playgroundServerPortNumb = Integer.parseInt(args[5]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[5] is not a number!");
             System.exit(1);
         }
@@ -67,8 +64,7 @@ public class ClientGameOfRopeReferee {
         contestantsBenchServerHostName = args[6];
         try {
             contestantsBenchServerPortNumb = Integer.parseInt(args[7]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[7] is not a number!");
             System.exit(1);
         }
@@ -89,8 +85,8 @@ public class ClientGameOfRopeReferee {
 
         try {
             referee.join();
+        } catch (InterruptedException e) {
         }
-        catch (InterruptedException e) {}
 
         GenericIO.writelnString("Referee has terminated.");
         GenericIO.writelnString();

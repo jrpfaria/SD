@@ -2,8 +2,8 @@ package clientSide.main;
 
 import clientSide.entities.*;
 import clientSide.stubs.*;
-import serverSide.main.*;
 import genclass.GenericIO;
+import serverSide.main.*;
 
 public class ClientGameOfRopeContestant {
     public static void main(String[] args) {
@@ -31,8 +31,7 @@ public class ClientGameOfRopeContestant {
         genReposServerHostName = args[0];
         try {
             genReposServerPortNumb = Integer.parseInt(args[1]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[1] is not a number!");
             System.exit(1);
         }
@@ -44,8 +43,7 @@ public class ClientGameOfRopeContestant {
         refereeSiteServerHostName = args[2];
         try {
             refereeSiteServerPortNumb = Integer.parseInt(args[3]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[3] is not a number!");
             System.exit(1);
         }
@@ -57,8 +55,7 @@ public class ClientGameOfRopeContestant {
         playgroundServerHostName = args[4];
         try {
             playgroundServerPortNumb = Integer.parseInt(args[5]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[5] is not a number!");
             System.exit(1);
         }
@@ -70,8 +67,7 @@ public class ClientGameOfRopeContestant {
         contestantsBenchServerHostName = args[6];
         try {
             contestantsBenchServerPortNumb = Integer.parseInt(args[7]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[7] is not a number!");
             System.exit(1);
         }
@@ -83,7 +79,8 @@ public class ClientGameOfRopeContestant {
         fileName = args[8];
 
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < SimulPar.NC; j++) contestantStrength[i][j] = (int)((SimulPar.MAXS-SimulPar.MINS+1)*Math.random()+SimulPar.MINS);
+            for (int j = 0; j < SimulPar.NC; j++)
+                contestantStrength[i][j] = (int) ((SimulPar.MAXS - SimulPar.MINS + 1) * Math.random() + SimulPar.MINS);
         }
 
         genReposStub = new GeneralReposStub(genReposServerHostName, genReposServerPortNumb);
@@ -109,9 +106,9 @@ public class ClientGameOfRopeContestant {
             for (int j = 0; j < SimulPar.NC; j++) {
                 try {
                     contestant[i][j].join();
+                } catch (InterruptedException e) {
                 }
-                catch (InterruptedException e) {}
-                GenericIO.writelnString("Contestant " + (i+1) + "-" + (j+1) + " has terminated.");
+                GenericIO.writelnString("Contestant " + (i + 1) + "-" + (j + 1) + " has terminated.");
             }
         }
 

@@ -2,11 +2,12 @@ package commInfra;
 
 import clientSide.entities.*;
 import serverSide.main.*;
-import java.io.*;
+
+import java.io.Serializable;
 
 public class Message implements Serializable { // TODO
     private static final long serialVersionUID = 2021L;
-    
+
     private MessageType msgType;
     private RefereeStates refereeState = null;
     private CoachStates coachState = null;
@@ -94,7 +95,7 @@ public class Message implements Serializable { // TODO
         this.strength = strength;
         return this;
     }
-    
+
     public int getValue() {
         return value;
     }

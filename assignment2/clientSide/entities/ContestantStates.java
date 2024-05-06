@@ -1,4 +1,5 @@
 package clientSide.entities;
+
 /**
  * The ContestantStates enum represents the possible states of a contestant in the game simulation.
  * Contestants can be in one of the following states: SEAT_AT_THE_BENCH, STAND_IN_POSITION, DO_YOUR_BEST.
@@ -21,6 +22,7 @@ public enum ContestantStates {
 
     /**
      * Overrides the toString method to provide custom string representations for enum values.
+     *
      * @return A string representation of the enum value.
      */
     @Override

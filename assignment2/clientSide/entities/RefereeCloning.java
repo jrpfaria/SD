@@ -1,6 +1,7 @@
 package clientSide.entities;
 
 public interface RefereeCloning {
-    public void setRefereeState(RefereeStates state);
-    public RefereeStates getRefereeState();
+    RefereeStates getRefereeState();
+
+    void setRefereeState(RefereeStates state);
 }

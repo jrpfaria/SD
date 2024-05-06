@@ -1,38 +1,34 @@
 package clientSide.entities;
 
 import clientSide.stubs.*;
-import genclass.GenericIO;
 import serverSide.main.SimulPar;
+
 /**
  * The Referee class represents the referee entity in the game simulation.
  * The referee oversees the match, announces new games, manages trials, and declares winners.
  */
 public class Referee extends Thread {
     /**
-     * Stores the referee's state
-     */
-    private RefereeStates state;
-
-    /**
      * Stores the reference for the refereeSite shared area
      */
     private final RefereeSiteStub refereeSiteStub;
-    
     /**
      * Stores the reference for the playground shared area
      */
     private final PlaygroundStub playgroundStub;
-    
     /**
      * Stores the reference for the contestantsBench shared area
      */
     private final ContestantsBenchStub contestantsBenchStub;
-    
+    /**
+     * Stores the referee's state
+     */
+    private RefereeStates state;
     /**
      * Stores team 1's score
      */
     private int score1;
-    
+
     /**
      * Stores team 2's score
      */
@@ -41,8 +37,9 @@ public class Referee extends Thread {
     /**
      * Constructor for Referee class.
      * Initializes the referee with a referee site, playground, and contestants bench.
-     * @param refereeSite The referee site shared memory area.
-     * @param playground The playground shared memory area.
+     *
+     * @param refereeSite      The referee site shared memory area.
+     * @param playground       The playground shared memory area.
      * @param contestantsBench The contestants bench shared memory area.
      */
     public Referee(RefereeSiteStub refereeSiteStub, PlaygroundStub playgroundStub, ContestantsBenchStub contestantsBenchStub) {
@@ -55,6 +52,7 @@ public class Referee extends Thread {
 
     /**
      * Sets the state of the referee.
+     *
      * @param state The state to set for the referee.
      */
     public void setRefereeState(RefereeStates state) {

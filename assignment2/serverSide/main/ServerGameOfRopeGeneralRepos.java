@@ -1,10 +1,11 @@
 package serverSide.main;
 
-import serverSide.entities.*;
-import serverSide.sharedRegions.*;
 import commInfra.*;
 import genclass.GenericIO;
-import java.net.*;
+import serverSide.entities.*;
+import serverSide.sharedRegions.*;
+
+import java.net.SocketTimeoutException;
 
 public class ServerGameOfRopeGeneralRepos {
 
@@ -20,8 +21,9 @@ public class ServerGameOfRopeGeneralRepos {
             GenericIO.writelnString("Wrong number of parameters!");
             System.exit(1);
         }
-        try {portNumb = Integer.parseInt(args[0]);}
-        catch (NumberFormatException e) {
+        try {
+            portNumb = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
             GenericIO.writelnString("args[0] is not a number!");
             System.exit(1);
         }
@@ -45,8 +47,8 @@ public class ServerGameOfRopeGeneralRepos {
                 sconi = scon.accept();
                 cliProxy = new GeneralReposClientProxy(sconi, reposInter);
                 cliProxy.start();
+            } catch (SocketTimeoutException e) {
             }
-            catch (SocketTimeoutException e) {}
         }
         scon.end();
         GenericIO.writelnString("Server was shutdown.");

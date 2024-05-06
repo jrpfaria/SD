@@ -5,8 +5,8 @@ import commInfra.*;
 import genclass.GenericIO;
 
 public class ContestantsBenchStub {
-    private String serverHostName;
-    private int serverPortNumb;
+    private final String serverHostName;
+    private final int serverPortNumb;
 
     public ContestantsBenchStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;
@@ -21,15 +21,17 @@ public class ContestantsBenchStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
         outMessage = new Message(MessageType.CLT);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -37,7 +39,7 @@ public class ContestantsBenchStub {
 
         com.close();
 
-        ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
     public void declareMatchWinner(int score1, int score2) {
@@ -46,16 +48,18 @@ public class ContestantsBenchStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
         outMessage = new Message(MessageType.DMW);
         outMessage.setScore1(score1).setScore2(score2);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -63,7 +67,7 @@ public class ContestantsBenchStub {
 
         com.close();
 
-        ((Referee)Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
     // Coach
@@ -74,18 +78,20 @@ public class ContestantsBenchStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
-        Coach t = (Coach)Thread.currentThread();
+        Coach t = (Coach) Thread.currentThread();
         int team = t.getTeam();
         outMessage = new Message(MessageType.RVN);
         outMessage.setTeam(team);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -102,18 +108,20 @@ public class ContestantsBenchStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
-        Coach t = (Coach)Thread.currentThread();
+        Coach t = (Coach) Thread.currentThread();
         int team = t.getTeam();
         outMessage = new Message(MessageType.WFRC);
         outMessage.setTeam(team);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -132,18 +140,20 @@ public class ContestantsBenchStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
-        
-        Coach t = (Coach)Thread.currentThread();
+
+        Coach t = (Coach) Thread.currentThread();
         int team = t.getTeam();
         outMessage = new Message(MessageType.CLC);
         outMessage.setTeam(team).setRoster(roster);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -160,11 +170,13 @@ public class ContestantsBenchStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
-        Contestant t = (Contestant)Thread.currentThread();
+        Contestant t = (Contestant) Thread.currentThread();
         int team = t.getTeam();
         int number = t.getNumber();
         int strength = t.getStrength();
@@ -172,8 +184,8 @@ public class ContestantsBenchStub {
         outMessage.setTeam(team).setNumber(number).setStrength(strength);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -181,7 +193,7 @@ public class ContestantsBenchStub {
 
         com.close();
 
-        ((Contestant)Thread.currentThread()).setContestantState(inMessage.getContestantState());
+        ((Contestant) Thread.currentThread()).setContestantState(inMessage.getContestantState());
 
         return inMessage.getValue();
     }
@@ -192,11 +204,13 @@ public class ContestantsBenchStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
-        Contestant t = (Contestant)Thread.currentThread();
+        Contestant t = (Contestant) Thread.currentThread();
         int team = t.getTeam();
         int number = t.getNumber();
         int strength = t.getStrength();
@@ -204,8 +218,8 @@ public class ContestantsBenchStub {
         outMessage.setTeam(team).setNumber(number).setStrength(strength);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.ACK) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.ACK) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
@@ -222,15 +236,17 @@ public class ContestantsBenchStub {
 
         com = new ClientCom(serverHostName, serverPortNumb);
         while (!com.open()) {
-            try {Thread.sleep((long)1000);}
-            catch (InterruptedException e) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
         }
 
         outMessage = new Message(MessageType.SHUT);
         com.writeObject(outMessage);
 
-        inMessage = (Message)com.readObject();
-        if (inMessage.getMsgType()!=MessageType.SHUTDONE) {
+        inMessage = (Message) com.readObject();
+        if (inMessage.getMsgType() != MessageType.SHUTDONE) {
             GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);

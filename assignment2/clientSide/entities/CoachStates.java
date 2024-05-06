@@ -1,4 +1,5 @@
 package clientSide.entities;
+
 /**
  * The CoachStates enum represents the possible states of a coach in the game simulation.
  * Coaches can be in one of the following states: WAIT_FOR_REFEREE_COMMAND, ASSEMBLE_TEAM, WATCH_TRIAL.
@@ -21,11 +22,12 @@ public enum CoachStates {
 
     /**
      * Overrides the toString method to provide custom string representations for enum values.
+     *
      * @return A string representation of the enum value.
      */
     @Override
     public String toString() {
-        switch(this) {
+        switch (this) {
             case WAIT_FOR_REFEREE_COMMAND:
                 return "WFRC"; // Short form for WAIT_FOR_REFEREE_COMMAND
             case ASSEMBLE_TEAM:

@@ -38,6 +38,7 @@ public enum RefereeStates {
 
     /**
      * Overrides the toString method to provide custom string representations for enum values.
+     *
      * @return A string representation of the enum value.
      */
     @Override

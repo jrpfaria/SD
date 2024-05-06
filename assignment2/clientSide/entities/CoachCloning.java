@@ -1,8 +1,11 @@
 package clientSide.entities;
 
 public interface CoachCloning {
-    public void setCoachState(CoachStates state);
-    public CoachStates getCoachState();
-    public void setCoachTeam(int team);
-    public int getCoachTeam();
+    CoachStates getCoachState();
+
+    void setCoachState(CoachStates state);
+
+    int getCoachTeam();
+
+    void setCoachTeam(int team);
 }

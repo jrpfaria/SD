@@ -114,7 +114,7 @@ public enum MessageType { // TODO
     /**
      * CLT - Call Trial
      */
-    CLT, 
+    CLT,
     /**
      * DMW - Declare Match Winner
      */

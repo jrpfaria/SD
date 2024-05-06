@@ -1,12 +1,12 @@
 package serverSide.sharedRegions;
 
-import serverSide.main.*;
-import serverSide.entities.*;
 import clientSide.entities.*;
 import commInfra.*;
+import serverSide.entities.*;
+import serverSide.main.*;
 
 public class GeneralReposInterface {
-    
+
     private final GeneralRepos repos;
 
     public GeneralReposInterface(GeneralRepos repos) {
@@ -17,20 +17,34 @@ public class GeneralReposInterface {
         Message outMessage = null;
 
         switch (inMessage.getMsgType()) {
-            case SETNFIC: break;
-            case STREFST: break;
-            case STCOAST: break;
-            case STCONTST: break;
-            case STCONTSTR: break;
-            case ADDCONT: break;
-            case RMCONT: break;
-            case STRP: break;
-            case CLT: break;
-            case STG: break;
-            case EOG: break;
-            case EOM: break;
-            case SHUT: break;
-            default: throw new MessageException("Invalid message type!", inMessage);
+            case SETNFIC:
+                break;
+            case STREFST:
+                break;
+            case STCOAST:
+                break;
+            case STCONTST:
+                break;
+            case STCONTSTR:
+                break;
+            case ADDCONT:
+                break;
+            case RMCONT:
+                break;
+            case STRP:
+                break;
+            case CLT:
+                break;
+            case STG:
+                break;
+            case EOG:
+                break;
+            case EOM:
+                break;
+            case SHUT:
+                break;
+            default:
+                throw new MessageException("Invalid message type!", inMessage);
         }
 
         switch (inMessage.getMsgType()) {
