@@ -167,6 +167,7 @@ public class ContestantsBench {
             GenericIO.writelnString("seating " + team + "-" + number);
             t.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
             reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
+            reposStub.setContestantStrength(team, number, strength);
             contestants[team][number].setValue(strength);
             seated[team]++;
             GenericIO.writelnString("seated" + team + " = " + seated[team]);
@@ -195,9 +196,9 @@ public class ContestantsBench {
         ContestantsBenchClientProxy t = (ContestantsBenchClientProxy) Thread.currentThread();
         int team = t.getContestantTeam();
         int number = t.getContestantNumber();
-        int strength = t.getContestantStrength();
         reposStub.removeContestant(team, number);
-        reposStub.setContestantStrength(team, number, strength);
+        t.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
+        reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
     }
 
     //

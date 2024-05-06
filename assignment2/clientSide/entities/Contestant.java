@@ -122,13 +122,13 @@ public class Contestant extends Thread {
         while (true) {
             orders = contestantsBenchStub.seat_at_the_bench(); // Wait for instructions while seated at the bench
             switch (orders) {
-                case 0:
-                    return; // Match is over; terminate thread
-                case 1:
+                case 0: // Match is over; terminate thread
+                    return;
+                case 1: // Player was not called; rest and start again
                     increaseStrength();
-                    continue; // Player was not called; rest and start again
-                case 2:
-                    break; // Player was called; continue execution
+                    continue;
+                case 2: // Player was called; continue execution
+                    break;
             }
             playgroundStub.followCoachAdvice(); // Follow coach's advice
             playgroundStub.stand_in_position(); // Stand in position on the playground

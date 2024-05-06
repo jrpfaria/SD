@@ -9,6 +9,10 @@ public interface ContestantCloning {
 
     void setContestantTeam(int team);
 
+    int getContestantNumber();
+
+    void setContestantNumber(int number);
+
     int getContestantStrength();
 
     void setContestantStrength(int strength);

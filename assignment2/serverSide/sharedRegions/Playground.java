@@ -167,8 +167,6 @@ public class Playground {
     public synchronized void followCoachAdvice() {
         PlaygroundClientProxy t = (PlaygroundClientProxy) Thread.currentThread();
         int team = t.getContestantTeam();
-        inPosition[team]++;
-        notifyAll();
     }
 
     /**
@@ -182,6 +180,8 @@ public class Playground {
         reposStub.addContestant(team, number);
         t.setContestantState(ContestantStates.STAND_IN_POSITION);
         reposStub.setContestantState(team, number, ContestantStates.STAND_IN_POSITION);
+        inPosition[team]++;
+        notifyAll();
         while (!startTrial) {
             try {
                 wait();
