@@ -4,20 +4,79 @@ import clientSide.entities.*;
 import clientSide.stubs.*;
 import genclass.GenericIO;
 
+/**
+ * Main class (type 2) for the referee entity.
+ * Initializes the referee entity and starts its lifecycle.
+ */
 public class ClientGameOfRopeReferee {
+    /**
+     * Main method.
+     * @param args runtime arguments
+     */
     public static void main(String[] args) {
+        /**
+         * General Repository server hostname
+         */
         String genReposServerHostName;
+
+        /**
+         * General Repository server port number
+         */
         int genReposServerPortNumb = -1;
+        
+        /**
+         * RefereeSite server hostname
+         */
         String refereeSiteServerHostName;
+        
+        /**
+         * RefereeSite server port number
+         */
         int refereeSiteServerPortNumb = -1;
+        
+        /**
+         * Playground server hostname
+         */
         String playgroundServerHostName;
+        
+        /**
+         * Playground server port number
+         */
         int playgroundServerPortNumb = -1;
+        
+        /**
+         * ContestantsBench server hostname
+         */
         String contestantsBenchServerHostName;
+        
+        /**
+         * ContestantsBench server port number
+         */
         int contestantsBenchServerPortNumb = -1;
+        
+        /**
+         * Referee entity
+         */
         Referee referee;
+        
+        /**
+         * General Repository stub
+         */
         GeneralReposStub genReposStub;
+
+        /**
+         * RefereeSite stub
+         */
         RefereeSiteStub refereeSiteStub;
+        
+        /**
+         * Playground stub
+         */
         PlaygroundStub playgroundStub;
+        
+        /**
+         * ContestantsBench stub
+         */
         ContestantsBenchStub contestantsBenchStub;
 
         if (args.length != 8) {

@@ -5,19 +5,74 @@ import clientSide.stubs.*;
 import genclass.GenericIO;
 import serverSide.main.*;
 
+/**
+ * Main class (type 2) for the contestant entity.
+ * Initializes the contestant entity and starts its lifecycle.
+ */
 public class ClientGameOfRopeContestant {
+    /**
+     * Main method.
+     * @param args runtime arguments
+     */
     public static void main(String[] args) {
+        /**
+         * General Repository server hostname
+         */
         String genReposServerHostName;
+        
+        /**
+         * General Repository server port number
+         */
         int genReposServerPortNumb = -1;
+
+        /**
+         * Playground server hostname
+         */
         String fileName;
+
+        /**
+         * Playground server hostname
+         */
         String playgroundServerHostName;
+        
+        /**
+         * Playground server port number
+         */
         int playgroundServerPortNumb = -1;
+
+        /**
+         * ContestantsBench server hostname
+         */
         String contestantsBenchServerHostName;
+
+        /**
+         * ContestantsBench server port number
+         */
         int contestantsBenchServerPortNumb = -1;
+
+        /**
+         * Contestant entities
+         */
         Contestant[][] contestant = new Contestant[2][SimulPar.NC];
+
+        /**
+         * Contestants strengths
+         */
         int[][] contestantStrength = new int[2][SimulPar.NC];
+
+        /**
+         * General Repository stub
+         */
         GeneralReposStub genReposStub;
+        
+        /**
+         * Playground stub
+         */
         PlaygroundStub playgroundStub;
+
+        /**
+         * ContestantsBench stub
+         */
         ContestantsBenchStub contestantsBenchStub;
 
         if (args.length != 7) {
