@@ -37,6 +37,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setMsgType(MessageType msgType) {
+        if (Enum.isDefined(MessageType.class, msgType) == false)
+            throw new MessageException("Invalid message type: " + msgType);
         this.msgType = msgType;
         return this;
     }
@@ -46,6 +48,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setRefereeState(RefereeStates refereeState) {
+        if (Enum.isDefined(RefereeStates.class, refereeState) == false)
+            throw new MessageException("Invalid referee state: " + refereeState);
         this.refereeState = refereeState;
         return this;
     }
@@ -55,6 +59,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setCoachState(CoachStates coachState) {
+        if (Enum.isDefined(CoachStates.class, coachState) == false)
+            throw new MessageException("Invalid coach state: " + coachState);
         this.coachState = coachState;
         return this;
     }
@@ -64,6 +70,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setContestantState(ContestantStates contestantState) {
+        if (Enum.isDefined(ContestantStates.class, contestant) == false)
+            throw new MessageException("Invalid contestant state: " + contestantState);
         this.contestantState = contestantState;
         return this;
     }
@@ -73,6 +81,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setTeam(int team) {
+        if (team != 0 && team != 1)
+            throw new MessageException("Invalid team number: " + team);
         this.team = team;
         return this;
     }
@@ -82,6 +92,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setNumber(int number) {
+        if (number < 0 || number >= SimulPar.NC)
+            throw new MessageException("Invalid number: " + number);
         this.number = number;
         return this;
     }
@@ -91,6 +103,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setStrength(int strength) {
+        if (strength == null)
+            throw new MessageException("Invalid strength: " + strength);
         this.strength = strength;
         return this;
     }
@@ -100,6 +114,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setValue(int value) {
+        if (value == null)
+            throw new MessageException("Invalid value: " + value);
         this.value = value;
         return this;
     }
@@ -109,6 +125,10 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setContestants(Pair<Integer, Integer>[] contestants) {
+        for (Pair<Integer, Integer> contestant : contestants) {
+            if (contestant.getKey() < 0 || contestant.getKey() >= SimulPar.NC)
+                throw new MessageException("Invalid contestant: " + contestant);
+        }
         this.contestants = contestants;
         return this;
     }
@@ -118,6 +138,10 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setRoster(int[] roster) {
+        for (int contestant : roster) {
+            if (contestant < 0 || contestant >= SimulPar.NC)
+                throw new MessageException("Invalid contestant: " + contestant);
+        }
         this.roster = roster;
         return this;
     }
@@ -127,6 +151,12 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setContestantStrength(int[][] contestantStrength) {
+        for (int[] contestant : contestantStrength) {
+            if (contestant[0] < 0 || contestant[0] >= SimulPar.NC)
+                throw new MessageException("Invalid contestant: " + contestant);
+            if (contestant[1] < SimulPar.MINS || contestant[1] >= SimulPar.MAXS)
+                throw new MessageException("Invalid contestant: " + contestant
+        }
         this.contestantStrength = contestantStrength;
         return this;
     }
@@ -136,6 +166,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setLogFileName(String logFileName) {
+        if (logFileName == null || logFileName.isEmpty())
+            throw new MessageException("Invalid log file name: " + logFileName);
         this.logFileName = logFileName;
         return this;
     }
@@ -145,6 +177,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setPosition(int position) {
+        if (position < 0 || position >= SimulPar.NP)
+            throw new MessageException("Invalid position: " + position);
         this.position = position;
         return this;
     }
@@ -154,6 +188,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setKnockout(boolean knockout) {
+        if (knockout == null)
+            throw new MessageException("Invalid knockout: " + knockout);
         this.knockout = knockout;
         return this;
     }
@@ -163,6 +199,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setScore1(int score1) {
+        if (score1 < 0 || score1 > SimulPar.NG)
+            throw new MessageException("Invalid score: " + score1);
         this.score1 = score1;
         return this;
     }
@@ -172,6 +210,8 @@ public class Message implements Serializable { // TODO
     }
 
     public Message setScore2(int score2) {
+        if (score2 < 0 || score2 > SimulPar.NG)
+            throw new MessageException("Invalid score: " + score2);
         this.score2 = score2;
         return this;
     }
