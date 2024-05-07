@@ -3,14 +3,30 @@ package serverSide.sharedRegions;
 import commInfra.*;
 import serverSide.entities.*;
 
+/**
+ * Interface for the Contestants Bench shared region.
+ * It processes the received messages and replies the corresponding ones.
+ */
 public class ContestantsBenchInterface {
-
+    /**
+     * Reference to the contestants Bench.
+     */
     private final ContestantsBench contestantsBench;
 
+    /**
+     * Instantiation of the interface to the Contestants Bench.
+     * @param contestantsBench Reference to the Contestants Bench.
+     */
     public ContestantsBenchInterface(ContestantsBench contestantsBench) {
         this.contestantsBench = contestantsBench;
     }
 
+    /**
+     * Processing of the received messages and generation of the corresponding response.
+     * @param inMessage incoming message with the request
+     * @return outgoing message with the reply
+     * @throws MessageException if the message contains an invalid request
+     */
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
         Message outMessage;
 

@@ -2,14 +2,30 @@ package serverSide.sharedRegions;
 
 import commInfra.*;
 
+/**
+ * Interface for the General Repository shared region.
+ * It processes the received messages and replies the corresponding ones.
+ */
 public class GeneralReposInterface {
-
+    /**
+     * Reference to the General Repository.
+     */
     private final GeneralRepos repos;
 
+    /**
+     * Instantiation of the interface to the General Repository.
+     * @param repos Reference to the General Repository.
+     */
     public GeneralReposInterface(GeneralRepos repos) {
         this.repos = repos;
     }
 
+    /**
+     * Processing of the received messages and generation of the corresponding response.
+     * @param inMessage incoming message with the request
+     * @return outgoing message with the reply
+     * @throws MessageException if the message contains an invalid request
+     */
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
         Message outMessage;
 

@@ -7,10 +7,21 @@ import serverSide.sharedRegions.*;
 
 import java.net.SocketTimeoutException;
 
+/**
+ * Server's main class for the General Repository.
+ */
 public class ServerGameOfRopeGeneralRepos {
-
+    /**
+     * waitConnection flag.
+     */
     public static boolean waitConnection;
 
+    /**
+     * Main program.
+     * @param args runtime arguments
+     *          args[0] - port number for listening to service requests
+     * @throws SocketTimeoutException if the socket time is exceeded.
+     */
     public static void main(String[] args) {
         GeneralRepos repos;
         GeneralReposInterface reposInter;

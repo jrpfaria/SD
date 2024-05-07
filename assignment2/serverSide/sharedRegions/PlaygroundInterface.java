@@ -3,14 +3,30 @@ package serverSide.sharedRegions;
 import commInfra.*;
 import serverSide.entities.*;
 
+/**
+ * Interface for the Playground shared region.
+ * It processes the received messages and replies the corresponding ones.
+ */
 public class PlaygroundInterface {
-
+    /**
+     * Reference to the Playground.
+     */
     private final Playground playground;
 
+    /**
+     * Instantiation of the interface to the Playground.
+     * @param playground Reference to the Playground.
+     */
     public PlaygroundInterface(Playground playground) {
         this.playground = playground;
     }
 
+    /**
+     * Processing of the received messages and generation of the corresponding response.
+     * @param inMessage incoming message with the request
+     * @return outgoing message with the reply
+     * @throws MessageException if the message contains an invalid request
+     */
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
 
         Message outMessage;

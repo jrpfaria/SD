@@ -3,14 +3,30 @@ package serverSide.sharedRegions;
 import commInfra.*;
 import serverSide.entities.*;
 
+/**
+ * Interface for the Referee Site shared region.
+ * It processes the received messages and replies the corresponding ones.
+ */
 public class RefereeSiteInterface {
-
+    /**
+     * Reference to the Referee Site.
+     */
     private final RefereeSite refereeSite;
 
+    /**
+     * Instantiation of the interface to the Referee Site.
+     * @param refereeSite Reference to the Referee Site.
+     */
     public RefereeSiteInterface(RefereeSite refereeSite) {
         this.refereeSite = refereeSite;
     }
 
+    /**
+     * Processing of the received messages and generation of the corresponding response.
+     * @param inMessage incoming message with the request
+     * @return outgoing message with the reply
+     * @throws MessageException if the message contains an invalid request
+     */
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
 
         Message outMessage;
