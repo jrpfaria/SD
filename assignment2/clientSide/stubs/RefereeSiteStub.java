@@ -19,6 +19,8 @@ public class RefereeSiteStub {
 
     /**
      * RefereeSite Stub instantiation
+     * @param serverHostName Name of the host where the server is located
+     * @param serverPortNumb Number of the listening port of the server
      */
     public RefereeSiteStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;

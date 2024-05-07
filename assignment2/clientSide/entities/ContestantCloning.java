@@ -5,42 +5,50 @@ package clientSide.entities;
  */
 public interface ContestantCloning {
     /**
-     * Get the contestant state.
+     * Contestant state getter.
+     * @return the contestant state
      */
     ContestantStates getContestantState();
 
     /**
-     * Set the contestant state.
+     * Contestant state setter.
+     * @param state the new contestant state
      */
     void setContestantState(ContestantStates state);
 
     /**
-     * Get the contestant team.
+     * Contestant team getter.
+     * @return the contestant team number
      */
     int getContestantTeam();
 
     /**
-     * Set the contestant team.
+     * Contestant team setter.
+     * @param team the new contestant team
      */
     void setContestantTeam(int team);
 
     /**
-     * Get the contestant number.
+     * Contestant number getter.
+     * @return the contestant number
      */
     int getContestantNumber();
 
     /**
-     * Set the contestant number.
+     * Contestant number setter.
+     * @param number the new contestant number
      */
     void setContestantNumber(int number);
 
     /**
-     * Get the contestant strength.
+     * Contestant strength getter.
+     * @return the contestant strength
      */
     int getContestantStrength();
 
     /**
-     * Set the contestant strength.
+     * Contestant strength setter.
+     * @param strength the new contestant strength
      */
     void setContestantStrength(int strength);
 }

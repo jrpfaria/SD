@@ -5,24 +5,55 @@ import commInfra.*;
 import genclass.GenericIO;
 import serverSide.sharedRegions.*;
 
+/**
+ * Service provider agent for access to the Referee Site shared region.
+ *     Implementation of the client-server model type 2 (server replication).
+ *     Communication is based on a communication channel under the TCP protocol.
+ */
 public class RefereeSiteClientProxy extends Thread implements RefereeCloning, CoachCloning {
-
+    /**
+     * Number of instances of the Referee Site client proxy.
+     */
     private static int nProxy = 0;
+    /**
+     * Communication channel.
+     */
     private final ServerCom sconi;
+    /**
+     * Referee Site Interface.
+     */
     private final RefereeSiteInterface refereeSiteInter;
 
     // Referee
+    /**
+     * Referee state.
+     */
     private RefereeStates refereeState;
     // Coach
+    /**
+     * Coach state.
+     */
     private CoachStates coachState;
+    /**
+     * Coach team number.
+     */
     private int coachTeam;
 
+    /**
+     * Instantiation of the Referee Site client proxy.
+     * @param sconi Communication channel
+     * @param refereeSiteInter Referee Site Interface
+     */
     public RefereeSiteClientProxy(ServerCom sconi, RefereeSiteInterface refereeSiteInter) {
         super("RefereeSite_" + RefereeSiteClientProxy.getProxyId());
         this.sconi = sconi;
         this.refereeSiteInter = refereeSiteInter;
     }
 
+    /**
+     * Generation of the instantiation id.
+     * @return Instantiation id
+     */
     private static int getProxyId() {
         Class<?> cl = null;
         int proxyId;
@@ -43,32 +74,57 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
         return proxyId;
     }
 
+    /**
+     * Referee state getter.
+     * @return State of the referee
+     */
     public RefereeStates getRefereeState() {
         return this.refereeState;
     }
 
+    /**
+     * Referee state setter.
+     * @param state New state of the referee
+     */
     public void setRefereeState(RefereeStates state) {
         this.refereeState = state;
     }
 
+    /**
+     * Coach state getter.
+     * @return State of the coach
+     */
     public CoachStates getCoachState() {
         return this.coachState;
     }
 
+    /**
+     * Coach state setter.
+     */
     public void setCoachState(CoachStates state) {
         this.coachState = state;
     }
 
     //
-
+    /**
+     * Coach team getter.
+     * @return Coach team number
+     */
     public int getCoachTeam() {
         return this.coachTeam;
     }
 
+    /**
+     * Coach team setter.
+     * @param team New coach team number
+     */
     public void setCoachTeam(int team) {
         this.coachTeam = team;
     }
 
+    /**
+     * Life cycle of the service provider agent.
+     */
     @Override
     public void run() {
         Message inMessage, outMessage = null;

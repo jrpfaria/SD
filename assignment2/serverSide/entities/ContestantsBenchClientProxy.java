@@ -101,7 +101,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Referee state setter.
-     * @param RefereeStates referee state
+     * @param state new referee state
      */
     public void setRefereeState(RefereeStates state) {
         this.refereeState = state;
@@ -117,7 +117,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Coach state setter.
-     * @param CoachStates state
+     * @param state new coach state
      */
     public void setCoachState(CoachStates state) {
         this.coachState = state;
@@ -133,7 +133,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Coach team setter.
-     * @param int team
+     * @param team new coach team number
      */
     public void setCoachTeam(int team) {
         this.coachTeam = team;
@@ -149,7 +149,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant state setter.
-     * @param ContestantStates state
+     * @param state new contestant state
      */
     public void setContestantState(ContestantStates state) {
         this.contestantState = state;
@@ -165,7 +165,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant team setter.
-     * @param int team
+     * @param team new contestant team number
      */
     public void setContestantTeam(int team) {
         this.contestantTeam = team;
@@ -181,7 +181,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant number setter.
-     * @param int number
+     * @param number new contestant number
      */
     public void setContestantNumber(int number) {
         this.contestantNumber = number;
@@ -189,14 +189,25 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     //
 
+    /**
+     * Contestant strength getter.
+     * @return contestant strength
+     */
     public int getContestantStrength() {
         return this.contestantStrength;
     }
 
+    /**
+     * Contestant strength setter.
+     * @param strength new contestant strength
+     */
     public void setContestantStrength(int strength) {
         this.contestantStrength = strength;
     }
 
+    /**
+     * Life cycle of the service provider agent.
+     */
     @Override
     public void run() {
         Message inMessage, outMessage = null;

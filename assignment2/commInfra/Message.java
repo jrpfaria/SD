@@ -80,6 +80,7 @@ public class Message implements Serializable {
 
     /**
      * Message instantiation.
+     * @param msgType Type of the message
      */
     public Message(MessageType msgType) {
         this.msgType = msgType;

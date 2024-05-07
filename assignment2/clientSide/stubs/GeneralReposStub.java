@@ -19,6 +19,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository Stub instantiation
+     * @param serverHostName name of the host where the server is located
+     * @param serverPortNumb number of the listening port of the server
      */
     public GeneralReposStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;
@@ -27,6 +29,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: initSimul
+     * @param fileName name of the log file
+     * @param contestantStength array with the contestant strength
      */
     public void initSimul(String fileName, int[][] contestantStength) {
         ClientCom com;
@@ -56,6 +60,7 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setRefereeState
+     * @param state the new referee state
      */
     public void setRefereeState(RefereeStates state) {
         ClientCom com;
@@ -85,6 +90,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setCoachState
+     * @param team the coach team number
+     * @param state the new coach state
      */
     public void setCoachState(int team, CoachStates state) {
         ClientCom com;
@@ -114,6 +121,9 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setContestantState
+     * @param team the contestant team number
+     * @param number the contestant number
+     * @param state the new contestant state
      */
     public void setContestantState(int team, int number, ContestantStates state) {
         ClientCom com;
@@ -143,6 +153,9 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setContestantStrength
+     * @param team the contestant team number
+     * @param number the contestant number
+     * @param strength the new contestant strength
      */
     public void setContestantStrength(int team, int number, int strength) {
         ClientCom com;
@@ -172,6 +185,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: addContestant
+     * @param team the contestant team number
+     * @param number the contestant number
      */
     public void addContestant(int team, int number) {
         ClientCom com;
@@ -201,6 +216,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: removeContestant
+     * @param team the contestant team number
+     * @param number the contestant number
      */
     public void removeContestant(int team, int number) {
         ClientCom com;
@@ -230,6 +247,7 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setRopePosition
+     * @param position the new rope position
      */
     public void setRopePosition(int position) {
         ClientCom com;
@@ -315,6 +333,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: endGame
+     * @param position the position of the rope
+     * @param knockout true if the game ended by knockout
      */
     public void endGame(int position, boolean knockout) {
         ClientCom com;
@@ -344,6 +364,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: endMatch
+     * @param score1 score of team 1
+     * @param score2 score of team 2
      */
     public void endMatch(int score1, int score2) {
         ClientCom com;

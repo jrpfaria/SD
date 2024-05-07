@@ -5,12 +5,14 @@ package clientSide.entities;
  */
 public interface RefereeCloning {
     /**
-     * Get the referee state.
+     * Referee state getter.
+     * @return the referee state
      */
     RefereeStates getRefereeState();
 
     /**
      * Set the referee state.
+     * @param state the new referee state
      */
     void setRefereeState(RefereeStates state);
 }

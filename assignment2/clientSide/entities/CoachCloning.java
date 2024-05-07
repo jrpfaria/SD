@@ -5,22 +5,26 @@ package clientSide.entities;
  */
 public interface CoachCloning {
     /**
-     * Get the coach state.
+     * Coach state getter.
+     * @return the coach state
      */
     CoachStates getCoachState();
 
     /**
-     * Set the coach state.
+     * Coach state setter.
+     * @param state the new coach state
      */
     void setCoachState(CoachStates state);
 
     /**
-     * Get the coach team.
+     * Coach team getter.
+     * @return the coach team number
      */
     int getCoachTeam();
 
     /**
-     * Set the coach team.
+     * Coach team setter.
+     * @param team the new coach team
      */
     void setCoachTeam(int team);
 }

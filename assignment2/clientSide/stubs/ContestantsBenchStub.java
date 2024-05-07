@@ -19,6 +19,8 @@ public class ContestantsBenchStub {
 
     /**
      * ContestantsBench Stub instantiation
+     * @param serverHostName Name of the host where the server is located
+     * @param serverPortNumb Number of the listening port of the server
      */
     public ContestantsBenchStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;
@@ -59,6 +61,8 @@ public class ContestantsBenchStub {
 
     /**
      * Referee: declareMatchWinner
+     * @param score1 score of team 1
+     * @param score2 score of team 2
      */
     public void declareMatchWinner(int score1, int score2) {
         ClientCom com;
@@ -162,6 +166,7 @@ public class ContestantsBenchStub {
 
     /**
      * Coach: callContestants
+     * @param roster Array with the contestants' numbers
      */
     public void callContestants(int[] roster) {
         ClientCom com;
