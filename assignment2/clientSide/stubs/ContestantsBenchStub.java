@@ -92,6 +92,7 @@ public class ContestantsBenchStub {
 
     /**
      * Coach: reviewNotes
+     * @return Array with all the contestants' numbers and their strength
      */
     public Pair<Integer, Integer>[] reviewNotes() {
         ClientCom com;
@@ -125,6 +126,7 @@ public class ContestantsBenchStub {
 
     /**
      * Coach: wait_for_referee_command
+     * @return Referee command
      */
     public int wait_for_referee_command() {
         ClientCom com;
@@ -192,6 +194,7 @@ public class ContestantsBenchStub {
     // Contestants
     /**
      * Contestants: seat_at_the_bench
+     * @return Orders to execute by the contestant
      */
     public int seat_at_the_bench() {
         ClientCom com;

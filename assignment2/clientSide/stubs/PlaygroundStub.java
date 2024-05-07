@@ -86,6 +86,7 @@ public class PlaygroundStub {
 
     /**
      * Referee: assertTrialDecision
+     * @return position of the rope after the trial
      */
     public int assertTrialDecision() {
         ClientCom com;
@@ -116,6 +117,7 @@ public class PlaygroundStub {
 
     /**
      * Referee: declareGameWinner
+     * @return position of the rope after the match
      */
     public int declareGameWinner() {
         ClientCom com;
