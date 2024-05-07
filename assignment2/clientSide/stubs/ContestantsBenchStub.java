@@ -4,10 +4,22 @@ import clientSide.entities.*;
 import commInfra.*;
 import genclass.GenericIO;
 
+/**
+ * ContestantsBench Stub
+ */
 public class ContestantsBenchStub {
+    /**
+     * Name of the host where the server is located
+     */
     private final String serverHostName;
+    /**
+     * Number of the listening port of the server
+     */
     private final int serverPortNumb;
 
+    /**
+     * ContestantsBench Stub instantiation
+     */
     public ContestantsBenchStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;
         this.serverPortNumb = serverPortNumb;
@@ -15,6 +27,9 @@ public class ContestantsBenchStub {
 
     // Referee
 
+    /**
+     * Referee: callTrial
+     */
     public void callTrial() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -42,6 +57,9 @@ public class ContestantsBenchStub {
         ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
+    /**
+     * Referee: declareMatchWinner
+     */
     public void declareMatchWinner(int score1, int score2) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -72,6 +90,9 @@ public class ContestantsBenchStub {
 
     // Coach
 
+    /**
+     * Coach: reviewNotes
+     */
     public Pair<Integer, Integer>[] reviewNotes() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -102,6 +123,9 @@ public class ContestantsBenchStub {
         return inMessage.getContestants();
     }
 
+    /**
+     * Coach: wait_for_referee_command
+     */
     public int wait_for_referee_command() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -134,6 +158,9 @@ public class ContestantsBenchStub {
         return inMessage.getValue();
     }
 
+    /**
+     * Coach: callContestants
+     */
     public void callContestants(int[] roster) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -163,7 +190,9 @@ public class ContestantsBenchStub {
     }
 
     // Contestants
-
+    /**
+     * Contestants: seat_at_the_bench
+     */
     public int seat_at_the_bench() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -198,6 +227,9 @@ public class ContestantsBenchStub {
         return inMessage.getValue();
     }
 
+    /**
+     * Contestants: seatDown
+     */
     public void seatDown() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -229,7 +261,9 @@ public class ContestantsBenchStub {
     }
 
     //
-
+    /**
+     * Shutdown ContestantsBenchStub
+     */
     public void shutdown() {
         ClientCom com;
         Message outMessage, inMessage;

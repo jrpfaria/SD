@@ -4,17 +4,31 @@ import clientSide.entities.*;
 import commInfra.*;
 import genclass.GenericIO;
 
+/**
+ * RefereeSite Stub
+ */
 public class RefereeSiteStub {
+    /**
+     * Name of the host where the server is located
+     */
     private final String serverHostName;
+    /**
+     * Number of the listening port of the server
+     */
     private final int serverPortNumb;
 
+    /**
+     * RefereeSite Stub instantiation
+     */
     public RefereeSiteStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;
         this.serverPortNumb = serverPortNumb;
     }
 
     // Referee
-
+    /**
+     * Referee: announceNewGame
+     */
     public void announceNewGame() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -43,6 +57,9 @@ public class RefereeSiteStub {
         ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
+    /**
+     * Referee: teams_ready
+     */
     public void teams_ready() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -69,6 +86,9 @@ public class RefereeSiteStub {
     }
 
     // Coach
+    /**
+     * Coach: informReferee
+     */
     public void informReferee() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -95,7 +115,9 @@ public class RefereeSiteStub {
     }
 
     //
-
+    /**
+     * Shutdown RefereeSiteStub
+     */
     public void shutdown() {
         ClientCom com;
         Message outMessage, inMessage;

@@ -4,17 +4,31 @@ import clientSide.entities.*;
 import commInfra.*;
 import genclass.GenericIO;
 
+/**
+ * Playground Stub
+ */
 public class PlaygroundStub {
+    /**
+     * Name of the host where the server is located
+     */
     private final String serverHostName;
+    /**
+     * Number of the listening port of the server
+     */
     private final int serverPortNumb;
 
+    /**
+     * Playground Stub instantiation
+     */
     public PlaygroundStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;
         this.serverPortNumb = serverPortNumb;
     }
 
     // Referee
-
+    /**
+     * Referee: startTrial
+     */
     public void startTrial() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -40,6 +54,9 @@ public class PlaygroundStub {
         com.close();
     }
 
+    /**
+     * Referee: wait_for_trial_conclusion
+     */
     public void wait_for_trial_conclusion() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -67,6 +84,9 @@ public class PlaygroundStub {
         ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
     }
 
+    /**
+     * Referee: assertTrialDecision
+     */
     public int assertTrialDecision() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -94,6 +114,9 @@ public class PlaygroundStub {
         return inMessage.getPosition();
     }
 
+    /**
+     * Referee: declareGameWinner
+     */
     public int declareGameWinner() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -124,7 +147,9 @@ public class PlaygroundStub {
     }
 
     // Coach
-
+    /**
+     * Coach: assemble_team
+     */
     public void assemble_team() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -155,6 +180,9 @@ public class PlaygroundStub {
         t.setCoachState(inMessage.getCoachState());
     }
 
+    /**
+     * Coach: watch_trial
+     */
     public void watch_trial() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -181,7 +209,9 @@ public class PlaygroundStub {
     }
 
     // Contestant
-
+    /**
+     * Contestants: followCoachAdvice
+     */
     public void followCoachAdvice() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -210,6 +240,9 @@ public class PlaygroundStub {
         com.close();
     }
 
+    /**
+     * Contestants: stand_in_position
+     */
     public void stand_in_position() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -241,6 +274,9 @@ public class PlaygroundStub {
         t.setContestantState(inMessage.getContestantState());
     }
 
+    /**
+     * Contestants: getReady
+     */
     public void getReady() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -273,6 +309,9 @@ public class PlaygroundStub {
         t.setContestantState(inMessage.getContestantState());
     }
 
+    /**
+     * Contestants: amDone
+     */
     public void amDone() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -298,6 +337,9 @@ public class PlaygroundStub {
         com.close();
     }
 
+    /**
+     * Shutdown PlaygroundStub
+     */
     public void shutdown() {
         ClientCom com;
         Message outMessage, inMessage;

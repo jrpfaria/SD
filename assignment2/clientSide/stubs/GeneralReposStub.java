@@ -4,15 +4,30 @@ import clientSide.entities.*;
 import commInfra.*;
 import genclass.GenericIO;
 
+/**
+ * General Repository Stub
+ */
 public class GeneralReposStub {
+    /**
+     * Name of the host where the server is located
+     */
     private final String serverHostName;
+    /**
+     * Number of the listening port of the server
+     */
     private final int serverPortNumb;
 
+    /**
+     * General Repository Stub instantiation
+     */
     public GeneralReposStub(String serverHostName, int serverPortNumb) {
         this.serverHostName = serverHostName;
         this.serverPortNumb = serverPortNumb;
     }
 
+    /**
+     * General Repository: initSimul
+     */
     public void initSimul(String fileName, int[][] contestantStength) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -39,6 +54,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: setRefereeState
+     */
     public void setRefereeState(RefereeStates state) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -65,6 +83,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: setCoachState
+     */
     public void setCoachState(int team, CoachStates state) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -91,6 +112,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: setContestantState
+     */
     public void setContestantState(int team, int number, ContestantStates state) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -117,6 +141,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: setContestantStrength
+     */
     public void setContestantStrength(int team, int number, int strength) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -143,6 +170,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: addContestant
+     */
     public void addContestant(int team, int number) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -169,6 +199,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: removeContestant
+     */
     public void removeContestant(int team, int number) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -195,6 +228,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: setRopePosition
+     */
     public void setRopePosition(int position) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -221,6 +257,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: callTrial
+     */
     public void callTrial() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -246,6 +285,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: startGame
+     */
     public void startGame() {
         ClientCom com;
         Message outMessage, inMessage;
@@ -271,6 +313,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: endGame
+     */
     public void endGame(int position, boolean knockout) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -297,6 +342,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * General Repository: endMatch
+     */
     public void endMatch(int score1, int score2) {
         ClientCom com;
         Message outMessage, inMessage;
@@ -323,6 +371,9 @@ public class GeneralReposStub {
         com.close();
     }
 
+    /**
+     * Shutdown GeneralReposStub
+     */
     public void shutdown() {
         ClientCom com;
         Message outMessage, inMessage;
