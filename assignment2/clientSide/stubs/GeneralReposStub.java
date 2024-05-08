@@ -6,6 +6,9 @@ import genclass.GenericIO;
 
 /**
  * General Repository Stub
+ *      It instantiates a remote reference to the general repository
+ *      Implementation of a client-server model of type 2 (server replication).
+ *      Communication is based on message passing over sockets using TCP.
  */
 public class GeneralReposStub {
     /**

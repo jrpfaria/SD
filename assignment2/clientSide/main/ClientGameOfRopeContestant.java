@@ -13,13 +13,20 @@ public class ClientGameOfRopeContestant {
     /**
      * Main method.
      * @param args runtime arguments
+     *          args[0] - General Repository server hostname
+     *          args[1] - General Repository server port number  
+     *          args[2] - Playground server hostname
+     *          args[3] - Playground server port number
+     *          args[4] - ContestantsBench server hostname
+     *          args[5] - ContestantsBench server port number
+     *          args[6] - file name
      */
     public static void main(String[] args) {
         /**
          * General Repository server hostname
          */
         String genReposServerHostName;
-        
+
         /**
          * General Repository server port number
          */
@@ -34,7 +41,7 @@ public class ClientGameOfRopeContestant {
          * Playground server hostname
          */
         String playgroundServerHostName;
-        
+
         /**
          * Playground server port number
          */
@@ -64,7 +71,7 @@ public class ClientGameOfRopeContestant {
          * General Repository stub
          */
         GeneralReposStub genReposStub;
-        
+
         /**
          * Playground stub
          */

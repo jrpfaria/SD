@@ -100,6 +100,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     /**
      * Coach state setter.
+     * @param state New state of the coach
      */
     public void setCoachState(CoachStates state) {
         this.coachState = state;

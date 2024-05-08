@@ -10,6 +10,9 @@ import java.net.SocketTimeoutException;
 
 /**
  * Server's main class for the Referee Site.
+ *
+ *    Implementation of a client-server model of type 2 (server replication).
+ *    Communication is based on a communication channel under the TCP protocol.
  */
 public class ServerGameOfRopeRefereeSite {
     /**

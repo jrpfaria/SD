@@ -12,6 +12,14 @@ public class ClientGameOfRopeCoach {
     /**
      * Main method.
      * @param args runtime arguments
+     *      args[0] - General Repository server hostname
+     *      args[1] - General Repository server port number
+     *      args[2] - RefereeSite server hostname
+     *      args[3] - RefereeSite server port number
+     *      args[4] - Playground server hostname
+     *      args[5] - Playground server port number
+     *      args[6] - ContestantsBench server hostname
+     *      args[7] - ContestantsBench server port number
      */
     public static void main(String[] args) {
         /**
@@ -23,57 +31,57 @@ public class ClientGameOfRopeCoach {
          * General Repository server port number
          */
         int genReposServerPortNumb = -1;
-        
+
         /**
          * RefereeSite server hostname
          */
         String refereeSiteServerHostName;
-        
+
         /**
          * RefereeSite server port number
          */
         int refereeSiteServerPortNumb = -1;
-        
+
         /**
          * Playground server hostname
          */
         String playgroundServerHostName;
-        
+
         /**
          * Playground server port number
          */
         int playgroundServerPortNumb = -1;
-        
+
         /**
          * ContestantsBench server hostname
          */
         String contestantsBenchServerHostName;
-        
+
         /**
          * ContestantsBench server port number
          */
         int contestantsBenchServerPortNumb = -1;
-        
+
         /**
          * Coach entities
          */
         Coach[] coach = new Coach[2];
-        
+
         /**
          * General Repository stub
          */
         GeneralReposStub genReposStub;
-        
+
         /**
          * RefereeSite stub
          */
         RefereeSiteStub refereeSiteStub;
-        
+
         /**
          * Playground stub
          */
         PlaygroundStub playgroundStub;
-        
+
         /**
          * ContestantsBench stub
          */

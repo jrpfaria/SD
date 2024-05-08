@@ -20,7 +20,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
      */
     private final ServerCom sconi;
     /**
-     * Playground Interface.  
+     * Playground Interface.
      */
     private final PlaygroundInterface playgroundInter;
 

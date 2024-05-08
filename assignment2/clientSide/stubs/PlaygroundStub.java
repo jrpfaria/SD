@@ -6,6 +6,9 @@ import genclass.GenericIO;
 
 /**
  * Playground Stub
+ *      It instantiates a remote reference to the Playground
+ *      Implementation of a client-server model of type 2 (server replication)
+ *      Communication is based on a communication channel using the TCP protocol
  */
 public class PlaygroundStub {
     /**

@@ -56,7 +56,7 @@ public class Message implements Serializable {
     /**
      * Strength of all the contestants.
      */
-    private int[][] con
+    private int[][] contestantStrength;
     /**
      * Name of the log file.
      */
@@ -105,6 +105,7 @@ public class Message implements Serializable {
 
     /**
      * MsgType setter
+     * @param msgType New message type
      * @return reference to this object
      */
     public Message setMsgType(MessageType msgType) {
@@ -124,6 +125,7 @@ public class Message implements Serializable {
 
     /**
      * RefereeState setter
+     * @param refereeState New state of the referee
      * @return reference to this object
      */
     public Message setRefereeState(RefereeStates refereeState) {
@@ -143,6 +145,7 @@ public class Message implements Serializable {
 
     /**
      * CoachState setter
+     * @param coachState New state of the coach
      * @return reference to this object
      */
     public Message setCoachState(CoachStates coachState) {
@@ -162,6 +165,7 @@ public class Message implements Serializable {
 
     /**
      * ContestantState setter
+     * @param contestantState New state of the contestant
      * @return reference to this object
      */
     public Message setContestantState(ContestantStates contestantState) {
@@ -181,6 +185,7 @@ public class Message implements Serializable {
 
     /**
      * Team setter
+     * @param team New team number
      * @return reference to this object
      */
     public Message setTeam(int team) {
@@ -200,6 +205,7 @@ public class Message implements Serializable {
 
     /**
      * Number setter
+     * @param number New contestant number
      * @return reference to this object
      */
     public Message setNumber(int number) {
@@ -219,6 +225,7 @@ public class Message implements Serializable {
 
     /**
      * Strength setter
+     * @param strength New strength of the contestant
      * @return reference to this object
      */
     public Message setStrength(int strength) {
@@ -238,6 +245,7 @@ public class Message implements Serializable {
 
     /**
      * Value setter
+     * @param value New value of the message
      * @return reference to this object
      */
     public Message setValue(int value) {
@@ -257,6 +265,7 @@ public class Message implements Serializable {
 
     /**
      * Contestants setter
+     * @param contestants New contestants in the game
      * @return reference to this object
      */
     public Message setContestants(Pair<Integer, Integer>[] contestants) {
@@ -278,6 +287,7 @@ public class Message implements Serializable {
 
     /**
      * Roster setter
+     * @param roster New roster of the team
      * @return reference to this object
      */
     public Message setRoster(int[] roster) {
@@ -299,6 +309,7 @@ public class Message implements Serializable {
 
     /**
      * ContestantStrength setter
+     * @param contestantStrength New strength of all the contestants
      * @return reference to this object
      */
     public Message setContestantStrength(int[][] contestantStrength) {
@@ -306,7 +317,7 @@ public class Message implements Serializable {
             if (contestant[0] < 0 || contestant[0] >= SimulPar.NC)
                 throw new MessageException("Invalid contestant: " + contestant);
             if (contestant[1] < SimulPar.MINS || contestant[1] >= SimulPar.MAXS)
-                throw new MessageException("Invalid contestant: " + contestant
+                throw new MessageException("Invalid contestant: " + contestant);
         }
         this.contestantStrength = contestantStrength;
         return this;
@@ -322,6 +333,7 @@ public class Message implements Serializable {
 
     /**
      * LogFileName setter
+     * @param logFileName New name of the log file
      * @return reference to this object
      */
     public Message setLogFileName(String logFileName) {
@@ -341,6 +353,7 @@ public class Message implements Serializable {
 
     /**
      * Position setter
+     * @param position New position of the rope
      * @return reference to this object
      */
     public Message setPosition(int position) {
@@ -360,6 +373,7 @@ public class Message implements Serializable {
 
     /**
      * Knockout setter
+     * @param knockout New knockout flag
      * @return reference to this object
      */
     public Message setKnockout(boolean knockout) {
@@ -379,6 +393,7 @@ public class Message implements Serializable {
 
     /**
      * Score1 setter
+     * @param score1 New score of team 1
      * @return reference to this object
      */
     public Message setScore1(int score1) {
@@ -398,6 +413,7 @@ public class Message implements Serializable {
 
     /**
      * Score2 setter
+     * @param score2 New score of team 2
      * @return reference to this object
      */
     public Message setScore2(int score2) {
