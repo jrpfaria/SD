@@ -5,10 +5,11 @@ import commInfra.*;
 import genclass.GenericIO;
 
 /**
- * ContestantsBench Stub
- *      It instantiates a remote reference to the ContestantsBench
- *      Implementation of a client-server model of type 2 (server replication)
- *      Communication is based on a communication channel using the TCP protocol
+ * Stub to the contestants bench
+ * <p>
+ * It instantiates a remote reference to the contestants bench.
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class ContestantsBenchStub {
     /**
@@ -22,6 +23,7 @@ public class ContestantsBenchStub {
 
     /**
      * ContestantsBench Stub instantiation
+     *
      * @param serverHostName Name of the host where the server is located
      * @param serverPortNumb Number of the listening port of the server
      */
@@ -64,6 +66,7 @@ public class ContestantsBenchStub {
 
     /**
      * Referee: declareMatchWinner
+     *
      * @param score1 score of team 1
      * @param score2 score of team 2
      */
@@ -80,7 +83,13 @@ public class ContestantsBenchStub {
         }
 
         outMessage = new Message(MessageType.DMW);
-        outMessage.setScore1(score1).setScore2(score2);
+        try {
+            outMessage.setScore1(score1).setScore2(score2);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -99,6 +108,7 @@ public class ContestantsBenchStub {
 
     /**
      * Coach: reviewNotes
+     *
      * @return Array with all the contestants' numbers and their strength
      */
     public Pair<Integer, Integer>[] reviewNotes() {
@@ -116,7 +126,13 @@ public class ContestantsBenchStub {
         Coach t = (Coach) Thread.currentThread();
         int team = t.getTeam();
         outMessage = new Message(MessageType.RVN);
-        outMessage.setTeam(team);
+        try {
+            outMessage.setTeam(team);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -133,6 +149,7 @@ public class ContestantsBenchStub {
 
     /**
      * Coach: wait_for_referee_command
+     *
      * @return Referee command
      */
     public int wait_for_referee_command() {
@@ -150,7 +167,13 @@ public class ContestantsBenchStub {
         Coach t = (Coach) Thread.currentThread();
         int team = t.getTeam();
         outMessage = new Message(MessageType.WFRC);
-        outMessage.setTeam(team);
+        try {
+            outMessage.setTeam(team);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -169,6 +192,7 @@ public class ContestantsBenchStub {
 
     /**
      * Coach: callContestants
+     *
      * @param roster Array with the contestants' numbers
      */
     public void callContestants(int[] roster) {
@@ -186,7 +210,14 @@ public class ContestantsBenchStub {
         Coach t = (Coach) Thread.currentThread();
         int team = t.getTeam();
         outMessage = new Message(MessageType.CLC);
-        outMessage.setTeam(team).setRoster(roster);
+        try {
+            outMessage.setTeam(team).setRoster(roster);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -200,8 +231,10 @@ public class ContestantsBenchStub {
     }
 
     // Contestants
+
     /**
      * Contestants: seat_at_the_bench
+     *
      * @return Orders to execute by the contestant
      */
     public int seat_at_the_bench() {
@@ -221,7 +254,14 @@ public class ContestantsBenchStub {
         int number = t.getNumber();
         int strength = t.getStrength();
         outMessage = new Message(MessageType.SAB);
-        outMessage.setTeam(team).setNumber(number).setStrength(strength);
+        try {
+            outMessage.setTeam(team).setNumber(number).setStrength(strength);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -258,7 +298,14 @@ public class ContestantsBenchStub {
         int number = t.getNumber();
         int strength = t.getStrength();
         outMessage = new Message(MessageType.SD);
-        outMessage.setTeam(team).setNumber(number).setStrength(strength);
+        try {
+            outMessage.setTeam(team).setNumber(number).setStrength(strength);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -272,6 +319,7 @@ public class ContestantsBenchStub {
     }
 
     //
+
     /**
      * Shutdown ContestantsBenchStub
      */

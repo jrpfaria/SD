@@ -3,7 +3,6 @@ package serverSide.sharedRegions;
 import clientSide.entities.*;
 import clientSide.stubs.*;
 import commInfra.*;
-import genclass.GenericIO;
 import serverSide.entities.*;
 import serverSide.main.*;
 
@@ -164,13 +163,11 @@ public class ContestantsBench {
         int number = t.getContestantNumber();
         int strength = t.getContestantStrength();
         synchronized (this) {
-            GenericIO.writelnString("seating " + team + "-" + number);
             t.setContestantState(ContestantStates.SEAT_AT_THE_BENCH);
             reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
             reposStub.setContestantStrength(team, number, strength);
             contestants[team][number].setValue(strength);
             seated[team]++;
-            GenericIO.writelnString("seated" + team + " = " + seated[team]);
             notifyAll();
         }
         synchronized (this) {

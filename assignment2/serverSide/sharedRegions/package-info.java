@@ -1,5 +1,8 @@
 /**
- * Definition of the shared regions in the Problem of the Game Of Rope.
- * Static solution with implicit monitors based synchronization.
+ * Definition of the shared regions and shared regions access.
+ * <p>
+ * Static solution based on implicit monitors for synchronization.
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 package serverSide.sharedRegions;

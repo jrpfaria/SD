@@ -9,10 +9,10 @@ import serverSide.sharedRegions.*;
 import java.net.SocketTimeoutException;
 
 /**
- * Server's main class for the Referee Site.
- *
- *    Implementation of a client-server model of type 2 (server replication).
- *    Communication is based on a communication channel under the TCP protocol.
+ * Server side of the Referee Site.
+ * <p>
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class ServerGameOfRopeRefereeSite {
     /**
@@ -22,10 +22,11 @@ public class ServerGameOfRopeRefereeSite {
 
     /**
      * Main program.
+     *
      * @param args runtime arguments
-     *          args[0] - port number for listening to service requests
-     *          args[1] - General Repository server hostname
-     *          args[2] - General Repository server port number
+     *             args[0] - port number for listening to service requests
+     *             args[1] - General Repository server hostname
+     *             args[2] - General Repository server port number
      */
     public static void main(String[] args) {
         RefereeSite refereeSite;

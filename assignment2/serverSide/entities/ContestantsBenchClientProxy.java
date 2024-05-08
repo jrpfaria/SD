@@ -6,9 +6,10 @@ import genclass.GenericIO;
 import serverSide.sharedRegions.*;
 
 /**
- * Service provider agent for access to the Contestants Bench shared region.
- *      Implementation of the client-server model type 2 (server replication).
- *      Communication is based on a communication channel under the TCP protocol.
+ * Service provider agent for access to the Contestants Bench.
+ * <p>
+ * Implementation of the client-server model type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class ContestantsBenchClientProxy extends Thread implements RefereeCloning, CoachCloning, ContestantCloning {
     /**
@@ -58,7 +59,8 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Instantiation of the Contestants Bench client proxy.
-     * @param sconi communication channel
+     *
+     * @param sconi                 communication channel
      * @param contestantsBenchInter Contestants Bench Interface
      */
     public ContestantsBenchClientProxy(ServerCom sconi, ContestantsBenchInterface contestantsBenchInter) {
@@ -69,6 +71,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Generation of the instantiation id.
+     *
      * @return instantiation id
      */
     private static int getProxyId() {
@@ -93,6 +96,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Referee state getter.
+     *
      * @return referee state
      */
     public RefereeStates getRefereeState() {
@@ -101,6 +105,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Referee state setter.
+     *
      * @param state new referee state
      */
     public void setRefereeState(RefereeStates state) {
@@ -109,6 +114,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Coach state getter.
+     *
      * @return state coach state
      */
     public CoachStates getCoachState() {
@@ -117,6 +123,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Coach state setter.
+     *
      * @param state new coach state
      */
     public void setCoachState(CoachStates state) {
@@ -125,6 +132,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Coach team getter.
+     *
      * @return coach team number
      */
     public int getCoachTeam() {
@@ -133,6 +141,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Coach team setter.
+     *
      * @param team new coach team number
      */
     public void setCoachTeam(int team) {
@@ -141,6 +150,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant state getter.
+     *
      * @return contestant state
      */
     public ContestantStates getContestantState() {
@@ -149,6 +159,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant state setter.
+     *
      * @param state new contestant state
      */
     public void setContestantState(ContestantStates state) {
@@ -157,6 +168,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant team getter.
+     *
      * @return contestant team number
      */
     public int getContestantTeam() {
@@ -165,6 +177,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant team setter.
+     *
      * @param team new contestant team number
      */
     public void setContestantTeam(int team) {
@@ -173,6 +186,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant number getter.
+     *
      * @return contestant number
      */
     public int getContestantNumber() {
@@ -181,6 +195,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant number setter.
+     *
      * @param number new contestant number
      */
     public void setContestantNumber(int number) {
@@ -191,6 +206,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant strength getter.
+     *
      * @return contestant strength
      */
     public int getContestantStrength() {
@@ -199,6 +215,7 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
 
     /**
      * Contestant strength setter.
+     *
      * @param strength new contestant strength
      */
     public void setContestantStrength(int strength) {
@@ -215,7 +232,6 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
         inMessage = (Message) sconi.readObject();
 
         try {
-            GenericIO.writelnString("Thread " + getName() + " received: " + inMessage + "!");
             outMessage = contestantsBenchInter.processAndReply(inMessage);
         } catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
@@ -224,7 +240,6 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
         }
 
         sconi.writeObject(outMessage);
-        GenericIO.writelnString("Thread " + getName() + " replied: " + outMessage + "!");
         //sconi.close();
     }
 }

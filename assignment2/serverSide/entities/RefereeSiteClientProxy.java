@@ -6,9 +6,10 @@ import genclass.GenericIO;
 import serverSide.sharedRegions.*;
 
 /**
- * Service provider agent for access to the Referee Site shared region.
- *     Implementation of the client-server model type 2 (server replication).
- *     Communication is based on a communication channel under the TCP protocol.
+ * Service provider agent for access to the Referee Site.
+ * <p>
+ * Implementation of the client-server model type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class RefereeSiteClientProxy extends Thread implements RefereeCloning, CoachCloning {
     /**
@@ -41,7 +42,8 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     /**
      * Instantiation of the Referee Site client proxy.
-     * @param sconi Communication channel
+     *
+     * @param sconi            Communication channel
      * @param refereeSiteInter Referee Site Interface
      */
     public RefereeSiteClientProxy(ServerCom sconi, RefereeSiteInterface refereeSiteInter) {
@@ -52,6 +54,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     /**
      * Generation of the instantiation id.
+     *
      * @return Instantiation id
      */
     private static int getProxyId() {
@@ -76,6 +79,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     /**
      * Referee state getter.
+     *
      * @return State of the referee
      */
     public RefereeStates getRefereeState() {
@@ -84,6 +88,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     /**
      * Referee state setter.
+     *
      * @param state New state of the referee
      */
     public void setRefereeState(RefereeStates state) {
@@ -92,6 +97,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     /**
      * Coach state getter.
+     *
      * @return State of the coach
      */
     public CoachStates getCoachState() {
@@ -100,6 +106,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     /**
      * Coach state setter.
+     *
      * @param state New state of the coach
      */
     public void setCoachState(CoachStates state) {
@@ -107,8 +114,10 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
     }
 
     //
+
     /**
      * Coach team getter.
+     *
      * @return Coach team number
      */
     public int getCoachTeam() {
@@ -117,6 +126,7 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
 
     /**
      * Coach team setter.
+     *
      * @param team New coach team number
      */
     public void setCoachTeam(int team) {
@@ -133,7 +143,6 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
         inMessage = (Message) sconi.readObject();
 
         try {
-            GenericIO.writelnString("Thread " + getName() + " received: " + inMessage + "!");
             outMessage = refereeSiteInter.processAndReply(inMessage);
         } catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
@@ -142,7 +151,6 @@ public class RefereeSiteClientProxy extends Thread implements RefereeCloning, Co
         }
 
         sconi.writeObject(outMessage);
-        GenericIO.writelnString("Thread " + getName() + " replied: " + outMessage + "!");
         //sconi.close();
     }
 }

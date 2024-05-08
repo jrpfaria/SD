@@ -5,9 +5,10 @@ import genclass.GenericIO;
 import serverSide.sharedRegions.*;
 
 /**
- * Service provider agent for access to the General Repository shared region.
- *     Implementation of the client-server model type 2 (server replication).
- *    Communication is based on a communication channel under the TCP protocol.
+ * Service provider agent for access to the General Repository.
+ * <p>
+ * Implementation of the client-server model type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class GeneralReposClientProxy extends Thread {
     /**
@@ -25,7 +26,8 @@ public class GeneralReposClientProxy extends Thread {
 
     /**
      * Instantiation of the General Repository client proxy.
-     * @param sconi Communication channel
+     *
+     * @param sconi      Communication channel
      * @param reposInter General Repository Interface
      */
     public GeneralReposClientProxy(ServerCom sconi, GeneralReposInterface reposInter) {
@@ -36,6 +38,7 @@ public class GeneralReposClientProxy extends Thread {
 
     /**
      * Generation of the instantiation id.
+     *
      * @return Instantiation id
      */
     private static int getProxyId() {
@@ -68,7 +71,6 @@ public class GeneralReposClientProxy extends Thread {
         inMessage = (Message) sconi.readObject();
 
         try {
-            GenericIO.writelnString("Thread " + getName() + " received: " + inMessage + "!");
             outMessage = reposInter.processAndReply(inMessage);
         } catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
@@ -77,7 +79,6 @@ public class GeneralReposClientProxy extends Thread {
         }
 
         sconi.writeObject(outMessage);
-        GenericIO.writelnString("Thread " + getName() + " replied: " + outMessage + "!");
         //sconi.close();
     }
 }

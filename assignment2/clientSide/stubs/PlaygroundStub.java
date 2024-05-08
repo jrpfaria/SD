@@ -5,10 +5,11 @@ import commInfra.*;
 import genclass.GenericIO;
 
 /**
- * Playground Stub
- *      It instantiates a remote reference to the Playground
- *      Implementation of a client-server model of type 2 (server replication)
- *      Communication is based on a communication channel using the TCP protocol
+ * Stub to the playground
+ * <p>
+ * It instantiates a remote reference to the playground.
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class PlaygroundStub {
     /**
@@ -22,6 +23,7 @@ public class PlaygroundStub {
 
     /**
      * Playground Stub instantiation
+     *
      * @param serverHostName Name of the host where the server is located
      * @param serverPortNumb Number of the listening port of the server
      */
@@ -31,6 +33,7 @@ public class PlaygroundStub {
     }
 
     // Referee
+
     /**
      * Referee: startTrial
      */
@@ -91,6 +94,7 @@ public class PlaygroundStub {
 
     /**
      * Referee: assertTrialDecision
+     *
      * @return position of the rope after the trial
      */
     public int assertTrialDecision() {
@@ -122,6 +126,7 @@ public class PlaygroundStub {
 
     /**
      * Referee: declareGameWinner
+     *
      * @return position of the rope after the match
      */
     public int declareGameWinner() {
@@ -154,6 +159,7 @@ public class PlaygroundStub {
     }
 
     // Coach
+
     /**
      * Coach: assemble_team
      */
@@ -172,7 +178,14 @@ public class PlaygroundStub {
         Coach t = (Coach) Thread.currentThread();
         int team = t.getTeam();
         outMessage = new Message(MessageType.ASTM);
-        outMessage.setTeam(team);
+        try {
+            outMessage.setTeam(team);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -216,6 +229,7 @@ public class PlaygroundStub {
     }
 
     // Contestant
+
     /**
      * Contestants: followCoachAdvice
      */
@@ -234,7 +248,14 @@ public class PlaygroundStub {
         Contestant t = (Contestant) Thread.currentThread();
         int team = t.getTeam();
         outMessage = new Message(MessageType.FCA);
-        outMessage.setTeam(team);
+        try {
+            outMessage.setTeam(team);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -266,7 +287,14 @@ public class PlaygroundStub {
         int team = t.getTeam();
         int number = t.getNumber();
         outMessage = new Message(MessageType.SIP);
-        outMessage.setTeam(team).setNumber(number);
+        try {
+            outMessage.setTeam(team).setNumber(number);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -301,7 +329,14 @@ public class PlaygroundStub {
         int number = t.getNumber();
         int strength = t.getStrength();
         outMessage = new Message(MessageType.GR);
-        outMessage.setTeam(team).setNumber(number).setStrength(strength);
+        try {
+            outMessage.setTeam(team).setNumber(number).setStrength(strength);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();

@@ -5,10 +5,11 @@ import commInfra.*;
 import genclass.GenericIO;
 
 /**
- * General Repository Stub
- *      It instantiates a remote reference to the general repository
- *      Implementation of a client-server model of type 2 (server replication).
- *      Communication is based on message passing over sockets using TCP.
+ * Stub to the general repository
+ * <p>
+ * It instantiates a remote reference to the general repository.
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class GeneralReposStub {
     /**
@@ -22,6 +23,7 @@ public class GeneralReposStub {
 
     /**
      * General Repository Stub instantiation
+     *
      * @param serverHostName name of the host where the server is located
      * @param serverPortNumb number of the listening port of the server
      */
@@ -32,7 +34,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: initSimul
-     * @param fileName name of the log file
+     *
+     * @param fileName          name of the log file
      * @param contestantStength array with the contestant strength
      */
     public void initSimul(String fileName, int[][] contestantStength) {
@@ -48,7 +51,14 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.SETNFIC);
-        outMessage.setLogFileName(fileName).setContestantStrength(contestantStength);
+        try {
+            outMessage.setLogFileName(fileName).setContestantStrength(contestantStength);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -63,6 +73,7 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setRefereeState
+     *
      * @param state the new referee state
      */
     public void setRefereeState(RefereeStates state) {
@@ -93,7 +104,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setCoachState
-     * @param team the coach team number
+     *
+     * @param team  the coach team number
      * @param state the new coach state
      */
     public void setCoachState(int team, CoachStates state) {
@@ -109,7 +121,14 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.STCOAST);
-        outMessage.setTeam(team).setCoachState(state);
+        try {
+            outMessage.setTeam(team).setCoachState(state);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -124,9 +143,10 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setContestantState
-     * @param team the contestant team number
+     *
+     * @param team   the contestant team number
      * @param number the contestant number
-     * @param state the new contestant state
+     * @param state  the new contestant state
      */
     public void setContestantState(int team, int number, ContestantStates state) {
         ClientCom com;
@@ -141,7 +161,14 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.STCONTST);
-        outMessage.setTeam(team).setNumber(number).setContestantState(state);
+        try {
+            outMessage.setTeam(team).setNumber(number).setContestantState(state);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -156,8 +183,9 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setContestantStrength
-     * @param team the contestant team number
-     * @param number the contestant number
+     *
+     * @param team     the contestant team number
+     * @param number   the contestant number
      * @param strength the new contestant strength
      */
     public void setContestantStrength(int team, int number, int strength) {
@@ -173,7 +201,14 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.STCONTSTR);
-        outMessage.setTeam(team).setNumber(number).setStrength(strength);
+        try {
+            outMessage.setTeam(team).setNumber(number).setStrength(strength);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -188,7 +223,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: addContestant
-     * @param team the contestant team number
+     *
+     * @param team   the contestant team number
      * @param number the contestant number
      */
     public void addContestant(int team, int number) {
@@ -204,7 +240,14 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.ADDCONT);
-        outMessage.setTeam(team).setNumber(number);
+        try {
+            outMessage.setTeam(team).setNumber(number);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -219,7 +262,8 @@ public class GeneralReposStub {
 
     /**
      * General Repository: removeContestant
-     * @param team the contestant team number
+     *
+     * @param team   the contestant team number
      * @param number the contestant number
      */
     public void removeContestant(int team, int number) {
@@ -235,7 +279,14 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.RMCONT);
-        outMessage.setTeam(team).setNumber(number);
+        try {
+            outMessage.setTeam(team).setNumber(number);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -250,6 +301,7 @@ public class GeneralReposStub {
 
     /**
      * General Repository: setRopePosition
+     *
      * @param position the new rope position
      */
     public void setRopePosition(int position) {
@@ -266,6 +318,7 @@ public class GeneralReposStub {
 
         outMessage = new Message(MessageType.STRP);
         outMessage.setPosition(position);
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
@@ -336,6 +389,7 @@ public class GeneralReposStub {
 
     /**
      * General Repository: endGame
+     *
      * @param position the position of the rope
      * @param knockout true if the game ended by knockout
      */
@@ -354,6 +408,7 @@ public class GeneralReposStub {
         outMessage = new Message(MessageType.EOG);
         outMessage.setPosition(position).setKnockout(knockout);
         com.writeObject(outMessage);
+        com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
@@ -367,6 +422,7 @@ public class GeneralReposStub {
 
     /**
      * General Repository: endMatch
+     *
      * @param score1 score of team 1
      * @param score2 score of team 2
      */
@@ -383,7 +439,14 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.EOM);
-        outMessage.setScore1(score1).setScore2(score2);
+        try {
+            outMessage.setScore1(score1).setScore2(score2);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+        com.writeObject(outMessage);
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();

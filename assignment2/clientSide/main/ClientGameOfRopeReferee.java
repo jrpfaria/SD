@@ -5,21 +5,24 @@ import clientSide.stubs.*;
 import genclass.GenericIO;
 
 /**
- * Main class (type 2) for the referee entity.
- * Initializes the referee entity and starts its lifecycle.
+ * Client side of the Game Of Rope (referee).
+ * <p>
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class ClientGameOfRopeReferee {
     /**
      * Main method.
+     *
      * @param args runtime arguments
-     *      args[0] - General Repository server hostname
-     *      args[1] - General Repository server port number  
-     *      args[2] - RefereeSite server hostname
-     *      args[3] - RefereeSite server port number
-     *      args[4] - Playground server hostname
-     *      args[5] - Playground server port number
-     *      args[6] - ContestantsBench server hostname
-     *      args[7] - ContestantsBench server port number
+     *             args[0] - General Repository server hostname
+     *             args[1] - General Repository server port number
+     *             args[2] - RefereeSite server hostname
+     *             args[3] - RefereeSite server port number
+     *             args[4] - Playground server hostname
+     *             args[5] - Playground server port number
+     *             args[6] - ContestantsBench server hostname
+     *             args[7] - ContestantsBench server port number
      */
     public static void main(String[] args) {
         /**

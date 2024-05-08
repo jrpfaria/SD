@@ -5,10 +5,11 @@ import commInfra.*;
 import genclass.GenericIO;
 
 /**
- * RefereeSite Stub
- *      It instantiates a remote reference to the RefereeSite
- *      Implementation of a client-server model of type 2 (server replication)
- *      Communication is based on a communication channel using the TCP protocol
+ * Stub to the referee site
+ * <p>
+ * It instantiates a remote reference to the referee site.
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class RefereeSiteStub {
     /**
@@ -22,6 +23,7 @@ public class RefereeSiteStub {
 
     /**
      * RefereeSite Stub instantiation
+     *
      * @param serverHostName Name of the host where the server is located
      * @param serverPortNumb Number of the listening port of the server
      */
@@ -31,6 +33,7 @@ public class RefereeSiteStub {
     }
 
     // Referee
+
     /**
      * Referee: announceNewGame
      */
@@ -91,6 +94,7 @@ public class RefereeSiteStub {
     }
 
     // Coach
+
     /**
      * Coach: informReferee
      */
@@ -120,6 +124,7 @@ public class RefereeSiteStub {
     }
 
     //
+
     /**
      * Shutdown RefereeSiteStub
      */

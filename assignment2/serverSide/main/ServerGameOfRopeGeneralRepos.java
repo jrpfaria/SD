@@ -8,10 +8,10 @@ import serverSide.sharedRegions.*;
 import java.net.SocketTimeoutException;
 
 /**
- * Server's main class for the General Repository.
- *
- *    Implementation of a client-server model of type 2 (server replication).
- *    Communication is based on a communication channel under the TCP protocol.
+ * Server side of the General Repository of Information.
+ * <p>
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class ServerGameOfRopeGeneralRepos {
     /**
@@ -21,8 +21,9 @@ public class ServerGameOfRopeGeneralRepos {
 
     /**
      * Main program.
+     *
      * @param args runtime arguments
-     *          args[0] - port number for listening to service requests
+     *             args[0] - port number for listening to service requests
      */
     public static void main(String[] args) {
         GeneralRepos repos;

@@ -1,7 +1,10 @@
 package commInfra;
 
 /**
- * MessageType is an enumeration of all the message types that can be exchanged between the entities.
+ * Type of the exchanged messages.
+ * <p>
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public enum MessageType { // TODO
     // GeneralRepos    

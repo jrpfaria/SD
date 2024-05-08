@@ -3,10 +3,11 @@ package serverSide.sharedRegions;
 import commInfra.*;
 
 /**
- * Interface for the General Repository shared region.
+ * Interface to the General Repository.
+ * <p>
  * It processes the received messages and replies the corresponding ones.
- *    Implementation of a client-server model of type 2 (server replication).
- *    Communication is based on a communication channel under the TCP protocol.
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class GeneralReposInterface {
     /**
@@ -16,6 +17,7 @@ public class GeneralReposInterface {
 
     /**
      * Instantiation of the interface to the General Repository.
+     *
      * @param repos Reference to the General Repository.
      */
     public GeneralReposInterface(GeneralRepos repos) {
@@ -24,43 +26,13 @@ public class GeneralReposInterface {
 
     /**
      * Processing of the received messages and generation of the corresponding response.
+     *
      * @param inMessage incoming message with the request
      * @return outgoing message with the reply
      * @throws MessageException if the message contains an invalid request
      */
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
         Message outMessage;
-
-        switch (inMessage.getMsgType()) {
-            case SETNFIC:
-                break;
-            case STREFST:
-                break;
-            case STCOAST:
-                break;
-            case STCONTST:
-                break;
-            case STCONTSTR:
-                break;
-            case ADDCONT:
-                break;
-            case RMCONT:
-                break;
-            case STRP:
-                break;
-            case CLT:
-                break;
-            case STG:
-                break;
-            case EOG:
-                break;
-            case EOM:
-                break;
-            case SHUT:
-                break;
-            default:
-                throw new MessageException("Invalid message type!", inMessage);
-        }
 
         switch (inMessage.getMsgType()) {
             case SETNFIC:
@@ -116,7 +88,7 @@ public class GeneralReposInterface {
                 outMessage = new Message(MessageType.SHUTDONE);
                 break;
             default:
-                outMessage = new Message(MessageType.ERR);
+                throw new MessageException("Invalid message type!", inMessage);
         }
 
         return outMessage;

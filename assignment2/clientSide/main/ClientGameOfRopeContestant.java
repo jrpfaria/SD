@@ -6,20 +6,23 @@ import genclass.GenericIO;
 import serverSide.main.*;
 
 /**
- * Main class (type 2) for the contestant entity.
- * Initializes the contestant entity and starts its lifecycle.
+ * Client side of the Game Of Rope (contestants).
+ * <p>
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class ClientGameOfRopeContestant {
     /**
      * Main method.
+     *
      * @param args runtime arguments
-     *          args[0] - General Repository server hostname
-     *          args[1] - General Repository server port number  
-     *          args[2] - Playground server hostname
-     *          args[3] - Playground server port number
-     *          args[4] - ContestantsBench server hostname
-     *          args[5] - ContestantsBench server port number
-     *          args[6] - file name
+     *             args[0] - General Repository server hostname
+     *             args[1] - General Repository server port number
+     *             args[2] - Playground server hostname
+     *             args[3] - Playground server port number
+     *             args[4] - ContestantsBench server hostname
+     *             args[5] - ContestantsBench server port number
+     *             args[6] - file name
      */
     public static void main(String[] args) {
         /**

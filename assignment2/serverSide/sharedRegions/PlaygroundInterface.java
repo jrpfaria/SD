@@ -4,10 +4,11 @@ import commInfra.*;
 import serverSide.entities.*;
 
 /**
- * Interface for the Playground shared region.
+ * Interface to the Playground.
+ * <p>
  * It processes the received messages and replies the corresponding ones.
- *    Implementation of a client-server model of type 2 (server replication).
- *    Communication is based on a communication channel under the TCP protocol.
+ * Implementation of a client-server model of type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class PlaygroundInterface {
     /**
@@ -17,6 +18,7 @@ public class PlaygroundInterface {
 
     /**
      * Instantiation of the interface to the Playground.
+     *
      * @param playground Reference to the Playground.
      */
     public PlaygroundInterface(Playground playground) {
@@ -25,6 +27,7 @@ public class PlaygroundInterface {
 
     /**
      * Processing of the received messages and generation of the corresponding response.
+     *
      * @param inMessage incoming message with the request
      * @return outgoing message with the reply
      * @throws MessageException if the message contains an invalid request
@@ -32,33 +35,6 @@ public class PlaygroundInterface {
     public Message processAndReply(Message inMessage) throws MessageException { // TODO
 
         Message outMessage;
-
-        switch (inMessage.getMsgType()) {
-            case STT:
-                break;
-            case WTC:
-                break;
-            case ATD:
-                break;
-            case DGW:
-                break;
-            case ASTM:
-                break;
-            case WATL:
-                break;
-            case FCA:
-                break;
-            case SIP:
-                break;
-            case GR:
-                break;
-            case AD:
-                break;
-            case SHUT:
-                break;
-            default:
-                throw new MessageException("Invalid message type!", inMessage);
-        }
 
         int position;
         switch (inMessage.getMsgType()) {
@@ -119,7 +95,7 @@ public class PlaygroundInterface {
                 outMessage = new Message(MessageType.SHUTDONE);
                 break;
             default:
-                outMessage = new Message(MessageType.ERR);
+                throw new MessageException("Invalid message type!", inMessage);
         }
 
         return outMessage;

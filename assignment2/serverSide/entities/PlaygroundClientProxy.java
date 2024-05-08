@@ -6,9 +6,10 @@ import genclass.GenericIO;
 import serverSide.sharedRegions.*;
 
 /**
- * Service provider agent for access to the Playground shared region.
- *     Implementation of the client-server model type 2 (server replication).
- *    Communication is based on a communication channel under the TCP protocol.
+ * Service provider agent for access to the Playground.
+ * <p>
+ * Implementation of the client-server model type 2 (server replication).
+ * Communication is based on a communication channel under the TCP protocol.
  */
 public class PlaygroundClientProxy extends Thread implements RefereeCloning, CoachCloning, ContestantCloning {
     /**
@@ -58,7 +59,8 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Instantiation of the Playground client proxy.
-     * @param sconi Communication channel
+     *
+     * @param sconi           Communication channel
      * @param playgroundInter Playground Interface
      */
     public PlaygroundClientProxy(ServerCom sconi, PlaygroundInterface playgroundInter) {
@@ -69,6 +71,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Generation of the instantiation id.
+     *
      * @return Instantiation id
      */
     private static int getProxyId() {
@@ -93,6 +96,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Referee state getter.
+     *
      * @return Referee state
      */
     public RefereeStates getRefereeState() {
@@ -101,6 +105,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Referee state setter.
+     *
      * @param state new referee state
      */
     public void setRefereeState(RefereeStates state) {
@@ -109,6 +114,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Coach state getter.
+     *
      * @return Coach state
      */
     public CoachStates getCoachState() {
@@ -117,6 +123,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Coach state setter.
+     *
      * @param state new coach state
      */
     public void setCoachState(CoachStates state) {
@@ -125,6 +132,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Coach team getter.
+     *
      * @return Coach team number
      */
     public int getCoachTeam() {
@@ -133,6 +141,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Coach team setter.
+     *
      * @param team new coach team number
      */
     public void setCoachTeam(int team) {
@@ -141,6 +150,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Contestant state getter.
+     *
      * @return Contestant state
      */
     public ContestantStates getContestantState() {
@@ -149,6 +159,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Contestant state setter.
+     *
      * @param state new contestant state
      */
     public void setContestantState(ContestantStates state) {
@@ -157,6 +168,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Contestant team getter.
+     *
      * @return Contestant team number
      */
     public int getContestantTeam() {
@@ -165,6 +177,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Contestant team setter.
+     *
      * @param team new contestant team number
      */
     public void setContestantTeam(int team) {
@@ -173,6 +186,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Contestant number getter.
+     *
      * @return Contestant number
      */
     public int getContestantNumber() {
@@ -181,6 +195,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Contestant number setter.
+     *
      * @param number new contestant number
      */
     public void setContestantNumber(int number) {
@@ -191,6 +206,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Contestant strength getter.
+     *
      * @return Contestant strength
      */
     public int getContestantStrength() {
@@ -199,6 +215,7 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
 
     /**
      * Contestant strength setter.
+     *
      * @param strength new contestant strength
      */
     public void setContestantStrength(int strength) {
@@ -215,7 +232,6 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
         inMessage = (Message) sconi.readObject();
 
         try {
-            GenericIO.writelnString("Thread " + getName() + " received: " + inMessage + "!");
             outMessage = playgroundInter.processAndReply(inMessage);
         } catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
@@ -224,7 +240,6 @@ public class PlaygroundClientProxy extends Thread implements RefereeCloning, Coa
         }
 
         sconi.writeObject(outMessage);
-        GenericIO.writelnString("Thread " + getName() + " replied: " + outMessage + "!");
         //sconi.close();
     }
 }
