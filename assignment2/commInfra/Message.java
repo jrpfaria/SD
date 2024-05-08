@@ -286,7 +286,7 @@ public class Message implements Serializable {
     public Message setContestants(Pair<Integer, Integer>[] contestants) throws MessageException {
         for (Pair<Integer, Integer> contestant : contestants) {
             if (contestant.getKey() < 0 || contestant.getKey() >= SimulPar.NC)
-                throw new MessageException("Invalid contestant: " + contestant.getKey(), this);
+                throw new MessageException("Invalid contestant number: " + contestant.getKey(), this);
         }
         this.contestants = contestants;
         return this;
@@ -336,8 +336,8 @@ public class Message implements Serializable {
     public Message setContestantStrength(int[][] contestantStrength) throws MessageException {
         for (int[] contestant : contestantStrength) {
             for (int i = 0; i < SimulPar.NC; i++) {
-                if (contestant[i] < SimulPar.MINS || contestant[1] >= SimulPar.MAXS)
-                    throw new MessageException("Invalid contestant: " + contestant[i], this);
+                if (contestant[i] < SimulPar.MINS || contestant[i] > SimulPar.MAXS)
+                    throw new MessageException("Invalid contestant strength: " + contestant[i], this);
             }
         }
         this.contestantStrength = contestantStrength;
