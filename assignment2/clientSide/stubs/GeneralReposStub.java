@@ -54,7 +54,7 @@ public class GeneralReposStub {
         try {
             outMessage.setLogFileName(fileName).setContestantStrength(contestantStength);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -63,7 +63,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.NFICDONE) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -89,12 +89,18 @@ public class GeneralReposStub {
         }
 
         outMessage = new Message(MessageType.STREFST);
-        outMessage.setRefereeState(state);
+        try {
+            outMessage.setRefereeState(state);
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
         com.writeObject(outMessage);
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -124,7 +130,7 @@ public class GeneralReposStub {
         try {
             outMessage.setTeam(team).setCoachState(state);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -133,7 +139,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -164,7 +170,7 @@ public class GeneralReposStub {
         try {
             outMessage.setTeam(team).setNumber(number).setContestantState(state);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -173,7 +179,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -204,7 +210,7 @@ public class GeneralReposStub {
         try {
             outMessage.setTeam(team).setNumber(number).setStrength(strength);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -213,7 +219,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -243,7 +249,7 @@ public class GeneralReposStub {
         try {
             outMessage.setTeam(team).setNumber(number);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -252,7 +258,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -282,7 +288,7 @@ public class GeneralReposStub {
         try {
             outMessage.setTeam(team).setNumber(number);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -291,7 +297,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -323,7 +329,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -351,7 +357,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -379,7 +385,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -412,7 +418,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -442,7 +448,7 @@ public class GeneralReposStub {
         try {
             outMessage.setScore1(score1).setScore2(score2);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -451,7 +457,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -479,7 +485,7 @@ public class GeneralReposStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.SHUTDONE) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from General Repository: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }

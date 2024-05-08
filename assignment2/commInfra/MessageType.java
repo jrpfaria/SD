@@ -7,7 +7,7 @@ package commInfra;
  * Communication is based on a communication channel under the TCP protocol.
  */
 public enum MessageType { // TODO
-    // GeneralRepos    
+    // GeneralRepos
     /**
      * SETNFIC - Set Log File Name
      */
@@ -17,19 +17,19 @@ public enum MessageType { // TODO
      */
     NFICDONE,
     /*
-     * STREFST - Start Referee State
+     * STREFST - Set Referee State
      */
     STREFST,
     /**
-     * STCOAST - Start Coach State
+     * STCOAST - Set Coach State
      */
     STCOAST,
     /**
-     * STCONTST - Start Contestant State
+     * STCONTST - Set Contestant State
      */
     STCONTST,
     /**
-     * STCONTSTR - Start Contestant Strength
+     * STCONTSTR - Set Contestant Strength
      */
     STCONTSTR,
     /**

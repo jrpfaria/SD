@@ -38,7 +38,7 @@ public class PlaygroundInterface {
 
         int position;
         switch (inMessage.getMsgType()) {
-            case STT: // unsure if this is correct
+            case STT:
                 playground.startTrial();
                 outMessage = new Message(MessageType.ACK);
                 break;
@@ -46,6 +46,7 @@ public class PlaygroundInterface {
                 playground.wait_for_trial_conclusion();
                 outMessage = new Message(MessageType.ACK);
                 outMessage.setRefereeState(((PlaygroundClientProxy) Thread.currentThread()).getRefereeState());
+                break;
             case ATD:
                 position = playground.assertTrialDecision();
                 outMessage = new Message(MessageType.ACK);

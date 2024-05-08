@@ -54,14 +54,20 @@ public class ContestantsBenchStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        try {
+            ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
     }
 
     /**
@@ -86,7 +92,7 @@ public class ContestantsBenchStub {
         try {
             outMessage.setScore1(score1).setScore2(score2);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -94,14 +100,20 @@ public class ContestantsBenchStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        try {
+            ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
     }
 
     // Coach
@@ -129,7 +141,7 @@ public class ContestantsBenchStub {
         try {
             outMessage.setTeam(team);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -137,14 +149,22 @@ public class ContestantsBenchStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        return inMessage.getContestants();
+        try {
+            return inMessage.getContestants();
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
+
+        return null;
     }
 
     /**
@@ -170,7 +190,7 @@ public class ContestantsBenchStub {
         try {
             outMessage.setTeam(team);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -178,14 +198,20 @@ public class ContestantsBenchStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        t.setCoachState(inMessage.getCoachState());
+        try {
+            t.setCoachState(inMessage.getCoachState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
 
         return inMessage.getValue();
     }
@@ -213,7 +239,7 @@ public class ContestantsBenchStub {
         try {
             outMessage.setTeam(team).setRoster(roster);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -222,7 +248,7 @@ public class ContestantsBenchStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -257,7 +283,7 @@ public class ContestantsBenchStub {
         try {
             outMessage.setTeam(team).setNumber(number).setStrength(strength);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -266,14 +292,20 @@ public class ContestantsBenchStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        ((Contestant) Thread.currentThread()).setContestantState(inMessage.getContestantState());
+        try {
+            ((Contestant) Thread.currentThread()).setContestantState(inMessage.getContestantState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
 
         return inMessage.getValue();
     }
@@ -301,7 +333,7 @@ public class ContestantsBenchStub {
         try {
             outMessage.setTeam(team).setNumber(number).setStrength(strength);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -310,7 +342,7 @@ public class ContestantsBenchStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -340,7 +372,7 @@ public class ContestantsBenchStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.SHUTDONE) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Contestants Bench: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }

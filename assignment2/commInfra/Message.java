@@ -52,15 +52,15 @@ public class Message implements Serializable {
     /**
      * Contestants in the game.
      */
-    private Pair<Integer, Integer>[] contestants;
+    private Pair<Integer, Integer>[] contestants = null;
     /**
      * Roster of the team.
      */
-    private int[] roster;
+    private int[] roster = null;
     /**
      * Strength of all the contestants.
      */
-    private int[][] contestantStrength;
+    private int[][] contestantStrength = null;
     /**
      * Name of the log file.
      */
@@ -98,7 +98,7 @@ public class Message implements Serializable {
      */
     @Override
     public String toString() {
-        return this.msgType.toString() + " team:" + team + " number:" + number;
+        return String.format("Type: %s, RefereeState: %s", this.msgType, this.refereeState);
     }
 
     /**
@@ -125,8 +125,12 @@ public class Message implements Serializable {
      * RefereeState getter
      *
      * @return State of the referee
+     * @throws MessageException thrown if data is invalid
      */
-    public RefereeStates getRefereeState() {
+    public RefereeStates getRefereeState() throws MessageException {
+        if (refereeState == null) {
+            throw new MessageException("referee state is not set", this);
+        }
         return refereeState;
     }
 
@@ -135,8 +139,12 @@ public class Message implements Serializable {
      *
      * @param refereeState New state of the referee
      * @return reference to this object
+     * @throws MessageException thrown if data is invalid
      */
-    public Message setRefereeState(RefereeStates refereeState) {
+    public Message setRefereeState(RefereeStates refereeState) throws MessageException {
+        if (refereeState == null) {
+            throw new MessageException("referee state is null", this);
+        }
         this.refereeState = refereeState;
         return this;
     }
@@ -145,8 +153,12 @@ public class Message implements Serializable {
      * CoachState getter
      *
      * @return State of the coach
+     * @throws MessageException thrown if data is invalid
      */
-    public CoachStates getCoachState() {
+    public CoachStates getCoachState() throws MessageException {
+        if (coachState == null) {
+            throw new MessageException("coach state is not set", this);
+        }
         return coachState;
     }
 
@@ -155,8 +167,12 @@ public class Message implements Serializable {
      *
      * @param coachState New state of the coach
      * @return reference to this object
+     * @throws MessageException thrown if data is invalid
      */
-    public Message setCoachState(CoachStates coachState) {
+    public Message setCoachState(CoachStates coachState) throws MessageException {
+        if (coachState == null) {
+            throw new MessageException("coach state is null", this);
+        }
         this.coachState = coachState;
         return this;
     }
@@ -165,8 +181,12 @@ public class Message implements Serializable {
      * ContestantState getter
      *
      * @return State of the contestant
+     * @throws MessageException thrown if data is invalid
      */
-    public ContestantStates getContestantState() {
+    public ContestantStates getContestantState() throws MessageException {
+        if (contestantState == null) {
+            throw new MessageException("contestant state is not set", this);
+        }
         return contestantState;
     }
 
@@ -175,8 +195,12 @@ public class Message implements Serializable {
      *
      * @param contestantState New state of the contestant
      * @return reference to this object
+     * @throws MessageException thrown if data is invalid
      */
-    public Message setContestantState(ContestantStates contestantState) {
+    public Message setContestantState(ContestantStates contestantState) throws MessageException {
+        if (contestantState == null) {
+            throw new MessageException("contestant state is null", this);
+        }
         this.contestantState = contestantState;
         return this;
     }
@@ -185,8 +209,11 @@ public class Message implements Serializable {
      * Team getter
      *
      * @return Team number
+     * @throws MessageException thrown if data is invalid
      */
-    public int getTeam() {
+    public int getTeam() throws MessageException {
+        if (team != 0 && team != 1)
+            throw new MessageException("Invalid team number: " + team, this);
         return team;
     }
 
@@ -208,8 +235,11 @@ public class Message implements Serializable {
      * Number getter
      *
      * @return Contestant number
+     * @throws MessageException thrown if data is invalid
      */
-    public int getNumber() {
+    public int getNumber() throws MessageException {
+        if (number < 0 || number >= SimulPar.NC)
+            throw new MessageException("Invalid number: " + number, this);
         return number;
     }
 
@@ -231,8 +261,12 @@ public class Message implements Serializable {
      * Strength getter
      *
      * @return Strength of the contestant
+     * @throws MessageException thrown if data is invalid
      */
-    public int getStrength() {
+    public int getStrength() throws MessageException {
+        if (strength < 0) {
+            throw new MessageException("Invalid contestant strength: " + strength, this);
+        }
         return strength;
     }
 
@@ -241,8 +275,12 @@ public class Message implements Serializable {
      *
      * @param strength New strength of the contestant
      * @return reference to this object
+     * @throws MessageException thrown if data is invalid
      */
-    public Message setStrength(int strength) {
+    public Message setStrength(int strength) throws MessageException {
+        if (strength < 0) {
+            throw new MessageException("Invalid contestant strength: " + strength, this);
+        }
         this.strength = strength;
         return this;
     }
@@ -271,8 +309,16 @@ public class Message implements Serializable {
      * Contestants getter
      *
      * @return Contestants in the game
+     * @throws MessageException thrown if data is invalid
      */
-    public Pair<Integer, Integer>[] getContestants() {
+    public Pair<Integer, Integer>[] getContestants() throws MessageException {
+        if (contestants == null) {
+            throw new MessageException("contestants were not set", this);
+        }
+        for (Pair<Integer, Integer> contestant : contestants) {
+            if (contestant.getKey() < 0 || contestant.getKey() >= SimulPar.NC)
+                throw new MessageException("Invalid contestant number: " + contestant.getKey(), this);
+        }
         return contestants;
     }
 
@@ -284,6 +330,9 @@ public class Message implements Serializable {
      * @throws MessageException thrown if data is invalid
      */
     public Message setContestants(Pair<Integer, Integer>[] contestants) throws MessageException {
+        if (contestants == null) {
+            throw new MessageException("contestants are null", this);
+        }
         for (Pair<Integer, Integer> contestant : contestants) {
             if (contestant.getKey() < 0 || contestant.getKey() >= SimulPar.NC)
                 throw new MessageException("Invalid contestant number: " + contestant.getKey(), this);
@@ -296,8 +345,16 @@ public class Message implements Serializable {
      * Roster getter
      *
      * @return Roster of the team
+     * @throws MessageException thrown if data is invalid
      */
-    public int[] getRoster() {
+    public int[] getRoster() throws MessageException {
+        if (roster == null) {
+            throw new MessageException("roster was not set", this);
+        }
+        for (int contestant : roster) {
+            if (contestant < 0 || contestant >= SimulPar.NC)
+                throw new MessageException("Invalid contestant: " + contestant, this);
+        }
         return roster;
     }
 
@@ -309,6 +366,9 @@ public class Message implements Serializable {
      * @throws MessageException thrown if data is invalid
      */
     public Message setRoster(int[] roster) throws MessageException {
+        if (roster == null) {
+            throw new MessageException("roster is null", this);
+        }
         for (int contestant : roster) {
             if (contestant < 0 || contestant >= SimulPar.NC)
                 throw new MessageException("Invalid contestant: " + contestant, this);
@@ -321,8 +381,18 @@ public class Message implements Serializable {
      * ContestantStrength getter
      *
      * @return Strength of all the contestants
+     * @throws MessageException thrown if data is invalid
      */
-    public int[][] getContestantStrength() {
+    public int[][] getContestantStrength() throws MessageException {
+        if (contestantStrength == null) {
+            throw new MessageException("contestantStrength was not set", this);
+        }
+        for (int[] contestant : contestantStrength) {
+            for (int i = 0; i < SimulPar.NC; i++) {
+                if (contestant[i] < SimulPar.MINS || contestant[i] > SimulPar.MAXS)
+                    throw new MessageException("Invalid contestant strength: " + contestant[i], this);
+            }
+        }
         return contestantStrength;
     }
 
@@ -334,6 +404,9 @@ public class Message implements Serializable {
      * @throws MessageException thrown if data is invalid
      */
     public Message setContestantStrength(int[][] contestantStrength) throws MessageException {
+        if (contestantStrength == null) {
+            throw new MessageException("contestantStrength is null", this);
+        }
         for (int[] contestant : contestantStrength) {
             for (int i = 0; i < SimulPar.NC; i++) {
                 if (contestant[i] < SimulPar.MINS || contestant[i] > SimulPar.MAXS)
@@ -348,8 +421,11 @@ public class Message implements Serializable {
      * LogFileName getter
      *
      * @return Name of the log file
+     * @throws MessageException thrown if data is invalid
      */
-    public String getLogFileName() {
+    public String getLogFileName()  throws MessageException {
+        if (logFileName == null || logFileName.isEmpty())
+            throw new MessageException("Invalid log file name: " + logFileName, this);
         return logFileName;
     }
 
@@ -411,8 +487,11 @@ public class Message implements Serializable {
      * Score1 getter
      *
      * @return Score of team 1
+     * @throws MessageException thrown if data is invalid
      */
-    public int getScore1() {
+    public int getScore1() throws MessageException {
+        if (score1 < 0 || score1 > SimulPar.NG)
+            throw new MessageException("Invalid score: " + score1, this);
         return score1;
     }
 
@@ -434,8 +513,11 @@ public class Message implements Serializable {
      * Score2 getter
      *
      * @return Score of team 2
+     * @throws MessageException thrown if data is invalid
      */
-    public int getScore2() {
+    public int getScore2() throws MessageException {
+        if (score2 < 0 || score2 > SimulPar.NG)
+            throw new MessageException("Invalid score: " + score2, this);
         return score2;
     }
 

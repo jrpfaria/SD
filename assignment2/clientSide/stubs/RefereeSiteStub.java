@@ -55,14 +55,20 @@ public class RefereeSiteStub {
         inMessage = (Message) com.readObject();
 
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Referee Site: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        try {
+            ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Referee Site: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
     }
 
     /**
@@ -85,7 +91,7 @@ public class RefereeSiteStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Referee Site: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -115,7 +121,7 @@ public class RefereeSiteStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Referee Site: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -145,7 +151,7 @@ public class RefereeSiteStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.SHUTDONE) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Referee Site: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }

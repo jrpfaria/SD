@@ -54,7 +54,7 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -82,14 +82,20 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        try {
+            ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
     }
 
     /**
@@ -114,7 +120,7 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -146,14 +152,20 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        try {
+            ((Referee) Thread.currentThread()).setRefereeState(inMessage.getRefereeState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
 
         return inMessage.getPosition();
     }
@@ -181,7 +193,7 @@ public class PlaygroundStub {
         try {
             outMessage.setTeam(team);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -190,14 +202,20 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        t.setCoachState(inMessage.getCoachState());
+        try {
+            t.setCoachState(inMessage.getCoachState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
     }
 
     /**
@@ -220,7 +238,7 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -251,7 +269,7 @@ public class PlaygroundStub {
         try {
             outMessage.setTeam(team);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -260,7 +278,7 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -290,7 +308,7 @@ public class PlaygroundStub {
         try {
             outMessage.setTeam(team).setNumber(number);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -299,14 +317,20 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        t.setContestantState(inMessage.getContestantState());
+        try {
+            t.setContestantState(inMessage.getContestantState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
     }
 
     /**
@@ -332,7 +356,7 @@ public class PlaygroundStub {
         try {
             outMessage.setTeam(team).setNumber(number).setStrength(strength);
         } catch (MessageException e) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": " + e.getMessage() + "!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
@@ -341,14 +365,20 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
 
         com.close();
 
-        t.setContestantState(inMessage.getContestantState());
+        try {
+            t.setContestantState(inMessage.getContestantState());
+        } catch (MessageException e) {
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: " + e.getMessage() + "!");
+            GenericIO.writelnString(e.getMessageVal().toString());
+            System.exit(1);
+        }
     }
 
     /**
@@ -371,7 +401,7 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.ACK) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }
@@ -399,7 +429,7 @@ public class PlaygroundStub {
 
         inMessage = (Message) com.readObject();
         if (inMessage.getMsgType() != MessageType.SHUTDONE) {
-            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + ": Invalid message type!");
+            GenericIO.writelnString("Thread " + Thread.currentThread().getName() + " | Error from Playground: Invalid message type!");
             GenericIO.writelnString(inMessage.toString());
             System.exit(1);
         }

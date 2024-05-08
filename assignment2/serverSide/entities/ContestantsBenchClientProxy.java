@@ -232,12 +232,15 @@ public class ContestantsBenchClientProxy extends Thread implements RefereeClonin
         inMessage = (Message) sconi.readObject();
 
         try {
+            GenericIO.writelnString(getName() + " received " + inMessage.getMsgType() + "!");
             outMessage = contestantsBenchInter.processAndReply(inMessage);
         } catch (MessageException e) {
             GenericIO.writelnString("Thread " + getName() + ": " + e.getMessage() + "!");
             GenericIO.writelnString(e.getMessageVal().toString());
             System.exit(1);
         }
+
+        GenericIO.writelnString(getName() + " sent " + outMessage.getMsgType() + "!");
 
         sconi.writeObject(outMessage);
         //sconi.close();
