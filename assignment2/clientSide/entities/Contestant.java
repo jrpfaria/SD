@@ -109,7 +109,9 @@ public class Contestant extends Thread {
      * Reduces the strength level of the contestant.
      */
     public void reduceStrength() {
-        this.strength--;
+        if (this.strength > 0) {
+            this.strength--;
+        }
     }
 
     /**
