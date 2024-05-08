@@ -23,7 +23,6 @@ public class ServerGameOfRopeGeneralRepos {
      * Main program.
      * @param args runtime arguments
      *          args[0] - port number for listening to service requests
-     * @throws SocketTimeoutException if the socket time is exceeded.
      */
     public static void main(String[] args) {
         GeneralRepos repos;

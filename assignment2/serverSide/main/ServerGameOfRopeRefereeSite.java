@@ -26,7 +26,6 @@ public class ServerGameOfRopeRefereeSite {
      *          args[0] - port number for listening to service requests
      *          args[1] - General Repository server hostname
      *          args[2] - General Repository server port number
-     * @throws SocketTimeoutException if the socket time is exceeded.
      */
     public static void main(String[] args) {
         RefereeSite refereeSite;
