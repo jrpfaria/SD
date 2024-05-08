@@ -1,3 +1,5 @@
+source config.sh
+
 xterm  -T "General Repository" -hold -e "./GeneralReposDeployAndRun.sh" &
 xterm  -T "Referee Site" -hold -e "./RefereeSiteDeployAndRun.sh" &
 xterm  -T "Playground" -hold -e "./PlaygroundDeployAndRun.sh" &
