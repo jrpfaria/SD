@@ -54,6 +54,8 @@ public class ClientGameOfRopeContestant {
 
         String nameEntryGeneralRepos = "GeneralRepository"; // public name of the general repository object
         GeneralReposInterface reposStub = null; // remote reference to the general repository object
+        String nameEntryRefereeSite = "RefereeSite"; // public name of the referee site object
+        RefereeSiteInterface refereeSiteStub = null; // remote reference to the referee site object
         String nameEntryPlayground = "Playground"; // public name of the playground object
         PlaygroundInterface playgroundStub = null; // remote reference to the playground object
         String nameEntryContestantsBench = "ContestantsBench"; // public name of the contestants bench object
@@ -78,6 +80,18 @@ public class ClientGameOfRopeContestant {
             System.exit(1);
         } catch (NotBoundException e) {
             GenericIO.writelnString("GeneralRepos not bound exception: " + e.getMessage());
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        try {
+            refereeSiteStub = (RefereeSiteInterface) registry.lookup(nameEntryRefereeSite);
+        } catch (RemoteException e) {
+            GenericIO.writelnString("Referee Site lookup exception: " + e.getMessage());
+            e.printStackTrace();
+            System.exit(1);
+        } catch (NotBoundException e) {
+            GenericIO.writelnString("Referee Site not bound exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
@@ -142,9 +156,15 @@ public class ClientGameOfRopeContestant {
                 }
                 GenericIO.writelnString("The contestant " + (i + 1) + "-" + (j + 1) + " has terminated.");
             }
-            GenericIO.writelnString();
         }
+        GenericIO.writelnString();
 
+        try {
+            refereeSiteStub.shutdown();
+        } catch (RemoteException e) {
+            GenericIO.writelnString("Contestant generator remote exception on Referee Site shutdown: " + e.getMessage());
+            System.exit(1);
+        }
         try {
             playgroundStub.shutdown();
         } catch (RemoteException e) {
