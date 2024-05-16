@@ -18,7 +18,7 @@ mkdir -p dirGeneralRepos dirGeneralRepos/serverSide dirGeneralRepos/serverSide/m
          dirGeneralRepos/clientSide dirGeneralRepos/clientSide/entities dirGeneralRepos/commInfra
 cp serverSide/main/SimulPar.class serverSide/main/ServerGameOfRopeGeneralRepos.class dirGeneralRepos/serverSide/main
 cp serverSide/objects/GeneralRepos.class dirGeneralRepos/serverSide/objects
-cp interfaces/Register.class interface/GeneralReposInterface.class dirGeneralRepos/interfaces
+cp interfaces/Register.class interfaces/GeneralReposInterface.class dirGeneralRepos/interfaces
 cp clientSide/entities/RefereeStates.class 'clientSide/entities/RefereeStates$1.class' clientSide/entities/CoachStates.class 'clientSide/entities/CoachStates$1.class' clientSide/entities/ContestantStates.class 'clientSide/entities/ContestantStates$1.class' dirGeneralRepos/clientSide/entities
 cp commInfra/*.class dirGeneralRepos/commInfra
 echo "  Referee Site"
