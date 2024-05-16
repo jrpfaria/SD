@@ -62,7 +62,7 @@ rm -rf dirCoaches/*/
 mkdir -p dirCoaches dirCoaches/serverSide dirCoaches/serverSide/main dirCoaches/clientSide dirCoaches/clientSide/main dirCoaches/clientSide/entities \
          dirCoaches/interfaces dirCoaches/commInfra
 cp serverSide/main/SimulPar.class dirCoaches/serverSide/main
-cp clientSide/main/ClientGameOfRopeReferee.class dirCoaches/clientSide/main
+cp clientSide/main/ClientGameOfRopeCoach.class dirCoaches/clientSide/main
 cp clientSide/entities/*.class dirCoaches/clientSide/entities
 cp interfaces/*.class dirCoaches/interfaces
 cp commInfra/*.class dirCoaches/commInfra
@@ -71,7 +71,7 @@ rm -rf dirContestants/*/
 mkdir -p dirContestants dirContestants/serverSide dirContestants/serverSide/main dirContestants/clientSide dirContestants/clientSide/main dirContestants/clientSide/entities \
          dirContestants/interfaces dirContestants/commInfra
 cp serverSide/main/SimulPar.class dirContestants/serverSide/main
-cp clientSide/main/ClientGameOfRopeReferee.class dirContestants/clientSide/main
+cp clientSide/main/ClientGameOfRopeContestant.class dirContestants/clientSide/main
 cp clientSide/entities/*.class dirContestants/clientSide/entities
 cp interfaces/*.class dirContestants/interfaces
 cp commInfra/*.class dirContestants/commInfra
