@@ -1,6 +1,6 @@
 *.iml
 *.zip
-dir*
+.class
 /out
 /.idea
 /.vscode

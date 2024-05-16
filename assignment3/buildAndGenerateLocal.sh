@@ -2,7 +2,7 @@
 echo "Deploying and decompressing execution environments."
 mkdir -p /home/$USER/test/GameOfRope
 rm -rf /home/$USER/test/GameOfRope/*
-cp dirRegistry.zip /home/$USER/test/SleepingBarbers
+cp dirRegistry.zip /home/$USER/test/GameOfRope
 cp dirGeneralRepos.zip /home/$USER/test/GameOfRope
 cp dirRefereeSite.zip /home/$USER/test/GameOfRope
 cp dirPlayground.zip /home/$USER/test/GameOfRope
