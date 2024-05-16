@@ -1,0 +1,6 @@
+*.iml
+*.zip
+dir*
+/out
+/.idea
+/.vscode

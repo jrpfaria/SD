@@ -1,0 +1,14 @@
+export USER=sd102
+export RMH='l040101-ws01.ua.pt'
+export RMP=22110
+export GRH='l040101-ws01.ua.pt'
+export GRP=22111
+export RSH='l040101-ws05.ua.pt'
+export RSP=22112
+export PGH='l040101-ws06.ua.pt'
+export PGP=22113
+export CBH='l040101-ws07.ua.pt'
+export CBP=22114
+export REFH='l040101-ws09.ua.pt'
+export COAH='l040101-ws09.ua.pt'
+export CONTH='l040101-ws10.ua.pt'
