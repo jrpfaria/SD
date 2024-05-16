@@ -102,7 +102,7 @@ public class ServerGameOfRopePlayground {
         try {
             playgroundStub = (PlaygroundInterface) UnicastRemoteObject.exportObject(playground, portNumb);
         } catch (RemoteException e) {
-            GenericIO.writelnString("Contestants Bench stub generation exception: " + e.getMessage());
+            GenericIO.writelnString("Playground stub generation exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
@@ -131,26 +131,26 @@ public class ServerGameOfRopePlayground {
         try {
             reg.bind(nameEntryObject, playgroundStub);
         } catch (RemoteException e) {
-            GenericIO.writelnString("Contestants Bench registration exception: " + e.getMessage());
+            GenericIO.writelnString("Playground registration exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         } catch (AlreadyBoundException e) {
-            GenericIO.writelnString("Contestants Bench already bound exception: " + e.getMessage());
+            GenericIO.writelnString("Playground already bound exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
-        GenericIO.writelnString("Contestants Bench object was registered!");
+        GenericIO.writelnString("Playground object was registered!");
 
         /* wait for the end of operations */
 
-        GenericIO.writelnString("Contestants Bench is in operation!");
+        GenericIO.writelnString("Playground is in operation!");
         try {
             while (!end)
                 synchronized (Class.forName("serverSide.main.ServerGameOfRopePlayground")) {
                     try {
                         (Class.forName("serverSide.main.ServerGameOfRopePlayground")).wait();
                     } catch (InterruptedException e) {
-                        GenericIO.writelnString("Contestants Bench main thread was interrupted!");
+                        GenericIO.writelnString("Playground main thread was interrupted!");
                     }
                 }
         } catch (ClassNotFoundException e) {
@@ -166,26 +166,26 @@ public class ServerGameOfRopePlayground {
         try {
             reg.unbind(nameEntryObject);
         } catch (RemoteException e) {
-            GenericIO.writelnString("Contestants Bench deregistration exception: " + e.getMessage());
+            GenericIO.writelnString("Playground deregistration exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         } catch (NotBoundException e) {
-            GenericIO.writelnString("Contestants Bench not bound exception: " + e.getMessage());
+            GenericIO.writelnString("Playground not bound exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
-        GenericIO.writelnString("Contestants Bench was deregistered!");
+        GenericIO.writelnString("Playground was deregistered!");
 
         try {
             shutdownDone = UnicastRemoteObject.unexportObject(playground, true);
         } catch (NoSuchObjectException e) {
-            GenericIO.writelnString("Contestants Bench unexport exception: " + e.getMessage());
+            GenericIO.writelnString("Playground unexport exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
 
         if (shutdownDone)
-            GenericIO.writelnString("Contestants Bench was shutdown!");
+            GenericIO.writelnString("Playground was shutdown!");
     }
 
     /**

@@ -94,8 +94,11 @@ public class Coach extends Thread {
      * @param contestants The list of contestants available for selection.
      * @return An array containing the indices of the selected players.
      */
-    public int[] selectPlayers(Pair<Integer, Integer>[] contestants) {
-        Pair<Integer, Integer>[] sorted = contestants.clone();
+    public int[] selectPlayers(int[] contestantStrength) {
+        Pair<Integer, Integer>[] sorted = (Pair<Integer, Integer>[]) new Pair[SimulPar.NC];
+        for (int i = 0; i < SimulPar.NC; i++) {
+            sorted[i] = new Pair<Integer, Integer>(i, contestantStrength[i]);
+        }
         Arrays.sort(sorted, Collections.reverseOrder()); // Sort contestants by strength (descending)
         if (method) // Sweaty method
             return selectPlayersSweaty(sorted);
@@ -145,8 +148,8 @@ public class Coach extends Thread {
     @Override
     public void run() {
         int orders;
-        Pair<Integer, Integer>[] contestants = reviewNotes(); // Review notes to help with assembling the team
-        int[] roster = selectPlayers(contestants); // Select players for the game
+        int[] contestantStrength = reviewNotes(); // Review notes to help with assembling the team
+        int[] roster = selectPlayers(contestantStrength); // Select players for the game
         while (true) {
             orders = wait_for_referee_command(); // Wait for referee's command
             if (orders == 0)
@@ -155,13 +158,13 @@ public class Coach extends Thread {
             assemble_team(); // Assemble team on the playground
             informReferee(); // Inform referee that team is ready
             watch_trial(); // Watch the trial on the playground
-            contestants = reviewNotes(); // Review notes for next game
-            roster = selectPlayers(contestants); // Select players for next game
+            contestantStrength = reviewNotes(); // Review notes for next game
+            roster = selectPlayers(contestantStrength); // Select players for next game
         }
     }
 
-    private Pair<Integer, Integer>[] reviewNotes() {
-        Pair<Integer, Integer>[] r = null;
+    private int[] reviewNotes() {
+        int[] r = null;
         try {
             r = contestantsBenchStub.reviewNotes(team);
         } catch (RemoteException e) {
@@ -174,7 +177,7 @@ public class Coach extends Thread {
     private int wait_for_referee_command() {
         int r = 0;
         try {
-            contestantsBenchStub.wait_for_referee_command(team);
+            r = contestantsBenchStub.wait_for_referee_command(team);
         } catch (RemoteException e) {
             GenericIO.writelnString(
                     "Coach " + (team + 1) + " remote exception on wait_for_referee_command: " + e.getMessage());

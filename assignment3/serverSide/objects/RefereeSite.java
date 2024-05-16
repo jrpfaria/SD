@@ -47,7 +47,7 @@ public class RefereeSite implements RefereeSiteInterface {
     @Override
     public synchronized void announceNewGame() throws RemoteException {
         try {
-            reposStub.setRefereeState(RefereeStates.START_OF_A_GAME);
+            reposStub.setRefereeState(RefereeStates.START_OF_A_GAME.ordinal());
         } catch (RemoteException e) {
             GenericIO.writelnString("Referee remote exception on callTrial - setRefereeState: " + e.getMessage());
             System.exit(1);

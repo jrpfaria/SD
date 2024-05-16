@@ -140,9 +140,9 @@ public class ClientGameOfRopeContestant {
                     contestant[i][j].join();
                 } catch (InterruptedException e) {
                 }
-                GenericIO.writelnString("The contestant " + (i + 1) + " has terminated.");
-                GenericIO.writelnString();
+                GenericIO.writelnString("The contestant " + (i + 1) + "-" + (j + 1) + " has terminated.");
             }
+            GenericIO.writelnString();
         }
 
         try {

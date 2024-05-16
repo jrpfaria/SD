@@ -8,4 +8,5 @@ echo "Decompressing data sent to the RMIregistry node."
 sshpass -f password ssh $USER@$RMH 'cd test/GameOfRope ; unzip -uq dirRMIRegistry.zip'
 sshpass -f password ssh $USER@$RMH 'cd test/GameOfRope/dirRMIRegistry ; cp interfaces/*.class /home/'$USER'/Public/classes/interfaces ; cp set_rmiregistry_d.sh /home/'$USER''
 echo "Executing program at the RMIregistry node."
-sshpass -f password ssh $USER@$RMH './set_rmiregistry_d.sh '$USER' '$RMP''
+sshpass -f password scp config.sh $USER@$RMH:/home/$USER
+sshpass -f password ssh $USER@$RMH 'source config.sh ; ./set_rmiregistry_d.sh '$USER' '$RMP''

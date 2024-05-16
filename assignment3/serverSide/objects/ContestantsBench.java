@@ -3,7 +3,6 @@ package serverSide.objects;
 import java.rmi.RemoteException;
 import interfaces.*;
 import clientSide.entities.*;
-import commInfra.*;
 import genclass.GenericIO;
 import serverSide.main.*;
 
@@ -39,7 +38,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
     /**
      * Array of Pairs that map a contestant's team and number to their strength.
      */
-    private final Pair<Integer, Integer>[][] contestants;
+    private final int[][] contestantStrength;
     /**
      * Flag that indicates that match is over.
      */
@@ -59,13 +58,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
         this.reposStub = reposStub;
         called = new int[2][SimulPar.NC];
         seated = new int[2];
-        contestants = (Pair<Integer, Integer>[][]) new Pair[2][];
-        contestants[0] = (Pair<Integer, Integer>[]) new Pair[SimulPar.NC];
-        contestants[1] = (Pair<Integer, Integer>[]) new Pair[SimulPar.NC];
-        for (int i = 0; i < SimulPar.NC; i++) {
-            contestants[0][i] = new Pair<Integer, Integer>(i, 0);
-            contestants[1][i] = new Pair<Integer, Integer>(i, 0);
-        }
+        contestantStrength = new int[2][SimulPar.NC];
     }
 
     // Referee
@@ -85,7 +78,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
             System.exit(1);
         }
         try {
-            reposStub.setRefereeState(RefereeStates.TEAMS_READY);
+            reposStub.setRefereeState(RefereeStates.TEAMS_READY.ordinal());
         } catch (RemoteException e) {
             GenericIO.writelnString("Referee remote exception on callTrial - setRefereeState: " + e.getMessage());
             System.exit(1);
@@ -123,14 +116,14 @@ public class ContestantsBench implements ContestantsBenchInterface {
      * @return roster of players
      */
     @Override
-    public synchronized Pair<Integer, Integer>[] reviewNotes(int team) throws RemoteException {
+    public synchronized int[] reviewNotes(int team) throws RemoteException {
         while (seated[team] < SimulPar.NC) {
             try {
                 wait();
             } catch (InterruptedException ignored) {
             }
         }
-        return contestants[team];
+        return contestantStrength[team];
     }
 
     /**
@@ -141,7 +134,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
      */
     @Override
     public synchronized int wait_for_referee_command(int team) throws RemoteException {
-        reposStub.setCoachState(team, CoachStates.WAIT_FOR_REFEREE_COMMAND);
+        reposStub.setCoachState(team, CoachStates.WAIT_FOR_REFEREE_COMMAND.ordinal());
         while (!matchOver && callTrial == 0) {
             try {
                 wait();
@@ -183,9 +176,9 @@ public class ContestantsBench implements ContestantsBenchInterface {
     @Override
     public int seat_at_the_bench(int team, int number, int strength) throws RemoteException {
         synchronized (this) {
-            reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
+            reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH.ordinal());
             reposStub.setContestantStrength(team, number, strength);
-            contestants[team][number].setValue(strength);
+            contestantStrength[team][number] = strength;
             seated[team]++;
             notifyAll();
         }
@@ -213,7 +206,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
     @Override
     public synchronized void seatDown(int team, int number) throws RemoteException {
         reposStub.removeContestant(team, number);
-        reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH);
+        reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH.ordinal());
     }
 
     //

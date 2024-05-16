@@ -133,9 +133,9 @@ public class GeneralRepos implements GeneralReposInterface {
      * @param refereeState referee state
      */
     @Override
-    public synchronized void setRefereeState(RefereeStates refereeState) throws RemoteException {
+    public synchronized void setRefereeState(int state) throws RemoteException {
         check_init();
-
+        RefereeStates refereeState = RefereeStates.values()[state];
         if (this.refereeState != refereeState) {
             this.refereeState = refereeState;
             reportStatus();
@@ -149,9 +149,9 @@ public class GeneralRepos implements GeneralReposInterface {
      * @param coachState coach state
      */
     @Override
-    public synchronized void setCoachState(int team, CoachStates coachState) throws RemoteException {
+    public synchronized void setCoachState(int team, int state) throws RemoteException {
         check_init();
-
+        CoachStates coachState = CoachStates.values()[state];
         if (this.coachState[team] != coachState) {
             this.coachState[team] = coachState;
             reportStatus();
@@ -166,10 +166,10 @@ public class GeneralRepos implements GeneralReposInterface {
      * @param contestantState contestant state
      */
     @Override
-    public synchronized void setContestantState(int team, int number, ContestantStates contestantState)
+    public synchronized void setContestantState(int team, int number, int state)
             throws RemoteException {
         check_init();
-
+        ContestantStates contestantState = ContestantStates.values()[state];
         if (this.contestantState[team][number] != contestantState) {
             this.contestantState[team][number] = contestantState;
             reportStatus();
@@ -284,7 +284,7 @@ public class GeneralRepos implements GeneralReposInterface {
     public synchronized void endGame(int team, boolean knockout) throws RemoteException {
         check_init();
 
-        setRefereeState(RefereeStates.END_OF_A_GAME);
+        setRefereeState(RefereeStates.END_OF_A_GAME.ordinal());
         reportEndOfGame(team, knockout);
     }
 
@@ -299,7 +299,7 @@ public class GeneralRepos implements GeneralReposInterface {
         check_init();
 
         reportEndOfMatch(score1, score2);
-        setRefereeState(RefereeStates.END_OF_THE_MATCH);
+        setRefereeState(RefereeStates.END_OF_THE_MATCH.ordinal());
     }
 
     private synchronized void check_init() {

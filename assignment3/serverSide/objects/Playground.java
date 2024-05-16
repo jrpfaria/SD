@@ -94,7 +94,7 @@ public class Playground implements PlaygroundInterface {
     @Override
     public synchronized void wait_for_trial_conclusion() throws RemoteException {
         try {
-            reposStub.setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION);
+            reposStub.setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION.ordinal());
         } catch (RemoteException e) {
             GenericIO.writelnString(
                     "Referee remote exception on wait_for_trial_conclusion - setRefereeState: " + e.getMessage());
@@ -163,7 +163,7 @@ public class Playground implements PlaygroundInterface {
     @Override
     public synchronized void assemble_team(int team) throws RemoteException {
         try {
-            reposStub.setCoachState(team, CoachStates.ASSEMBLE_TEAM);
+            reposStub.setCoachState(team, CoachStates.ASSEMBLE_TEAM.ordinal());
         } catch (RemoteException e) {
             GenericIO.writelnString(
                     "Coach " + (team + 1) + " remote exception on assemble_team - setCoachState: 1 " + e.getMessage());
@@ -176,7 +176,7 @@ public class Playground implements PlaygroundInterface {
             }
         }
         try {
-            reposStub.setCoachState(team, CoachStates.WATCH_TRIAL);
+            reposStub.setCoachState(team, CoachStates.WATCH_TRIAL.ordinal());
         } catch (RemoteException e) {
             GenericIO.writelnString(
                     "Coach " + (team + 1) + " remote exception on assemble_team - setCoachState 2: " + e.getMessage());
@@ -224,7 +224,7 @@ public class Playground implements PlaygroundInterface {
             System.exit(1);
         }
         try {
-            reposStub.setContestantState(team, number, ContestantStates.STAND_IN_POSITION);
+            reposStub.setContestantState(team, number, ContestantStates.STAND_IN_POSITION.ordinal());
         } catch (RemoteException e) {
             GenericIO.writelnString("Contestant " + (team + 1) + "-" + (number + 1)
                     + " remote exception on stand_in_position - setContestantState: " + e.getMessage());
@@ -248,7 +248,7 @@ public class Playground implements PlaygroundInterface {
     @Override
     public synchronized void getReady(int team, int number, int strength) throws RemoteException {
         try {
-            reposStub.setContestantState(team, number, ContestantStates.DO_YOUR_BEST);
+            reposStub.setContestantState(team, number, ContestantStates.DO_YOUR_BEST.ordinal());
         } catch (RemoteException e) {
             GenericIO.writelnString("Contestant " + (team + 1) + "-" + (number + 1)
                     + " remote exception on getReady - setContestantState: " + e.getMessage());

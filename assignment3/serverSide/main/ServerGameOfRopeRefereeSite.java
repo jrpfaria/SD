@@ -102,7 +102,7 @@ public class ServerGameOfRopeRefereeSite {
         try {
             refereeSiteStub = (RefereeSiteInterface) UnicastRemoteObject.exportObject(refereeSite, portNumb);
         } catch (RemoteException e) {
-            GenericIO.writelnString("Contestants Bench stub generation exception: " + e.getMessage());
+            GenericIO.writelnString("Referee Site stub generation exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
@@ -131,26 +131,26 @@ public class ServerGameOfRopeRefereeSite {
         try {
             reg.bind(nameEntryObject, refereeSiteStub);
         } catch (RemoteException e) {
-            GenericIO.writelnString("Contestants Bench registration exception: " + e.getMessage());
+            GenericIO.writelnString("Referee Site registration exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         } catch (AlreadyBoundException e) {
-            GenericIO.writelnString("Contestants Bench already bound exception: " + e.getMessage());
+            GenericIO.writelnString("Referee Site already bound exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
-        GenericIO.writelnString("Contestants Bench object was registered!");
+        GenericIO.writelnString("Referee Site object was registered!");
 
         /* wait for the end of operations */
 
-        GenericIO.writelnString("Contestants Bench is in operation!");
+        GenericIO.writelnString("Referee Site is in operation!");
         try {
             while (!end)
                 synchronized (Class.forName("serverSide.main.ServerGameOfRopeRefereeSite")) {
                     try {
                         (Class.forName("serverSide.main.ServerGameOfRopeRefereeSite")).wait();
                     } catch (InterruptedException e) {
-                        GenericIO.writelnString("Contestants Bench main thread was interrupted!");
+                        GenericIO.writelnString("Referee Site main thread was interrupted!");
                     }
                 }
         } catch (ClassNotFoundException e) {
@@ -166,26 +166,26 @@ public class ServerGameOfRopeRefereeSite {
         try {
             reg.unbind(nameEntryObject);
         } catch (RemoteException e) {
-            GenericIO.writelnString("Contestants Bench deregistration exception: " + e.getMessage());
+            GenericIO.writelnString("Referee Site deregistration exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         } catch (NotBoundException e) {
-            GenericIO.writelnString("Contestants Bench not bound exception: " + e.getMessage());
+            GenericIO.writelnString("Referee Site not bound exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
-        GenericIO.writelnString("Contestants Bench was deregistered!");
+        GenericIO.writelnString("Referee Site was deregistered!");
 
         try {
             shutdownDone = UnicastRemoteObject.unexportObject(refereeSite, true);
         } catch (NoSuchObjectException e) {
-            GenericIO.writelnString("Contestants Bench unexport exception: " + e.getMessage());
+            GenericIO.writelnString("Referee Site unexport exception: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
 
         if (shutdownDone)
-            GenericIO.writelnString("Contestants Bench was shutdown!");
+            GenericIO.writelnString("Referee Site was shutdown!");
     }
 
     /**

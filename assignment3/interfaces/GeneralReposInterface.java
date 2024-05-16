@@ -1,7 +1,6 @@
 package interfaces;
 
 import java.rmi.*;
-import clientSide.entities.*;
 
 public interface GeneralReposInterface extends Remote {
 
@@ -12,7 +11,7 @@ public interface GeneralReposInterface extends Remote {
      *
      * @param refereeState referee state
      */
-    public void setRefereeState(RefereeStates refereeState) throws RemoteException;
+    public void setRefereeState(int state) throws RemoteException;
 
     /**
      * Set coach state.
@@ -20,7 +19,7 @@ public interface GeneralReposInterface extends Remote {
      * @param team       coach team
      * @param coachState coach state
      */
-    public void setCoachState(int team, CoachStates coachState) throws RemoteException;
+    public void setCoachState(int team, int state) throws RemoteException;
 
     /**
      * Set contestant state.
@@ -29,7 +28,7 @@ public interface GeneralReposInterface extends Remote {
      * @param number          contestant number
      * @param contestantState contestant state
      */
-    public void setContestantState(int team, int number, ContestantStates contestantState) throws RemoteException;
+    public void setContestantState(int team, int number, int state) throws RemoteException;
 
     /**
      * Set contestant strength.

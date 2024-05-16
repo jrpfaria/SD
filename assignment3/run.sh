@@ -1,4 +1,4 @@
 pkill xterm
 ./buildAndGenerateGlobal.sh
-./kill.sh
-./deployAndRunOtherTimes.sh
+./killall.sh
+./deployAndRunFirstTime.sh

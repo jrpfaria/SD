@@ -1,7 +1,6 @@
 package interfaces;
 
 import java.rmi.*;
-import commInfra.*;
 
 public interface ContestantsBenchInterface extends Remote {
     // Referee
@@ -32,7 +31,7 @@ public interface ContestantsBenchInterface extends Remote {
      *
      * @return roster of players
      */
-    public Pair<Integer, Integer>[] reviewNotes(int team) throws RemoteException;
+    public int[] reviewNotes(int team) throws RemoteException;
 
     /**
      * Operation wait_for_referee_command

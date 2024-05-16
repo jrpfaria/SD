@@ -133,8 +133,8 @@ public class ClientGameOfRopeCoach {
             } catch (InterruptedException e) {
             }
             GenericIO.writelnString("The coach " + (i + 1) + " has terminated.");
-            GenericIO.writelnString();
         }
+        GenericIO.writelnString();
 
         try {
             playgroundStub.shutdown();
