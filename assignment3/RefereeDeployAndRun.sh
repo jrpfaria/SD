@@ -5,4 +5,4 @@ sshpass -f password scp dirReferee.zip $USER@$REFH:test/GameOfRope
 echo "Decompressing data sent to the referee node."
 sshpass -f password ssh $USER@$REFH 'cd test/GameOfRope ; unzip -uq dirReferee.zip'
 echo "Executing program at the referee node."
-sshpass -f password ssh $USER@$REFH 'cd test/GameOfRope/dirReferee ; java clientSide.main.ClientGameOfRopeReferee '$GRH' '$GRP' '$RSH' '$RSP' '$PGH' '$PGP' '$CBH' '$CBP''
+sshpass -f password ssh $USER@$REFH 'cd test/GameOfRope/dirReferee ; ./referee_com_d.sh'
