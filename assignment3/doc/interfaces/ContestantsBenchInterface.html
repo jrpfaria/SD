@@ -218,8 +218,11 @@ extends java.rmi.Remote</pre>
 <div class="block">Operation callTrial
  Called by the referee to notify the coaches that a trial was called.</div>
 <dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>int and state</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -241,7 +244,8 @@ extends java.rmi.Remote</pre>
 <dd><code>score1</code> - score of team 1</dd>
 <dd><code>score2</code> - score of team 2</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -262,7 +266,8 @@ extends java.rmi.Remote</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>roster of players</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -282,7 +287,8 @@ extends java.rmi.Remote</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>0 if match is over, 1 if trial was called</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -303,7 +309,8 @@ extends java.rmi.Remote</pre>
 <dd><code>team</code> - coach's team</dd>
 <dd><code>roster</code> - numbers of the contestants that will participate</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -329,7 +336,8 @@ extends java.rmi.Remote</pre>
 <dd>0 if match is over, 1 if player has to stay in the bench, 2 if player
          will participate in the trial</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -349,8 +357,11 @@ extends java.rmi.Remote</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>team</code> - contestant team</dd>
 <dd><code>number</code> - contestant number</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>int and state</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -365,7 +376,8 @@ extends java.rmi.Remote</pre>
 <div class="block">Operation shutdown.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>

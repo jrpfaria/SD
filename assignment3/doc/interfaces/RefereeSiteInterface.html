@@ -178,8 +178,11 @@ extends java.rmi.Remote</pre>
  
  It is called by the referee when he declares the start of a game.</div>
 <dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>ReturnInt int and state</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -196,7 +199,8 @@ extends java.rmi.Remote</pre>
  It is called by the referee while he waits for the teams to be ready.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -213,7 +217,8 @@ extends java.rmi.Remote</pre>
  It is called by a coach to indicate to the referee that their team is ready.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -228,7 +233,8 @@ extends java.rmi.Remote</pre>
 <div class="block">Operation shutdown.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>

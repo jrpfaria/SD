@@ -305,7 +305,8 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../interfaces/PlaygroundInterface.html#startTrial--">startTrial</a></code>&nbsp;in interface&nbsp;<code><a href="../../interfaces/PlaygroundInterface.html" title="interface in interfaces">PlaygroundInterface</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -322,8 +323,11 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../interfaces/PlaygroundInterface.html#wait_for_trial_conclusion--">wait_for_trial_conclusion</a></code>&nbsp;in interface&nbsp;<code><a href="../../interfaces/PlaygroundInterface.html" title="interface in interfaces">PlaygroundInterface</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>ReturnInt int and state</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -344,7 +348,8 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>rope position</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -364,7 +369,8 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>rope position</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -383,8 +389,11 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dd><code><a href="../../interfaces/PlaygroundInterface.html#assemble_team-int-">assemble_team</a></code>&nbsp;in interface&nbsp;<code><a href="../../interfaces/PlaygroundInterface.html" title="interface in interfaces">PlaygroundInterface</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>team</code> - coach's team</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>int and state</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -402,7 +411,8 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../interfaces/PlaygroundInterface.html#watch_trial--">watch_trial</a></code>&nbsp;in interface&nbsp;<code><a href="../../interfaces/PlaygroundInterface.html" title="interface in interfaces">PlaygroundInterface</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -420,7 +430,8 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../interfaces/PlaygroundInterface.html#followCoachAdvice--">followCoachAdvice</a></code>&nbsp;in interface&nbsp;<code><a href="../../interfaces/PlaygroundInterface.html" title="interface in interfaces">PlaygroundInterface</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -441,8 +452,11 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>team</code> - contestant's team</dd>
 <dd><code>number</code> - contestant's number</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>ReturnInt int and state</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -466,8 +480,11 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dd><code>team</code> - contestant's team</dd>
 <dd><code>number</code> - contestant's number</dd>
 <dd><code>strength</code> - contestant's strength</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>int and state</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -485,7 +502,8 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../interfaces/PlaygroundInterface.html#amDone--">amDone</a></code>&nbsp;in interface&nbsp;<code><a href="../../interfaces/PlaygroundInterface.html" title="interface in interfaces">PlaygroundInterface</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>
@@ -503,7 +521,8 @@ implements <a href="../../interfaces/PlaygroundInterface.html" title="interface 
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../interfaces/PlaygroundInterface.html#shutdown--">shutdown</a></code>&nbsp;in interface&nbsp;<code><a href="../../interfaces/PlaygroundInterface.html" title="interface in interfaces">PlaygroundInterface</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.rmi.RemoteException</code></dd>
+<dd><code>java.rmi.RemoteException</code> - if either the invocation of the remote method,
+                         or the communication with the registry service fails</dd>
 </dl>
 </li>
 </ul>

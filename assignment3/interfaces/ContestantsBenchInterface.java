@@ -8,8 +8,9 @@ public interface ContestantsBenchInterface extends Remote {
     /**
      * Operation callTrial
      * Called by the referee to notify the coaches that a trial was called.
+     * @return int and state
      * @throws RemoteException if either the invocation of the remote method,
-     *                       or the communication with the registry service fails
+     *                         or the communication with the registry service fails
      */
     public ReturnInt callTrial() throws RemoteException;
 
@@ -22,7 +23,7 @@ public interface ContestantsBenchInterface extends Remote {
      * @param score1 score of team 1
      * @param score2 score of team 2
      * @throws RemoteException if either the invocation of the remote method,
-     *                       or the communication with the registry service fails
+     *                         or the communication with the registry service fails
      */
     public void declareMatchWinner(int score1, int score2) throws RemoteException;
 
@@ -32,20 +33,22 @@ public interface ContestantsBenchInterface extends Remote {
      * Operation reviewNotes
      * Called by the coaches to obtain the strength of each of their players, after
      * they're all in the bench.
+     * 
      * @param team coach's team
      * @return roster of players
      * @throws RemoteException if either the invocation of the remote method,
-     *                      or the communication with the registry service fails
+     *                         or the communication with the registry service fails
      */
     public int[] reviewNotes(int team) throws RemoteException;
 
     /**
      * Operation wait_for_referee_command
      * The coaches wait for either the match to end or for a trial to be called
+     * 
      * @param team coach's team
      * @return 0 if match is over, 1 if trial was called
      * @throws RemoteException if either the invocation of the remote method,
-     *                     or the communication with the registry service fails
+     *                         or the communication with the registry service fails
      */
     public ReturnInt wait_for_referee_command(int team) throws RemoteException;
 
@@ -57,7 +60,7 @@ public interface ContestantsBenchInterface extends Remote {
      * @param team   coach's team
      * @param roster numbers of the contestants that will participate
      * @throws RemoteException if either the invocation of the remote method,
-     *                      or the communication with the registry service fails
+     *                         or the communication with the registry service fails
      */
     public void callContestants(int team, int[] roster) throws RemoteException;
 
@@ -67,13 +70,14 @@ public interface ContestantsBenchInterface extends Remote {
      * Operation seat_at_the_bench
      * Called by the contestants to update their strength, and wait for either the
      * match to end or a trial to be called.
+     * 
      * @param team     contestant team
      * @param number   contestant number
      * @param strength contestant strength
      * @return 0 if match is over, 1 if player has to stay in the bench, 2 if player
      *         will participate in the trial
      * @throws RemoteException if either the invocation of the remote method,
-     *                      or the communication with the registry service fails
+     *                         or the communication with the registry service fails
      */
     public ReturnInt seat_at_the_bench(int team, int number, int strength) throws RemoteException;
 
@@ -81,18 +85,21 @@ public interface ContestantsBenchInterface extends Remote {
      * Operation seatDown
      * Called by the contestants to update their strength and remove their number
      * from the general repository.
+     * 
      * @param team   contestant team
      * @param number contestant number
+     * @return int and state
      * @throws RemoteException if either the invocation of the remote method,
-     *                     or the communication with the registry service fails
+     *                         or the communication with the registry service fails
      */
     public ReturnInt seatDown(int team, int number) throws RemoteException;
 
     //
     /**
      * Operation shutdown.
+     * 
      * @throws RemoteException if either the invocation of the remote method,
-     *                      or the communication with the registry service fails
+     *                         or the communication with the registry service fails
      */
     public void shutdown() throws RemoteException;
 }
