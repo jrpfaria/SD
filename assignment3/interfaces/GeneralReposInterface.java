@@ -8,7 +8,8 @@ public interface GeneralReposInterface extends Remote {
      * Initialize the simulation.
      * @param logFileName       name of the log file
      * @param contestantStrengh strength of each contestant
-     * @throws RemoteException 
+     * @throws RemoteException if either the invocation of the remote method,
+     *                        or the communication with the registry service fails
      */
     public void initSimul(String logFileName, int[][] contestantStrength) throws RemoteException;
 
@@ -16,7 +17,8 @@ public interface GeneralReposInterface extends Remote {
      * Set referee state.
      *
      * @param refereeState referee state
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                       or the communication with the registry service fails
      */
     public void setRefereeState(int state) throws RemoteException;
 
@@ -25,7 +27,8 @@ public interface GeneralReposInterface extends Remote {
      *
      * @param team       coach team
      * @param coachState coach state
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                      or the communication with the registry service fails
      */
     public void setCoachState(int team, int state) throws RemoteException;
 
@@ -35,7 +38,8 @@ public interface GeneralReposInterface extends Remote {
      * @param team            contestant team
      * @param number          contestant number
      * @param contestantState contestant state
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                      or the communication with the registry service fails
      */
     public void setContestantState(int team, int number, int state) throws RemoteException;
 
@@ -45,7 +49,8 @@ public interface GeneralReposInterface extends Remote {
      * @param team     contestant team
      * @param number   contestant number
      * @param strength contestant strength
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                     or the communication with the registry service fails
      */
     public void setContestantStrength(int team, int number, int strength) throws RemoteException;
 
@@ -54,7 +59,8 @@ public interface GeneralReposInterface extends Remote {
      *
      * @param team   contestant team
      * @param number contestant number
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                     or the communication with the registry service fails
      */
     public void addContestant(int team, int number) throws RemoteException;
 
@@ -63,7 +69,8 @@ public interface GeneralReposInterface extends Remote {
      *
      * @param team   contestant team
      * @param number contestant number
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                    or the communication with the registry service fails
      */
     public void removeContestant(int team, int number) throws RemoteException;
 
@@ -71,19 +78,22 @@ public interface GeneralReposInterface extends Remote {
      * Set position of rope.
      *
      * @param position rope position
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                    or the communication with the registry service fails
      */
     public void setRopePosition(int position) throws RemoteException;
 
     /**
      * Call trial.
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                   or the communication with the registry service fails
      */
     public void callTrial() throws RemoteException;
 
     /**
      * Start game.
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                  or the communication with the registry service fails
      */
     public void startGame() throws RemoteException;
 
@@ -93,7 +103,8 @@ public interface GeneralReposInterface extends Remote {
      * @param team     winning team
      * @param knockout true if game was won by knockout, false if game was won by
      *                 points
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                    or the communication with the registry service fails
      */
     public void endGame(int team, boolean knockout) throws RemoteException;
 
@@ -102,7 +113,8 @@ public interface GeneralReposInterface extends Remote {
      *
      * @param score1 score of team 1
      * @param score2 score of team 2
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                   or the communication with the registry service fails
      */
     public void endMatch(int score1, int score2) throws RemoteException;
 
@@ -110,7 +122,8 @@ public interface GeneralReposInterface extends Remote {
 
     /**
      * Operation shutdown.
-     * @throws RemoteException
+     * @throws RemoteException if either the invocation of the remote method,
+     *                   or the communication with the registry service fails
      */
     public void shutdown() throws RemoteException;
 }
