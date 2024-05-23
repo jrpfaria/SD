@@ -91,7 +91,7 @@ public class Coach extends Thread {
     /**
      * Selects players for the game based on a given list of contestants.
      *
-     * @param contestants The list of contestants available for selection.
+     * @param contestantStrength Strength of the contestants available.
      * @return An array containing the indices of the selected players.
      */
     public int[] selectPlayers(int[] contestantStrength) {

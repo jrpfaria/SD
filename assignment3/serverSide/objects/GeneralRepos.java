@@ -130,7 +130,7 @@ public class GeneralRepos implements GeneralReposInterface {
     /**
      * Set referee state.
      *
-     * @param refereeState referee state
+     * @param state referee state
      */
     @Override
     public synchronized void setRefereeState(int state) throws RemoteException {
@@ -146,7 +146,7 @@ public class GeneralRepos implements GeneralReposInterface {
      * Set coach state.
      *
      * @param team       coach team
-     * @param coachState coach state
+     * @param state coach state
      */
     @Override
     public synchronized void setCoachState(int team, int state) throws RemoteException {
@@ -163,7 +163,7 @@ public class GeneralRepos implements GeneralReposInterface {
      *
      * @param team            contestant team
      * @param number          contestant number
-     * @param contestantState contestant state
+     * @param state contestant state
      */
     @Override
     public synchronized void setContestantState(int team, int number, int state)
