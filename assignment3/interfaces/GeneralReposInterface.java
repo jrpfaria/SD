@@ -6,9 +6,10 @@ public interface GeneralReposInterface extends Remote {
 
     /**
      * Initialize the simulation.
+     * 
      * @param logFileName       name of the log file
      * @param contestantStrengh strength of each contestant
-     * @throws RemoteException 
+     * @throws RemoteException
      */
     public void initSimul(String logFileName, int[][] contestantStrength) throws RemoteException;
 
@@ -77,12 +78,14 @@ public interface GeneralReposInterface extends Remote {
 
     /**
      * Call trial.
+     * 
      * @throws RemoteException
      */
     public void callTrial() throws RemoteException;
 
     /**
      * Start game.
+     * 
      * @throws RemoteException
      */
     public void startGame() throws RemoteException;
@@ -110,6 +113,7 @@ public interface GeneralReposInterface extends Remote {
 
     /**
      * Operation shutdown.
+     * 
      * @throws RemoteException
      */
     public void shutdown() throws RemoteException;

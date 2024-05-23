@@ -45,7 +45,7 @@ public class RefereeSite implements RefereeSiteInterface {
      * It is called by the referee when he declares the start of a game.
      */
     @Override
-    public synchronized void announceNewGame() throws RemoteException {
+    public synchronized ReturnInt announceNewGame() throws RemoteException {
         try {
             reposStub.setRefereeState(RefereeStates.START_OF_A_GAME.ordinal());
         } catch (RemoteException e) {
@@ -58,6 +58,7 @@ public class RefereeSite implements RefereeSiteInterface {
             GenericIO.writelnString("Referee remote exception on callTrial - setRefereeState: " + e.getMessage());
             System.exit(1);
         }
+        return new ReturnInt(0, RefereeStates.START_OF_A_GAME.ordinal());
     }
 
     /**

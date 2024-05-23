@@ -10,7 +10,7 @@ public interface ContestantsBenchInterface extends Remote {
      * Called by the referee to notify the coaches that a trial was called.
      * @throws RemoteException
      */
-    public void callTrial() throws RemoteException;
+    public ReturnInt callTrial() throws RemoteException;
 
     /**
      * Operation declareMatchWinner
@@ -42,7 +42,7 @@ public interface ContestantsBenchInterface extends Remote {
      * @param team coach's team
      * @return 0 if match is over, 1 if trial was called
      */
-    public int wait_for_referee_command(int team) throws RemoteException;
+    public ReturnInt wait_for_referee_command(int team) throws RemoteException;
 
     /**
      * Operation callContestants
@@ -68,7 +68,7 @@ public interface ContestantsBenchInterface extends Remote {
      *         will participate in the trial
      * @throws RemoteException
      */
-    public int seat_at_the_bench(int team, int number, int strength) throws RemoteException;
+    public ReturnInt seat_at_the_bench(int team, int number, int strength) throws RemoteException;
 
     /**
      * Operation seatDown
@@ -78,7 +78,7 @@ public interface ContestantsBenchInterface extends Remote {
      * @param number contestant number
      * @throws RemoteException
      */
-    public void seatDown(int team, int number) throws RemoteException;
+    public ReturnInt seatDown(int team, int number) throws RemoteException;
 
     //
     /**

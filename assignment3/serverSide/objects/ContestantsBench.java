@@ -68,7 +68,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
      * Called by the referee to notify the coaches that a trial was called.
      */
     @Override
-    public synchronized void callTrial() throws RemoteException {
+    public synchronized ReturnInt callTrial() throws RemoteException {
         callTrial = 2;
         notifyAll();
         try {
@@ -83,6 +83,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
             GenericIO.writelnString("Referee remote exception on callTrial - setRefereeState: " + e.getMessage());
             System.exit(1);
         }
+        return new ReturnInt(0, RefereeStates.TEAMS_READY.ordinal());
     }
 
     /**
@@ -133,7 +134,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
      * @return 0 if match is over, 1 if trial was called
      */
     @Override
-    public synchronized int wait_for_referee_command(int team) throws RemoteException {
+    public synchronized ReturnInt wait_for_referee_command(int team) throws RemoteException {
         reposStub.setCoachState(team, CoachStates.WAIT_FOR_REFEREE_COMMAND.ordinal());
         while (!matchOver && callTrial == 0) {
             try {
@@ -142,9 +143,9 @@ public class ContestantsBench implements ContestantsBenchInterface {
             }
         }
         if (matchOver)
-            return 0;
+            return new ReturnInt(0, CoachStates.WAIT_FOR_REFEREE_COMMAND.ordinal());
         callTrial--;
-        return 1;
+        return new ReturnInt(1, CoachStates.WAIT_FOR_REFEREE_COMMAND.ordinal());
     }
 
     /**
@@ -174,7 +175,7 @@ public class ContestantsBench implements ContestantsBenchInterface {
      *         will participate in the trial
      */
     @Override
-    public int seat_at_the_bench(int team, int number, int strength) throws RemoteException {
+    public ReturnInt seat_at_the_bench(int team, int number, int strength) throws RemoteException {
         synchronized (this) {
             reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH.ordinal());
             reposStub.setContestantStrength(team, number, strength);
@@ -190,11 +191,11 @@ public class ContestantsBench implements ContestantsBenchInterface {
                 }
             }
             if (matchOver)
-                return 0;
+                return new ReturnInt(0, ContestantStates.SEAT_AT_THE_BENCH.ordinal());
             seated[team]--;
             int orders = called[team][number];
             called[team][number] = 0;
-            return orders;
+            return new ReturnInt(orders, ContestantStates.SEAT_AT_THE_BENCH.ordinal());
         }
     }
 
@@ -204,9 +205,10 @@ public class ContestantsBench implements ContestantsBenchInterface {
      * from the general repository.
      */
     @Override
-    public synchronized void seatDown(int team, int number) throws RemoteException {
+    public synchronized ReturnInt seatDown(int team, int number) throws RemoteException {
         reposStub.removeContestant(team, number);
         reposStub.setContestantState(team, number, ContestantStates.SEAT_AT_THE_BENCH.ordinal());
+        return new ReturnInt(0, ContestantStates.SEAT_AT_THE_BENCH.ordinal());
     }
 
     //

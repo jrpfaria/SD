@@ -147,7 +147,7 @@ public class Contestant extends Thread {
     }
 
     private int seat_at_the_bench() {
-        int r = 0;
+        ReturnInt r = null;
         try {
             r = contestantsBenchStub.seat_at_the_bench(team, number, strength);
         } catch (RemoteException e) {
@@ -155,7 +155,8 @@ public class Contestant extends Thread {
                     + " remote exception on seat_at_the_bench: " + e.getMessage());
             System.exit(1);
         }
-        return r;
+        this.state = ContestantStates.values()[r.getIntStateVal()];
+        return r.getIntVal();
     }
 
     private void followCoachAdvice() {
@@ -169,23 +170,27 @@ public class Contestant extends Thread {
     }
 
     private void stand_in_position() {
+        ReturnInt r = null;
         try {
-            playgroundStub.stand_in_position(team, number);
+            r = playgroundStub.stand_in_position(team, number);
         } catch (RemoteException e) {
             GenericIO.writelnString("Contestant " + (team + 1) + "-" + (number + 1)
                     + " remote exception on stand_in_position: " + e.getMessage());
             System.exit(1);
         }
+        this.state = ContestantStates.values()[r.getIntStateVal()];
     }
 
     private void getReady() {
+        ReturnInt r = null;
         try {
-            playgroundStub.getReady(team, number, strength);
+            r = playgroundStub.getReady(team, number, strength);
         } catch (RemoteException e) {
             GenericIO.writelnString("Contestant " + (team + 1) + "-" + (number + 1) + " remote exception on getReady: "
                     + e.getMessage());
             System.exit(1);
         }
+        this.state = ContestantStates.values()[r.getIntStateVal()];
     }
 
     private void pullTheRope() {
@@ -207,12 +212,14 @@ public class Contestant extends Thread {
     }
 
     private void seatDown() {
+        ReturnInt r = null;
         try {
-            contestantsBenchStub.seatDown(team, number);
+            r = contestantsBenchStub.seatDown(team, number);
         } catch (RemoteException e) {
             GenericIO.writelnString("Contestant " + (team + 1) + "-" + (number + 1) + " remote exception on seatDown: "
                     + e.getMessage());
             System.exit(1);
         }
+        this.state = ContestantStates.values()[r.getIntStateVal()];
     }
 }
