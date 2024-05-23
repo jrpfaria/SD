@@ -6,6 +6,7 @@ public interface GeneralReposInterface extends Remote {
 
     /**
      * Initialize the simulation.
+     * 
      * @param logFileName       name of the log file
      * @param contestantStrengh strength of each contestant
      * @throws RemoteException if either the invocation of the remote method,
@@ -122,8 +123,13 @@ public interface GeneralReposInterface extends Remote {
 
     /**
      * Operation shutdown.
+<<<<<<< HEAD
      * @throws RemoteException if either the invocation of the remote method,
      *                   or the communication with the registry service fails
+=======
+     * 
+     * @throws RemoteException
+>>>>>>> 877bf4f20955498c99fe61a6ead57cd9b879df37
      */
     public void shutdown() throws RemoteException;
 }

@@ -13,7 +13,7 @@ public interface RefereeSiteInterface extends Remote {
      * @throws RemoteException if either the invocation of the remote method,
      *                   or the communication with the registry service fails
      */
-    public void announceNewGame() throws RemoteException;
+    public ReturnInt announceNewGame() throws RemoteException;
 
     /**
      * Operation teams_ready.

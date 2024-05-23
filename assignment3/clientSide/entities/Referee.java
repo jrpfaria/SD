@@ -104,21 +104,25 @@ public class Referee extends Thread {
     }
 
     private void announceNewGame() {
+        ReturnInt r = null;
         try {
-            refereeSiteStub.announceNewGame();
+            r = refereeSiteStub.announceNewGame();
         } catch (RemoteException e) {
             GenericIO.writelnString("Referee remote exception on announceNewGame: " + e.getMessage());
             System.exit(1);
         }
+        this.state = RefereeStates.values()[r.getIntStateVal()];
     }
 
     private void callTrial() {
+        ReturnInt r = null;
         try {
-            contestantsBenchStub.callTrial();
+            r = contestantsBenchStub.callTrial();
         } catch (RemoteException e) {
             GenericIO.writelnString("Referee remote exception on callTrial: " + e.getMessage());
             System.exit(1);
         }
+        this.state = RefereeStates.values()[r.getIntStateVal()];
     }
 
     private void teams_ready() {
@@ -140,12 +144,14 @@ public class Referee extends Thread {
     }
 
     private void wait_for_trial_conclusion() {
+        ReturnInt r = null;
         try {
-            playgroundStub.wait_for_trial_conclusion();
+            r = playgroundStub.wait_for_trial_conclusion();
         } catch (RemoteException e) {
             GenericIO.writelnString("Referee remote exception on wait_for_trial_conclusion: " + e.getMessage());
             System.exit(1);
         }
+        this.state = RefereeStates.values()[r.getIntStateVal()];
     }
 
     private int assertTrialDecision() {

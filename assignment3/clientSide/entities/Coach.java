@@ -91,7 +91,7 @@ public class Coach extends Thread {
     /**
      * Selects players for the game based on a given list of contestants.
      *
-     * @param contestants The list of contestants available for selection.
+     * @param contestantStrength Strength of the contestants available.
      * @return An array containing the indices of the selected players.
      */
     public int[] selectPlayers(int[] contestantStrength) {
@@ -175,7 +175,7 @@ public class Coach extends Thread {
     }
 
     private int wait_for_referee_command() {
-        int r = 0;
+        ReturnInt r = null;
         try {
             r = contestantsBenchStub.wait_for_referee_command(team);
         } catch (RemoteException e) {
@@ -183,7 +183,8 @@ public class Coach extends Thread {
                     "Coach " + (team + 1) + " remote exception on wait_for_referee_command: " + e.getMessage());
             System.exit(1);
         }
-        return r;
+        this.state = CoachStates.values()[r.getIntStateVal()];
+        return r.getIntVal();
     }
 
     private void callContestants(int[] roster) {
@@ -196,12 +197,14 @@ public class Coach extends Thread {
     }
 
     private void assemble_team() {
+        ReturnInt r = null;
         try {
-            playgroundStub.assemble_team(team);
+            r = playgroundStub.assemble_team(team);
         } catch (RemoteException e) {
             GenericIO.writelnString("Coach " + (team + 1) + " remote exception on assemble_team: " + e.getMessage());
             System.exit(1);
         }
+        this.state = CoachStates.values()[r.getIntStateVal()];
     }
 
     private void informReferee() {

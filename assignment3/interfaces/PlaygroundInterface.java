@@ -23,7 +23,7 @@ public interface PlaygroundInterface extends Remote {
      * @throws RemoteException if either the invocation of the remote method,
      *                   or the communication with the registry service fails
      */
-    public void wait_for_trial_conclusion() throws RemoteException;
+    public ReturnInt wait_for_trial_conclusion() throws RemoteException;
 
     /**
      * Operation assertTrialDecision
@@ -51,11 +51,12 @@ public interface PlaygroundInterface extends Remote {
     /**
      * Operation assemble_team
      * The coaches wait for the contestants to get in position to play
+     * 
      * @param team coach's team
      * @throws RemoteException if either the invocation of the remote method,
      *                   or the communication with the registry service fails
      */
-    public void assemble_team(int team) throws RemoteException;
+    public ReturnInt assemble_team(int team) throws RemoteException;
 
     /**
      * Operation watch_trial
@@ -78,24 +79,26 @@ public interface PlaygroundInterface extends Remote {
     /**
      * Operation stand_in_position
      * The contestants wait for the trial to start
-     * @param team contestant's team
+     * 
+     * @param team   contestant's team
      * @param number contestant's number
      * @throws RemoteException if either the invocation of the remote method,
      *                   or the communication with the registry service fails
      */
-    public void stand_in_position(int team, int number) throws RemoteException;
+    public ReturnInt stand_in_position(int team, int number) throws RemoteException;
 
     /**
      * Operation getReady
      * The contestants inform the general repository of their participation in the
      * trial
-     * @param team contestant's team
-     * @param number contestant's number
+     * 
+     * @param team     contestant's team
+     * @param number   contestant's number
      * @param strength contestant's strength
      * @throws RemoteException if either the invocation of the remote method,
      *                   or the communication with the registry service fails
      */
-    public void getReady(int team, int number, int strength) throws RemoteException;
+    public ReturnInt getReady(int team, int number, int strength) throws RemoteException;
 
     /**
      * Operation amDone

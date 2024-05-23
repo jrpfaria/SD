@@ -28,6 +28,8 @@ public class ServerGameOfRopeContestantsBench {
      * args[1] - name of the platform where is located the RMI registering service
      * args[2] - port number where the registering service is listening to service
      * requests
+     * 
+     * @param args arguments
      */
 
     public static void main(String[] args) {
@@ -100,7 +102,8 @@ public class ServerGameOfRopeContestantsBench {
         ContestantsBenchInterface contestantsBenchStub = null; // remote reference to the contestants bench object
 
         try {
-            contestantsBenchStub = (ContestantsBenchInterface) UnicastRemoteObject.exportObject(contestantsBench, portNumb);
+            contestantsBenchStub = (ContestantsBenchInterface) UnicastRemoteObject.exportObject(contestantsBench,
+                    portNumb);
         } catch (RemoteException e) {
             GenericIO.writelnString("Contestants Bench stub generation exception: " + e.getMessage());
             e.printStackTrace();

@@ -11,7 +11,7 @@ public interface ContestantsBenchInterface extends Remote {
      * @throws RemoteException if either the invocation of the remote method,
      *                       or the communication with the registry service fails
      */
-    public void callTrial() throws RemoteException;
+    public ReturnInt callTrial() throws RemoteException;
 
     /**
      * Operation declareMatchWinner
@@ -47,7 +47,7 @@ public interface ContestantsBenchInterface extends Remote {
      * @throws RemoteException if either the invocation of the remote method,
      *                     or the communication with the registry service fails
      */
-    public int wait_for_referee_command(int team) throws RemoteException;
+    public ReturnInt wait_for_referee_command(int team) throws RemoteException;
 
     /**
      * Operation callContestants
@@ -75,7 +75,7 @@ public interface ContestantsBenchInterface extends Remote {
      * @throws RemoteException if either the invocation of the remote method,
      *                      or the communication with the registry service fails
      */
-    public int seat_at_the_bench(int team, int number, int strength) throws RemoteException;
+    public ReturnInt seat_at_the_bench(int team, int number, int strength) throws RemoteException;
 
     /**
      * Operation seatDown
@@ -86,7 +86,7 @@ public interface ContestantsBenchInterface extends Remote {
      * @throws RemoteException if either the invocation of the remote method,
      *                     or the communication with the registry service fails
      */
-    public void seatDown(int team, int number) throws RemoteException;
+    public ReturnInt seatDown(int team, int number) throws RemoteException;
 
     //
     /**

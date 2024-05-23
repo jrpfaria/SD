@@ -92,7 +92,7 @@ public class Playground implements PlaygroundInterface {
      * The referee waits while contestants pull the rope.
      */
     @Override
-    public synchronized void wait_for_trial_conclusion() throws RemoteException {
+    public synchronized ReturnInt wait_for_trial_conclusion() throws RemoteException {
         try {
             reposStub.setRefereeState(RefereeStates.WAIT_FOR_TRIAL_CONCLUSION.ordinal());
         } catch (RemoteException e) {
@@ -108,6 +108,7 @@ public class Playground implements PlaygroundInterface {
             }
         }
         amDone = 0;
+        return new ReturnInt(0, RefereeStates.WAIT_FOR_TRIAL_CONCLUSION.ordinal());
     }
 
     /**
@@ -161,7 +162,7 @@ public class Playground implements PlaygroundInterface {
      * The coaches wait for the contestants to get in position to play
      */
     @Override
-    public synchronized void assemble_team(int team) throws RemoteException {
+    public synchronized ReturnInt assemble_team(int team) throws RemoteException {
         try {
             reposStub.setCoachState(team, CoachStates.ASSEMBLE_TEAM.ordinal());
         } catch (RemoteException e) {
@@ -184,6 +185,7 @@ public class Playground implements PlaygroundInterface {
         }
 
         inPosition[team] = 0;
+        return new ReturnInt(0, CoachStates.ASSEMBLE_TEAM.ordinal());
     }
 
     /**
@@ -215,7 +217,7 @@ public class Playground implements PlaygroundInterface {
      * The contestants wait for the trial to start
      */
     @Override
-    public synchronized void stand_in_position(int team, int number) throws RemoteException {
+    public synchronized ReturnInt stand_in_position(int team, int number) throws RemoteException {
         try {
             reposStub.addContestant(team, number);
         } catch (RemoteException e) {
@@ -238,6 +240,7 @@ public class Playground implements PlaygroundInterface {
             } catch (InterruptedException ignored) {
             }
         }
+        return new ReturnInt(0, ContestantStates.STAND_IN_POSITION.ordinal());
     }
 
     /**
@@ -246,7 +249,7 @@ public class Playground implements PlaygroundInterface {
      * trial
      */
     @Override
-    public synchronized void getReady(int team, int number, int strength) throws RemoteException {
+    public synchronized ReturnInt getReady(int team, int number, int strength) throws RemoteException {
         try {
             reposStub.setContestantState(team, number, ContestantStates.DO_YOUR_BEST.ordinal());
         } catch (RemoteException e) {
@@ -259,6 +262,8 @@ public class Playground implements PlaygroundInterface {
             strengthDifference -= strength;
         else
             strengthDifference += strength;
+        
+        return new ReturnInt(0, ContestantStates.DO_YOUR_BEST.ordinal());
     }
 
     /**
