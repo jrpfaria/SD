@@ -19,7 +19,7 @@ mkdir -p dirGeneralRepos dirGeneralRepos/serverSide dirGeneralRepos/serverSide/m
 cp serverSide/main/SimulPar.class serverSide/main/ServerGameOfRopeGeneralRepos.class dirGeneralRepos/serverSide/main
 cp serverSide/objects/GeneralRepos.class dirGeneralRepos/serverSide/objects
 cp interfaces/Register.class interfaces/GeneralReposInterface.class dirGeneralRepos/interfaces
-cp clientSide/entities/*.class dirGeneralRepos/clientSide/entities
+cp clientSide/entities/RefereeStates.class 'clientSide/entities/RefereeStates$1.class' clientSide/entities/CoachStates.class 'clientSide/entities/CoachStates$1.class' clientSide/entities/ContestantStates.class 'clientSide/entities/ContestantStates$1.class' dirGeneralRepos/clientSide/entities
 cp commInfra/*.class dirGeneralRepos/commInfra
 echo "  Referee Site"
 rm -rf dirRefereeSite/*/
@@ -28,7 +28,7 @@ mkdir -p dirRefereeSite dirRefereeSite/serverSide dirRefereeSite/serverSide/main
 cp serverSide/main/SimulPar.class serverSide/main/ServerGameOfRopeRefereeSite.class dirRefereeSite/serverSide/main
 cp serverSide/objects/RefereeSite.class dirRefereeSite/serverSide/objects
 cp interfaces/*.class dirRefereeSite/interfaces
-cp clientSide/entities/*.class dirRefereeSite/clientSide/entities
+cp clientSide/entities/RefereeStates.class 'clientSide/entities/RefereeStates$1.class' clientSide/entities/CoachStates.class 'clientSide/entities/CoachStates$1.class' clientSide/entities/ContestantStates.class 'clientSide/entities/ContestantStates$1.class' dirRefereeSite/clientSide/entities
 cp commInfra/*.class dirRefereeSite/commInfra
 echo "  Playground"
 rm -rf dirPlayground/*/
@@ -37,7 +37,7 @@ mkdir -p dirPlayground dirPlayground/serverSide dirPlayground/serverSide/main di
 cp serverSide/main/SimulPar.class serverSide/main/ServerGameOfRopePlayground.class dirPlayground/serverSide/main
 cp serverSide/objects/Playground.class dirPlayground/serverSide/objects
 cp interfaces/*.class dirPlayground/interfaces
-cp clientSide/entities/*.class dirPlayground/clientSide/entities
+cp clientSide/entities/RefereeStates.class 'clientSide/entities/RefereeStates$1.class' clientSide/entities/CoachStates.class 'clientSide/entities/CoachStates$1.class' clientSide/entities/ContestantStates.class 'clientSide/entities/ContestantStates$1.class' dirPlayground/clientSide/entities
 cp commInfra/*.class dirPlayground/commInfra
 echo "  Contestants Bench"
 rm -rf dirContestantsBench/*/
@@ -46,7 +46,7 @@ mkdir -p dirContestantsBench dirContestantsBench/serverSide dirContestantsBench/
 cp serverSide/main/SimulPar.class serverSide/main/ServerGameOfRopeContestantsBench.class dirContestantsBench/serverSide/main
 cp serverSide/objects/ContestantsBench.class dirContestantsBench/serverSide/objects
 cp interfaces/*.class dirContestantsBench/interfaces
-cp clientSide/entities/*.class dirContestantsBench/clientSide/entities
+cp clientSide/entities/RefereeStates.class 'clientSide/entities/RefereeStates$1.class' clientSide/entities/CoachStates.class 'clientSide/entities/CoachStates$1.class' clientSide/entities/ContestantStates.class 'clientSide/entities/ContestantStates$1.class' dirContestantsBench/clientSide/entities
 cp commInfra/*.class dirContestantsBench/commInfra
 echo "  Referee"
 rm -rf dirReferee/*/
@@ -54,7 +54,7 @@ mkdir -p dirReferee dirReferee/serverSide dirReferee/serverSide/main dirReferee/
          dirReferee/interfaces dirReferee/commInfra
 cp serverSide/main/SimulPar.class dirReferee/serverSide/main
 cp clientSide/main/ClientGameOfRopeReferee.class dirReferee/clientSide/main
-cp clientSide/entities/*.class dirReferee/clientSide/entities
+cp clientSide/entities/Referee.class clientSide/entities/RefereeStates.class 'clientSide/entities/RefereeStates$1.class' dirReferee/clientSide/entities
 cp interfaces/*.class dirReferee/interfaces
 cp commInfra/*.class dirReferee/commInfra
 echo "  Coaches"
@@ -63,7 +63,7 @@ mkdir -p dirCoaches dirCoaches/serverSide dirCoaches/serverSide/main dirCoaches/
          dirCoaches/interfaces dirCoaches/commInfra
 cp serverSide/main/SimulPar.class dirCoaches/serverSide/main
 cp clientSide/main/ClientGameOfRopeCoach.class dirCoaches/clientSide/main
-cp clientSide/entities/*.class dirCoaches/clientSide/entities
+cp clientSide/entities/Coach.class clientSide/entities/CoachStates.class 'clientSide/entities/CoachStates$1.class' dirCoaches/clientSide/entities
 cp interfaces/*.class dirCoaches/interfaces
 cp commInfra/*.class dirCoaches/commInfra
 echo "  Contestants"
@@ -72,7 +72,7 @@ mkdir -p dirContestants dirContestants/serverSide dirContestants/serverSide/main
          dirContestants/interfaces dirContestants/commInfra
 cp serverSide/main/SimulPar.class dirContestants/serverSide/main
 cp clientSide/main/ClientGameOfRopeContestant.class dirContestants/clientSide/main
-cp clientSide/entities/*.class dirContestants/clientSide/entities
+cp clientSide/entities/Contestant.class clientSide/entities/ContestantStates.class 'clientSide/entities/ContestantStates$1.class' dirContestants/clientSide/entities
 cp interfaces/*.class dirContestants/interfaces
 cp commInfra/*.class dirContestants/commInfra
 echo "Compressing execution environments."
